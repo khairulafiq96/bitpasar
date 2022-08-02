@@ -1,0 +1,11 @@
+.main_container {
+    height: 100vh;
+    display: flex;
+    background-color: lightblue;
+    /* Direction of the items, can be row or column */
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+}
