@@ -6,40 +6,23 @@ import App from './components/App';
 
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import store, {Persistor} from './store'
 
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./reducers";
-import middleware from './middleware';
 
 //persist data stored in the LocalStorage
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const persistConfig={
-  key:'main-root',
-  storage
-}
 
-const persistedReducer=persistReducer(persistConfig)
-
-//No persist data
-const store = createStore(reducer,middleware)
-
-//with Persist data
-//const store = createStore(persistedReducer,middleware)
-
-const Persistor = persistStore(store)
 
 
 //WITH REDUX
 ReactDOM.render(
   <BrowserRouter>
   <Provider store={store}>
-    
-    <App />
-    
+    <PersistGate Loading={null} persistor={Persistor}>
+      <App />
+    </PersistGate>
   </Provider>
   </BrowserRouter>,
   document.getElementById('root'),
