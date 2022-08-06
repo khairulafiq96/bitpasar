@@ -1,14 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {ethers} from 'ethers'
-import { setSignedInUser } from '../../actions/users';
+import { setSignedInUser,getUserBalance } from '../../actions/users';
 
 class WalletConnect extends Component {
 
-    state = {
-        address : null,
-        balance : null
-    } 
 
     render(){
 
@@ -20,10 +16,13 @@ class WalletConnect extends Component {
 
                 window.ethereum.request({method: 'eth_requestAccounts'}).then(result=>{
                     
-                    this.props.dispatch(setSignedInUser(result))
+                    //Just to dispatch account
+                    accountChangedHandler(result)
 
                 }
-                )
+                ).catch(error =>{
+                    window.alert(error.message)
+                })
     
             } else {
                 console.log('Need to install MetaMask');
@@ -31,15 +30,59 @@ class WalletConnect extends Component {
             }
         }
 
+        const getAccountBalance = (account) => {
+            window.ethereum.request({method: 'eth_getBalance', params: [account, 'latest']})
+            .then(balance => {
+                //console.log((ethers.utils.formatEther(balance)))
+                this.props.dispatch(getUserBalance(ethers.utils.formatEther(balance)));
+            })
+            .catch(error => {
+                window.alert(error.message);
+            });
+        };
+
+        //converting address to a shorter version
+        const displayAddress = (address) => {
+            const len = address.length
+            const finalString = address.substring(0,5) + "..." + address.substring((len-5),len)
+            return finalString
+        }
+
+        //dispatching account
+        const accountChangedHandler = (result) => {
+            this.props.dispatch(setSignedInUser(result))
+            getAccountBalance(result.toString())
+        }
+
+        //To refresh page when chain is chabged
+        const chainChangedHandler = () => {
+            getAccountBalance(this.props.user.address)
+            window.location.reload();
+        }
+
+        //Listener when account is changed and dispatching the value
+        window.ethereum.on('accountsChanged', accountChangedHandler);
+
+        //Listener when chain is changed
+        window.ethereum.on('chainChanged', chainChangedHandler)
+
 
         return(
             <div>
-                <button 
-                    className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    onClick={connectWalletHandler}
-                    >Connect Wallet</button>
+                {user ?
+                       <button className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            {displayAddress(user.address)} 
+                        </button>
+                      : <button 
+                            className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            onClick={connectWalletHandler}>
+                                Connect Wallet
+                        </button>}
                 
-                {JSON.stringify(this.props.user)}
+
+                
+                
+               
             </div>
         )
     }

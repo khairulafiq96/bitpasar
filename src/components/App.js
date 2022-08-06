@@ -6,6 +6,7 @@ import Header from './Pages/Header';
 
 import {connect} from 'react-redux';
 import Footer from './Pages/Footer';
+import Registration from './Pages/Registration';
 
 import './Styles/App.css'
 
@@ -27,10 +28,13 @@ class App extends Component {
     return (
       <div className='main_container'>
         <Header></Header>
-          <div className='main'>
-            <Switch>
-              <Route exact path="/home" component={HomePage} />
-            </Switch>
+          <div className='main flex justify-center'>
+                <div className='container'>
+                    <Switch>
+                      <Route exact path="/home" component={HomePage} />
+                      <Route exact path="/registration" component={Registration} />
+                    </Switch>
+                </div>
           </div>
         <Footer></Footer>
       </div>
