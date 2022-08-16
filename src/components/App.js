@@ -7,8 +7,10 @@ import Header from './Pages/Header';
 import {connect} from 'react-redux';
 import Footer from './Pages/Footer';
 import Registration from './Pages/Registration';
+import AddItem from './Pages/AddItem';
 
 import './Styles/App.css'
+import TestUploadImages from './Pages/TestUploadImage';
 
 
 
@@ -33,6 +35,8 @@ class App extends Component {
                     <Switch>
                       <Route exact path="/home" component={HomePage} />
                       <Route exact path="/registration" component={Registration} />
+                      <Route exact path="/additem" component={AddItem} />
+                      <Route exact path="/testUpload" component={TestUploadImages} />
                     </Switch>
                 </div>
           </div>

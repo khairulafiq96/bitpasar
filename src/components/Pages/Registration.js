@@ -42,7 +42,7 @@ class Registration extends Component {
     handleSubmission = async (e) => {
        e.preventDefault();
        const {dispatch,user} = this.props
-       const {redirectToHome} = this.props
+       
        var obj = {
               "name" : this.state.name,
               "email" : this.state.email,

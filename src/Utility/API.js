@@ -33,3 +33,36 @@ export function registrationAPI(user){
           return resJson;
          })
     }
+
+  export function addItemAPI(item){
+    var obj = {
+
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'appKey' : appKey
+      },
+
+      body: JSON.stringify({
+          "ownerid" : item['ownerid'],
+          "title" : item['title'],
+          "type" : item['type'],
+          "shortdescription" : item['shortdescription'],
+          "longdescription" : item['longdescription'],
+          "itemprice" : item['itemprice'],
+          "status" : item['status'],
+          "postagename" : item['postagename'],
+          "postageprice" : item['postageprice'],
+          "images" : item['images'],
+          "status" : "new"
+      })
+
+    }
+
+    return fetch(url+'/addItem', obj).then(function(res){
+      return res.json();
+    }).then(function(resJson){
+      return resJson;
+    })
+  }
