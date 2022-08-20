@@ -1,5 +1,6 @@
 import * as API from '../Utility/API'
 import { setRegisterUser } from './users'
+import {getAllMarketplaceItems} from './items'
 import { Redirect } from 'react-router'
 
 export function handleUserRegistration(user){
@@ -15,6 +16,14 @@ export function handleUserRegistration(user){
                 
             }
             
+        })
+    }
+}
+
+export function handleGetAllMarketplaceItems(page){
+    return(dispatch)=>{
+        return API.getAllMarketplaceAPI(page).then((response)=>{
+            dispatch(getAllMarketplaceItems(response))
         })
     }
 }

@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Disabling the API KEY deployment, PLEASE ENABLE FOR PROD
+\src\components\Pages\AddItem.js

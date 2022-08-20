@@ -66,3 +66,27 @@ export function registrationAPI(user){
       return resJson;
     })
   }
+
+  export function getAllMarketplaceAPI(page){
+    var obj = {
+
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'appKey' : appKey
+      },
+
+      body: JSON.stringify({
+          "page" : page,
+          "search" : null
+      })
+
+    }
+
+    return fetch(url+'/getFilteredMarketplace', obj).then(function(res){
+      return res.json();
+    }).then(function(resJson){
+      return resJson;
+    })
+  }

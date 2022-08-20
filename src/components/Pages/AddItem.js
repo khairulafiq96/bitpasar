@@ -40,12 +40,12 @@ class AddItem extends Component {
     }
 
     firebaseConfig = {
-        apiKey: "",
+        apiKey: "AIzaSyDUnl86TI-bpWFD0NAaOrKTTm6msdmYvyU",
         authDomain: "bitpasar.firebaseapp.com",
         projectId: "bitpasar",
         storageBucket: "bitpasar.appspot.com",
-        messagingSenderId: "",
-        appId: ""
+        messagingSenderId: "782221905508",
+        appId: "1:782221905508:web:eed2befb480366548d1971"
       };
 
 

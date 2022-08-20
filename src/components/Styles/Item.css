@@ -1,0 +1,16 @@
+.itemImage {
+    height: auto; 
+    width: auto; 
+    max-width: 150px; 
+    max-height: 150px;
+}
+
+.itemPadding{
+    margin: 10px;
+}
+
+.itemCard {
+    border: solid 1px black;
+    max-width: 11rem;
+    height: 12rem;
+}

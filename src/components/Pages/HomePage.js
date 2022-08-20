@@ -8,10 +8,11 @@ class CategoryPage extends Component {
             <div>
                 <br></br>
                 <div className='pb-2'>Buy and sell physical items with cryptocurrencies</div>
-                <button
+                <NavLink
+                    exact to="/marketplace"
                     className="text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Buy Items
-                    </button>
+                    </NavLink>
                 <br></br>
                 <br></br>
                 <NavLink
