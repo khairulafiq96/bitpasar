@@ -67,7 +67,7 @@ export function registrationAPI(user){
     })
   }
 
-  export function getAllMarketplaceAPI(page){
+  export function getAllMarketplaceAPI(page,search){
     var obj = {
 
       method: 'POST',
@@ -79,12 +79,36 @@ export function registrationAPI(user){
 
       body: JSON.stringify({
           "page" : page,
-          "search" : null
+          "search" : search
       })
 
     }
 
     return fetch(url+'/getFilteredMarketplace', obj).then(function(res){
+      return res.json();
+    }).then(function(resJson){
+      return resJson;
+    })
+  }
+
+  export function getMarketplacePageNumAPI(page,search){
+    var obj = {
+
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'appKey' : appKey
+      },
+
+      body: JSON.stringify({
+          "page" : page,
+          "search" : search
+      })
+
+    }
+
+    return fetch(url+'/marketplacePageNum', obj).then(function(res){
       return res.json();
     }).then(function(resJson){
       return resJson;

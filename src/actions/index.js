@@ -1,6 +1,7 @@
 import * as API from '../Utility/API'
 import { setRegisterUser } from './users'
-import {getAllMarketplaceItems} from './items'
+import {getAllMarketplaceItems,getSearchMarketplaceItems} from './items'
+import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
 
 export function handleUserRegistration(user){
@@ -20,10 +21,32 @@ export function handleUserRegistration(user){
     }
 }
 
-export function handleGetAllMarketplaceItems(page){
+
+export function handleGetAllMarketplaceItems(page,search){
     return(dispatch)=>{
-        return API.getAllMarketplaceAPI(page).then((response)=>{
+        return API.getAllMarketplaceAPI(page,search).then((response)=>{
             dispatch(getAllMarketplaceItems(response))
         })
     }
 }
+
+export function handleGetSearchMarketplaceItems(page,search){
+    return(dispatch)=>{
+        return API.getAllMarketplaceAPI(page,search).then((response)=>{
+            dispatch(getSearchMarketplaceItems(response))
+        })
+    }
+}
+
+export function handleMarketplaceTotalPage(page,search){
+
+    if(page === 1){
+        return(dispatch)=>{
+            return API.getMarketplacePageNumAPI(page,search).then((response)=>{
+                dispatch(getSearchMarketplaceTotalPages(response))
+            })
+        }
+    }
+}
+
+
