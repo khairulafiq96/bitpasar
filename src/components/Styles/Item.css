@@ -23,3 +23,11 @@
 .itemLayout{
     width: 200px;
 }
+
+.itemLargeImage{
+    height: auto; 
+    width: auto; 
+    max-width: 400px; 
+    max-height: 400px;
+}
+

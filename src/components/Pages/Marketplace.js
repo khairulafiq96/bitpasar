@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {handleGetAllMarketplaceItems,handleGetSearchMarketplaceItems,handleMarketplaceTotalPage} from '../../actions'
 import Item_Card from "./Item_Card";
 import '../Styles/Item.css'
+import { Link, Redirect } from 'react-router-dom';
+
 
 class Marketplace extends Component {
 
@@ -54,6 +56,12 @@ class Marketplace extends Component {
             ]) 
         }
 
+        const redirectToItemIndividualPage = (itemId) =>{
+            console.log(itemId)
+            return <Redirect exact to={"item/" + itemId}></Redirect>
+            
+        }
+
         return (
             <div>
                 <div>Marketplace</div>
@@ -68,10 +76,10 @@ class Marketplace extends Component {
                         <div className="max-w-xl pt-10">
                             {Object.keys(items).map(function(keyValue, index){
                                 return(
-                                    <div key={keyValue} className="inline-block pr-5" >
+                                    <Link key={keyValue} className="inline-block pr-5 " to={"/item/"+keyValue}>
                                         <Item_Card individualItem={items[keyValue]}></Item_Card>
                                         <br/>
-                                    </div>   
+                                    </Link>   
                                 )  
                             })}
                         </div>
@@ -85,7 +93,7 @@ class Marketplace extends Component {
                              marketplace['totalPage'].map((pageNum)=>
                              {
                                 return(
-                                    <div className="inline-block border-solid border-2 border-black p-2">
+                                    <div className="inline-block border-solid border-2 border-black p-2" key={pageNum}>
                                         <button onClick={()=>filterResults(search,pageNum)}>{pageNum}</button>
                                     </div>
                                 )

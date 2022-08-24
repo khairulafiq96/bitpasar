@@ -1,6 +1,6 @@
 import * as API from '../Utility/API'
 import { setRegisterUser } from './users'
-import {getAllMarketplaceItems,getSearchMarketplaceItems} from './items'
+import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
 
@@ -46,6 +46,15 @@ export function handleMarketplaceTotalPage(page,search){
                 dispatch(getSearchMarketplaceTotalPages(response))
             })
         }
+    }
+}
+
+
+export function handleGetIndividualItem(itemId){
+    return(dispatch)=>{
+        return API.getIndividualItemAPI(itemId).then((response)=>{
+            dispatch(getIndividualItem(response))
+        })
     }
 }
 

@@ -9,6 +9,7 @@ import Footer from './Pages/Footer';
 import Registration from './Pages/Registration';
 import AddItem from './Pages/AddItem';
 import Marketplace from './Pages/Marketplace';
+import Item_Individual from './Pages/Item_Individual';
 
 import './Styles/App.css'
 
@@ -37,6 +38,7 @@ class App extends Component {
                       <Route exact path="/registration" component={Registration} />
                       <Route exact path="/additem" component={AddItem} />
                       <Route exact path="/marketplace" component={Marketplace} />
+                      <Route exact path="/item/:itemId" component={Item_Individual} />
                     </Switch>
                 </div>
           </div>

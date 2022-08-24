@@ -31,9 +31,10 @@ class WalletConnect extends Component {
         }
 
         const getAccountBalance = (account) => {
+            //console.log("Running Account balance")
             window.ethereum.request({method: 'eth_getBalance', params: [account, 'latest']})
             .then(balance => {
-                //console.log((ethers.utils.formatEther(balance)))
+                console.log((ethers.utils.formatEther(balance)))
                 this.props.dispatch(getUserBalance(ethers.utils.formatEther(balance)));
             })
             .catch(error => {
@@ -52,19 +53,21 @@ class WalletConnect extends Component {
         const accountChangedHandler = (result) => {
             this.props.dispatch(setSignedInUser(result))
             getAccountBalance(result.toString())
+            //window.location.reload();
         }
 
         //To refresh page when chain is chabged
         const chainChangedHandler = () => {
+            //console.log("Changing account")
             getAccountBalance(this.props.user.address)
-            window.location.reload();
+            //window.location.reload();
         }
 
         //Listener when account is changed and dispatching the value
         window.ethereum.on('accountsChanged', accountChangedHandler);
 
         //Listener when chain is changed
-        window.ethereum.on('chainChanged', chainChangedHandler)
+        window.ethereum.on('chainChanged', chainChangedHandler) 
 
 
         return(

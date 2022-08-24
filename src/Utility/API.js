@@ -114,3 +114,26 @@ export function registrationAPI(user){
       return resJson;
     })
   }
+
+  export function getIndividualItemAPI(itemId){
+    var obj = {
+
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'appKey' : appKey
+      },
+
+      body: JSON.stringify({
+          "itemId" : itemId,
+      })
+
+    }
+
+    return fetch(url+'/getItemDetail', obj).then(function(res){
+      return res.json();
+    }).then(function(resJson){
+      return resJson;
+    })
+  }

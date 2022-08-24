@@ -45,7 +45,7 @@ class AddItem extends Component {
         projectId: "bitpasar",
         storageBucket: "bitpasar.appspot.com",
         messagingSenderId: "",
-        appId: "1"
+        appId: ""
       };
 
 
