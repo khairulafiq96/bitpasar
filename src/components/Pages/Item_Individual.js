@@ -9,7 +9,8 @@ class Item_Individual extends Component{
     state = {
         photoCount : 0,
         buyNow : false,
-        buyButtonMessage:[]
+        buyButtonMessage:[],
+        redirectToBuyNow : false
     }
 
     componentDidMount= async () => {
@@ -53,7 +54,7 @@ class Item_Individual extends Component{
 
         const {items,user} = this.props
         const {itemId} = this.props.match.params
-        const {photoCount,buyNow,buyButtonMessage} = this.state
+        const {photoCount,buyNow,buyButtonMessage,redirectToBuyNow} = this.state
         //const photoLength = items[itemId]['images'].length
 
         const decrementPic = (currPhoto) => {
@@ -83,9 +84,18 @@ class Item_Individual extends Component{
             
             else {
                 //redirect to next page
-                window.alert(user['balance'])
+                //window.alert(user['balance'])
+                this.setState({redirectToBuyNow : true})
+                //return <Redirect exact to = {"/buynow/"+itemId} ></Redirect>
             }
            
+        }
+
+        //Redirecting user to the next page
+        function renderRedirect(){
+            if(redirectToBuyNow){
+                return <Redirect exact to = {"/buynow/"+itemId} ></Redirect>
+            }
         }
 
         //as items[itemId] always return an error when null/undefined, try catch is used
@@ -94,18 +104,14 @@ class Item_Individual extends Component{
                 if(items[itemId]){
                    return true
                 }
-                    
-                
             } catch (e){
                 return false
-            }   
-            
-            
+            } 
         }
 
         return (
             <div>
-                
+                {renderRedirect()}
                 {checkItems() ? 
                                 <div>
                                     

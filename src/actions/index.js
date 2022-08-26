@@ -1,5 +1,5 @@
 import * as API from '../Utility/API'
-import { setRegisterUser } from './users'
+import { setRegisterUser,getUserDetails} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -17,6 +17,18 @@ export function handleUserRegistration(user){
                 
             }
             
+        })
+    }
+}
+
+export function handleGetUserDetails(walletid){
+    return(dispatch)=>{
+        return API.getUserDetailsAPI(walletid).then((response)=>{
+            if(response.status === 'unregistered'){
+                window.alert(response.message)
+            } else {
+                dispatch(getUserDetails(response))
+            }
         })
     }
 }

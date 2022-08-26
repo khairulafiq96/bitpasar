@@ -1,6 +1,7 @@
 export const SET_SIGNED_IN_USER = "SET_SIGNED_IN_USER";
 export const GET_USER_BALANCE = "SET_USER_BALANCE";
 export const REGISTER_USER = "REGISTER_USER ";
+export const GET_USER_DETAILS = "GET_USER_DETAILS";
 
 
 export function setSignedInUser(user) {
@@ -20,6 +21,13 @@ export function getUserBalance(user) {
 export function setRegisterUser(user){
   return {
     type: REGISTER_USER,
+    user
+  }
+}
+
+export function getUserDetails(user){
+  return {
+    type: GET_USER_DETAILS,
     user
   }
 }

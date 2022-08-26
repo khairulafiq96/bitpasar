@@ -32,9 +32,32 @@ export function registrationAPI(user){
           //console.log(resJson)
           return resJson;
          })
-    }
+}
 
-  export function addItemAPI(item){
+export function getUserDetailsAPI(walletid){
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+        "walletid" : walletid,
+    })
+
+  }
+
+  return fetch(url+'/getUserDetails', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}
+
+export function addItemAPI(item){
     var obj = {
 
       method: 'POST',
@@ -89,9 +112,9 @@ export function registrationAPI(user){
     }).then(function(resJson){
       return resJson;
     })
-  }
+}
 
-  export function getMarketplacePageNumAPI(page,search){
+export function getMarketplacePageNumAPI(page,search){
     var obj = {
 
       method: 'POST',
@@ -113,9 +136,10 @@ export function registrationAPI(user){
     }).then(function(resJson){
       return resJson;
     })
-  }
+}
 
-  export function getIndividualItemAPI(itemId){
+
+export function getIndividualItemAPI(itemId){
     var obj = {
 
       method: 'POST',
@@ -136,4 +160,4 @@ export function registrationAPI(user){
     }).then(function(resJson){
       return resJson;
     })
-  }
+}

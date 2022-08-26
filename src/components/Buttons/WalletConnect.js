@@ -2,22 +2,25 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {ethers} from 'ethers'
 import { setSignedInUser,getUserBalance } from '../../actions/users';
+import { handleGetUserDetails } from "../../actions";
 
 class WalletConnect extends Component {
 
 
     render(){
 
-        const {user} = this.props
+        const {user,dispatch} = this.props
 
-        const connectWalletHandler = () => {
+        const connectWalletHandler = async () => {
             if (window.ethereum && window.ethereum.isMetaMask) {
                 console.log('MetaMask Here!');
 
-                window.ethereum.request({method: 'eth_requestAccounts'}).then(result=>{
+                await window.ethereum.request({method: 'eth_requestAccounts'}).then(result=>{
                     
                     //Just to dispatch account
+                    console.log(result)
                     accountChangedHandler(result)
+                    
 
                 }
                 ).catch(error =>{
@@ -50,8 +53,9 @@ class WalletConnect extends Component {
         }
 
         //dispatching account
-        const accountChangedHandler = (result) => {
+        const accountChangedHandler = async (result) => {
             this.props.dispatch(setSignedInUser(result))
+            await dispatch(handleGetUserDetails(result.toString()))
             getAccountBalance(result.toString())
             //window.location.reload();
         }

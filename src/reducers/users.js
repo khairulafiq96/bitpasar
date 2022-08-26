@@ -1,4 +1,4 @@
-import { SET_SIGNED_IN_USER, GET_USER_BALANCE,REGISTER_USER } from "../actions/users";
+import { SET_SIGNED_IN_USER, GET_USER_BALANCE,REGISTER_USER, GET_USER_DETAILS } from "../actions/users";
 
 export default function user(state = null, action) {
     switch (action.type) {
@@ -14,7 +14,14 @@ export default function user(state = null, action) {
 
         case REGISTER_USER:
           return {...state,
-                  ...action.user}
+                  ...action.user};
+        
+        
+        case GET_USER_DETAILS:
+          return {
+                  ...state,
+                  ...action.user
+                  }
 
       default:
         return state;
