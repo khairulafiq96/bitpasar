@@ -8,7 +8,9 @@ export default function user(state = null, action) {
                 ...userAddress};
 
         case GET_USER_BALANCE:
-        const userBalance = {'balance' : action.user[0]}
+        //OLD
+        //const userBalance = {'balance' : action.user[0]}
+        const userBalance = {'balance' : action.user}
         return {...state,
                 ...userBalance};
 

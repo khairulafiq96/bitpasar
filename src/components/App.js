@@ -12,6 +12,8 @@ import Marketplace from './Pages/Marketplace';
 import Item_Individual from './Pages/Item_Individual';
 import BuyNow from './Pages/BuyNow';
 import VerifyPurchase from './Pages/VerifyPurchase';
+import Payment from './Pages/Payment';
+import MyPurchase from './Pages/MyPurchase';
 
 import './Styles/App.css'
 
@@ -43,6 +45,8 @@ class App extends Component {
                       <Route exact path="/item/:itemId" component={Item_Individual} />
                       <Route exact path="/buynow/:itemId" component={BuyNow} />
                       <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} />
+                      <Route exact path="/buynow/verifypurchase/payment/:itemId" component={Payment} />
+                      <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase} />
                     </Switch>
                 </div>
           </div>

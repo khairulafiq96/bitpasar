@@ -4,6 +4,7 @@ import { handleGetUserDetails } from "../../actions";
 import '../Styles/Item.css'
 import {handleGetIndividualItem} from '../../actions'
 import { Redirect } from "react-router-dom";
+import {setConfirmPurchase} from '../../actions/items'
 
 class BuyNow extends Component{
 
@@ -11,6 +12,10 @@ class BuyNow extends Component{
         super()
         this.state = {
             form : {
+                itemid :null,
+                ownerid :null,
+                buyerid : null,
+                
                 name:null,
                 email:null,
                 phonenum:null,
@@ -21,6 +26,7 @@ class BuyNow extends Component{
                 states : null,
                 postagename : null,
                 postageprice : null,
+                totalprice: null
             },
             redirect:{
                 redirectToBuyNow: false,
@@ -35,21 +41,37 @@ class BuyNow extends Component{
         const {user,dispatch,items} = this.props
         
         if(user){
-            const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance')
-            this.setState({
-                form : {
-                    name : user[userId]['name'],
-                    email : user[userId]['email'],
-                    phonenum : user[userId]['phonenum'],
-                    address1:user[userId]['address1'],
-                    address2:user[userId]['address2'],
-                    city:user[userId]['city'],
-                    states:user[userId]['state'],
-                    zipcode: user[userId]['zipcode'],
-                    postagename : items[itemId]['postagename'],
-                    postageprice : items[itemId]['postageprice']
-                }
-            })
+            //checks if the user already registed their details in the registration form
+            try{
+                const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance')
+                this.setState({
+                    form : {
+                        name : user[userId]['name'],
+                        email : user[userId]['email'],
+                        phonenum : user[userId]['phonenum'],
+                        address1:user[userId]['address1'],
+                        address2:user[userId]['address2'],
+                        city:user[userId]['city'],
+                        states:user[userId]['state'],
+                        zipcode: user[userId]['zipcode'],
+                        postagename : items[itemId]['postagename'],
+                        postageprice : items[itemId]['postageprice'],
+                        totalprice : parseFloat(items[itemId]['postageprice']) + parseFloat(items[itemId]['itemprice'])
+                    }
+                })
+
+            } catch (e) {
+                window.alert("Please update your details in the edit profile page for better user experience later.")
+                this.setState({
+                    form : {
+                        postagename : items[itemId]['postagename'],
+                        postageprice : items[itemId]['postageprice'],
+                        totalprice : parseFloat(items[itemId]['postageprice']) + parseFloat(items[itemId]['itemprice'])
+                    }
+                })
+            }
+
+            
         } else {
             window.alert("Please connect to your wallet")
             this.setState({redirectToBuyNow : true})
@@ -62,12 +84,14 @@ class BuyNow extends Component{
         this.setState((prevState, props) => ({ form : {...prevState.form,[evt.target.name]: evt.target.value }}));
     }
 
-    handleSubmission(formState){
+    async handleSubmission(formState, item, url, user){
         //filtering null items in form state
         const values = Object.values(formState).filter((item)=> item === '')
         if(values.length > 0 ){
             window.alert("Please fill all of the input required *")
         } else {
+
+            await this.props.dispatch(setConfirmPurchase(this.handlePurchaseObject(formState, item ,url , user)))
             this.setState({
                 redirect:{
                     redirectToVerifyPurchase : true
@@ -76,11 +100,40 @@ class BuyNow extends Component{
         }
     }
 
+    handlePurchaseObject(form, items, itemId, user){
+
+        const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance')
+
+        var purchase = {
+            "buyername" : form['name'],
+            "ownername" : items['ownername'],
+            "ownerwallet" : items['walletid'],
+            "totalprice" : form['totalprice'],
+            "address1" : form['address1'],
+            "address2" : form['address2'],
+            "city" : form['city'],
+            "state" : form['states'],
+            "zipcode" : form['zipcode'],
+            "postagename" : items['postagename'],
+            "postageprice" : items['postageprice'],
+            "buyeremail" : form['email'],
+            "buyerphonenum" : form['phonenum'],
+            "itemid" : itemId,
+            "ownerid" : items['ownerid'],
+            "buyerid" : userId[0],
+            "buyerwallet" : user['address']
+        }
+
+        
+        return purchase
+    }
+
+
     render (){
 
         const {itemId} = this.props.match.params
         const {items,user} = this.props
-        const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice} =this.state.form
+        const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice,totalprice} =this.state.form
         const {redirectToBuyNow,redirectToVerifyPurchase} = this.state.redirect
 
         const checkItems = () => {
@@ -155,7 +208,11 @@ class BuyNow extends Component{
                                     <div>{postageprice}</div>
                                 </div>
                                 <br></br>
-                                <button onClick={()=>this.handleSubmission(this.state.form)}>Proceed</button>
+                                <div>
+                                    Total Price : {items[itemId]['itemprice']} + {postageprice} = {totalprice} ETH
+                                </div>
+                                <br></br>
+                                <button onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user )}>Proceed</button>
                             </div>
                             :
                             <div></div>

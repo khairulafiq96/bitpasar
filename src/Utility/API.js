@@ -161,3 +161,43 @@ export function getIndividualItemAPI(itemId){
       return resJson;
     })
 }
+
+
+export function postCreateOrder(purchase){ 
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+        "buyername" : purchase['buyername'], 
+        "buyerwallet":purchase['buyerwallet'], 
+        "ownername":purchase['ownername'], 
+        "ownerwallet":purchase['ownerwallet'], 
+        "address1":purchase['address1'], 
+        "address2":purchase['address2'], 
+        "city":purchase['city'], 
+        "state":purchase['state'], 
+        "zipcode":purchase['zipcode'], 
+        "postagename":purchase['postagename'], 
+        "postageprice":purchase['postageprice'], 
+        "buyeremail":purchase['buyeremail'], 
+        "buyerphonenum":purchase['buyerphonenum'], 
+        "itemid":purchase['itemid'], 
+        "ownerid":purchase['ownerid'], 
+        "buyerid":purchase['buyerid'] || "", 
+        "status":'completed payment'
+    })
+
+  }
+  
+  return fetch(url+'/createOrder',obj).then(function(res){
+    return res.json()
+  }).then(function(resJson){
+    return resJson
+  })
+}

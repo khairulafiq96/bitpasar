@@ -71,3 +71,16 @@ export function handleGetIndividualItem(itemId){
 }
 
 
+export function handleCreateOrder(purchase){
+    return(dispatch)=>{
+        return API.postCreateOrder(purchase).then((response)=>{
+            if (response['status'] === 'successful'){
+                window.alert(response['message'])
+            } else {
+                window.alert(response['message'])
+            }
+        })
+    }
+}
+
+
