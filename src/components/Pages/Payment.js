@@ -3,11 +3,13 @@ import {connect} from 'react-redux'
 import {ethers} from 'ethers'
 import { handleCreateOrder } from "../../actions";
 import {NavLink} from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 class Payment extends Component {
 
     //Test wallet : 0x1CB8C4aE3CaA2cCf38bc65cF04B22b7B50a3F11b
     //Completed payment hash : 0xa1963c9fc5fe23dd558d8311f75e3f496a45e02f586f6d1a6f0e5dae47ee110f
+    //Test URL : http://localhost:3000/buynow/verifypurchase/payment/595c3bda-467b-4a45-8fdd-551d96fee19b
 
     state = {
         transaction : null,
@@ -71,9 +73,6 @@ class Payment extends Component {
                     <img src="https://i.stack.imgur.com/27Rnd.gif"></img>
                 </div>)
         } else {
-
-            const {purchase} = this.props
-
             return(<div>
                         <div>Transaction Completed</div>
                         <br></br>
@@ -93,36 +92,50 @@ class Payment extends Component {
 
         const {gasprice,transaction,transactionStatus,runCheckTransaction} = this.state
         const {purchase} = this.props
+        const {itemId} = this.props.match.params
+
+        function redirectToIndividualItem(){
+            if(!purchase){
+                return <Redirect exact to = {"/item/"+itemId} ></Redirect>
+            }
+        }
 
         return(
             <div>
-                <br></br>
-                <br></br>
-                <div>To pay : {purchase['totalprice']} ETH</div>
-                <div>to : {purchase['ownerwallet']}</div>
-                <br></br>
-                {transaction ? 
-                             <div>Payment initiated</div> 
-                             : 
-                             <div>
-                                <button onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>Pay Now</button>
-                            </div>}
-                {/*<button onClick={()=>this.startPayment('purchase['totalprice'].toString() 0.00001', purchase['ownerwallet'])}>Pay Now</button>*/}
-                <br></br>
-                <div>Check your transaction here</div>
-                {transaction ? 
-                            <div> 
-                                <a target="_blank" href={"https://ropsten.etherscan.io/tx/"+transaction['hash']}>https://ropsten.etherscan.io/tx/{transaction['hash']}</a>
-                            </div> 
-                            : 
+                {purchase ?
                             <div>
-                            </div>}
-                <br></br>
-                {transaction ? 
-                              this.renderCheckTransaction(transaction['hash'], purchase['buyerwallet']) 
-                              : 
-                              <div>
-                              </div>}
+                            <br></br>
+                            <br></br>
+                            <div>To pay : {purchase['totalprice']} ETH</div>
+                            <div>to : {purchase['ownerwallet']}</div>
+                            <br></br>
+                            {transaction ? 
+                                        <div>Payment initiated</div> 
+                                        : 
+                                        <div>
+                                            <button onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>Pay Now</button>
+                                        </div>}
+                            {/*<button onClick={()=>this.startPayment('purchase['totalprice'].toString() 0.00001', purchase['ownerwallet'])}>Pay Now</button>*/}
+                            <br></br>
+                            <div>Check your transaction here</div>
+                            {transaction ? 
+                                        <div> 
+                                            <a target="_blank" href={"https://ropsten.etherscan.io/tx/"+transaction['hash']}>https://ropsten.etherscan.io/tx/{transaction['hash']}</a>
+                                        </div> 
+                                        : 
+                                        <div>
+                                        </div>}
+                            <br></br>
+                            {transaction ? 
+                                        this.renderCheckTransaction(transaction['hash'], purchase['buyerwallet']) 
+                                        : 
+                                        <div>
+                                        </div>}
+                            </div> 
+                            :
+                            redirectToIndividualItem() }
+                
+                    
             </div>
         )
     }

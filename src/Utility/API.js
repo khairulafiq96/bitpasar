@@ -34,6 +34,38 @@ export function registrationAPI(user){
          })
 }
 
+//My Profile page, updates user details
+export function updateUserDetailsAPI(user){
+  var obj = {  
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'appKey' : appKey
+              },
+              //HAD to JSON stringify because the body datatype is Object and the API could not process any Object item
+              body: JSON.stringify({
+                  "name" : user['name'],
+                  "email" : user['email'],
+                  "phonenum" : user['phonenum'],
+                  "address1" : user['address1'],
+                  "address2" : user['address2'],
+                  "city" : user['city'],
+                  "state" : user['state'],
+                  "zipcode" : user['zipcode'],
+                  "walletid" : user['walletid']               
+              }) 
+            }
+    return fetch(url+'/updateUserDetails', obj).then(function(res) {
+        //console.log(res)
+        return res.json();
+       })
+      .then(function(resJson) {
+        //console.log(resJson)
+        return resJson;
+       })
+}
+
 export function getUserDetailsAPI(walletid){
   var obj = {
 
@@ -51,6 +83,29 @@ export function getUserDetailsAPI(walletid){
   }
 
   return fetch(url+'/getUserDetails', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}
+
+export function getUserPurchasesAPI(walletid){
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+        "walletid" : walletid,
+    })
+
+  }
+
+  return fetch(url+'/getUserPurchases', obj).then(function(res){
     return res.json();
   }).then(function(resJson){
     return resJson;

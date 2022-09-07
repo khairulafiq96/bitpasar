@@ -1,5 +1,5 @@
 import * as API from '../Utility/API'
-import { setRegisterUser,getUserDetails} from './users'
+import { setRegisterUser,getUserDetails, getUserPurchases} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -32,6 +32,26 @@ export function handleGetUserDetails(walletid){
         })
     }
 }
+
+export function handleGetUserPurchases(walletid){
+    return(dispatch)=>{
+        return API.getUserPurchasesAPI(walletid).then((response)=>{
+            //Reusing getUserDetails reducer
+            dispatch(getUserPurchases(response))
+        })
+    }
+}
+
+export function handleUpdateUserDetails(form){
+    return(dispatch)=>{
+        return API.updateUserDetailsAPI(form).then((response)=>{
+            window.alert("User details has been succesfully updated")
+            //Reusing getUserDetails reducer
+            dispatch(getUserDetails(response))
+        })
+    }
+}
+
 
 
 export function handleGetAllMarketplaceItems(page,search){

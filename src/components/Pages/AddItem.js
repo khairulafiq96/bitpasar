@@ -47,6 +47,7 @@ class AddItem extends Component {
         messagingSenderId: "",
         appId: ""
       };
+      
 
 
     handleChange (evt) {

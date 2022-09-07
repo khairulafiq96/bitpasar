@@ -1,4 +1,4 @@
-import { SET_SIGNED_IN_USER, GET_USER_BALANCE,REGISTER_USER, GET_USER_DETAILS } from "../actions/users";
+import { SET_SIGNED_IN_USER, GET_USER_BALANCE,REGISTER_USER, GET_USER_DETAILS,GET_USER_PURCHASE } from "../actions/users";
 
 export default function user(state = null, action) {
     switch (action.type) {
@@ -24,6 +24,11 @@ export default function user(state = null, action) {
                   ...state,
                   ...action.user
                   }
+
+        case GET_USER_PURCHASE:
+          const userPurchase = {'mypurchase' : action.user}
+          return {...state,
+                  ...userPurchase}
 
       default:
         return state;

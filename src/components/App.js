@@ -14,6 +14,8 @@ import BuyNow from './Pages/BuyNow';
 import VerifyPurchase from './Pages/VerifyPurchase';
 import Payment from './Pages/Payment';
 import MyPurchase from './Pages/MyPurchase';
+import MyProfile from './Pages/MyProfile'
+import MyDashboard from './Pages/MyDashboard';
 
 import './Styles/App.css'
 
@@ -47,6 +49,8 @@ class App extends Component {
                       <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} />
                       <Route exact path="/buynow/verifypurchase/payment/:itemId" component={Payment} />
                       <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase} />
+                      <Route exact path="/profile/:userId" component={MyProfile} />
+                      <Route exact path="/dashboard/:userId" component={MyDashboard} />
                     </Switch>
                 </div>
           </div>

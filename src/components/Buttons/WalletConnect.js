@@ -3,13 +3,39 @@ import {connect} from 'react-redux';
 import {ethers} from 'ethers'
 import { setSignedInUser,getUserBalance } from '../../actions/users';
 import { handleGetUserDetails } from "../../actions";
+import { NavLink } from 'react-router-dom';
 
 class WalletConnect extends Component {
+
+    state = {
+        renderDropdown : false
+    }
+
+    displayDropdown(renderDropdown){
+        this.setState({
+            renderDropdown : !renderDropdown
+        })
+    }
+
+    renderDropdownItems(address){
+        if(this.state.renderDropdown){
+            return(
+                <div className='bg-amber-200'>
+                    <NavLink className='border-solid border-2 border-black' exact to ={"/profile/" + address}>My Profile</NavLink>
+                    <br></br>
+                    <NavLink className='border-solid border-2 border-black' exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
+                </div>
+            )
+        }
+    }
 
 
     render(){
 
         const {user,dispatch} = this.props
+        const {renderDropdown} = this.state
+
+        
 
         const connectWalletHandler = async () => {
             if (window.ethereum && window.ethereum.isMetaMask) {
@@ -76,10 +102,12 @@ class WalletConnect extends Component {
 
         return(
             <div>
-                {user ?
-                       <button className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {displayAddress(user.address)} 
-                        </button>
+                {user ?<div>
+                            <button onClick={()=>this.displayDropdown(renderDropdown)} className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    {displayAddress(user.address)}
+                            </button>
+                            {renderDropdown ? this.renderDropdownItems(user.address) : <div></div>}
+                        </div>
                       : <button 
                             className=" text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             onClick={connectWalletHandler}>
