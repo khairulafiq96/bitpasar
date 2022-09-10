@@ -50,7 +50,7 @@ class App extends Component {
                       <Route exact path="/buynow/verifypurchase/payment/:itemId" component={Payment} />
                       <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase} />
                       <Route exact path="/profile/:userId" component={MyProfile} />
-                      <Route exact path="/dashboard/:userId" component={MyDashboard} />
+                      <Route exact path="/dashboard/:walletid" component={MyDashboard} />
                     </Switch>
                 </div>
           </div>

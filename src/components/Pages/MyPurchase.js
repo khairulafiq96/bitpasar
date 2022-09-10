@@ -35,6 +35,12 @@ class MyPurchase extends Component {
             } 
         }
 
+        const displayButton = (mypurchase) => {
+            if(Object.keys(mypurchase).length === 0){
+                return <div> There are no recent purchases</div>
+            }
+        }
+
         return (
                 <div>
                    {toHome()}
@@ -43,6 +49,7 @@ class MyPurchase extends Component {
                     <br></br>
                     {user && user['mypurchase'] ?
                                         <div>
+                                            {displayButton(user['mypurchase'])}
                                             {Object.keys(user['mypurchase']).map((item)=>
                                                 <div key={item}>
                                                     <div className="itemImage">

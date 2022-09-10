@@ -112,6 +112,29 @@ export function getUserPurchasesAPI(walletid){
   })
 }
 
+export function getAllAdsAPI(walletid){
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+        "walletid" : walletid,
+    })
+
+  }
+
+  return fetch(url+'/getAllAds', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}
+
 export function addItemAPI(item){
     var obj = {
 
@@ -254,5 +277,29 @@ export function postCreateOrder(purchase){
     return res.json()
   }).then(function(resJson){
     return resJson
+  })
+}
+
+export function updateOrderTrackerAPI(orderid, trackerid){
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+      "orderid" : orderid,
+      "trackerid" : trackerid
+    })
+
+  }
+
+  return fetch(url+'/updateOrderTracker', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
   })
 }

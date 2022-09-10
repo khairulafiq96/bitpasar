@@ -36,7 +36,7 @@ class MyProfile extends Component{
     async componentDidMount(){
 
         const {user,dispatch} = this.props
-        const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance' && details !== 'mypurchase')
+        const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance' && details !== 'mypurchase' && details !== 'toship')
         
         if(user[userId]){
             console.log("User details is identified")

@@ -1,4 +1,8 @@
-import { SET_SIGNED_IN_USER, GET_USER_BALANCE,REGISTER_USER, GET_USER_DETAILS,GET_USER_PURCHASE } from "../actions/users";
+import { SET_SIGNED_IN_USER, 
+        GET_USER_BALANCE,REGISTER_USER, 
+        GET_USER_DETAILS,GET_USER_PURCHASE,
+        GET_USER_TO_SHIP,
+        UPDATE_ORDER_TRACKER } from "../actions/users";
 
 export default function user(state = null, action) {
     switch (action.type) {
@@ -26,9 +30,24 @@ export default function user(state = null, action) {
                   }
 
         case GET_USER_PURCHASE:
-          const userPurchase = {'mypurchase' : action.user}
           return {...state,
-                  ...userPurchase}
+                  mypurchase : {...action.user}}
+
+        case GET_USER_TO_SHIP:
+          //This state should be updated regularly to get the latest data
+          return {...state,
+                  myads : {...action.user}}
+
+        //TODO : Make this work
+        case UPDATE_ORDER_TRACKER:
+          //Removing the item in to ship
+         
+          const key = Object.keys(action.user)
+          const itemKey = key[0]
+          //How to update object in reducer react
+          //https://atomizedobjects.com/blog/javascript/how-to-merge-two-objects-in-javascript/
+          return {...state,
+                   toship : { ...state.toship, [itemKey] : {...state.toship[itemKey],...action.user[itemKey]} }}
 
       default:
         return state;

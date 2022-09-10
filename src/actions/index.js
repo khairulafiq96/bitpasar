@@ -1,5 +1,5 @@
 import * as API from '../Utility/API'
-import { setRegisterUser,getUserDetails, getUserPurchases} from './users'
+import { setRegisterUser,getUserDetails, getUserPurchases,getAllAds,updateOrderTracker} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -39,6 +39,43 @@ export function handleGetUserPurchases(walletid){
             //Reusing getUserDetails reducer
             dispatch(getUserPurchases(response))
         })
+    }
+}
+
+export function handleGetAllAds(walletid){
+    return(dispatch)=>{
+        return API.getAllAdsAPI(walletid).then((response)=>{
+            //Reusing getUserDetails reducer
+            dispatch(getAllAds(response))
+        })
+    }
+}
+
+export function handleUpdateOrderTracker(orderid, trackerid){
+    return(dispatch)=>{
+        return API.updateOrderTrackerAPI(orderid, trackerid).then((response)=>{
+            if (response.status === 'unsuccessful'){
+                window.alert(response.message)
+            } else {
+                window.alert("Item has been shipped")
+                
+                dispatch(updateOrderTracker(response))
+                
+            }
+           
+        })
+
+        /*
+        Only for testing purposes
+        var obj = {
+            "29c29605-7a81-4ac9-9fc2-9931c4b85abf": {
+                "status": "shipped",
+                "trackerid": "YAY"
+            }
+        }
+
+        dispatch(updateOrderTracker(obj))
+        */
     }
 }
 
