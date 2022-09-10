@@ -112,7 +112,7 @@ export function getUserPurchasesAPI(walletid){
   })
 }
 
-export function getAllAdsAPI(walletid){
+export function getAllOrdersAPI(walletid){
   var obj = {
 
     method: 'POST',
@@ -128,7 +128,7 @@ export function getAllAdsAPI(walletid){
 
   }
 
-  return fetch(url+'/getAllAds', obj).then(function(res){
+  return fetch(url+'/getAllOrders', obj).then(function(res){
     return res.json();
   }).then(function(resJson){
     return resJson;

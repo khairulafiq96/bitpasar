@@ -16,6 +16,7 @@ import Payment from './Pages/Payment';
 import MyPurchase from './Pages/MyPurchase';
 import MyProfile from './Pages/MyProfile'
 import MyDashboard from './Pages/MyDashboard';
+import MyAds from './Pages/MyAds';
 
 import './Styles/App.css'
 
@@ -51,6 +52,7 @@ class App extends Component {
                       <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase} />
                       <Route exact path="/profile/:userId" component={MyProfile} />
                       <Route exact path="/dashboard/:walletid" component={MyDashboard} />
+                      <Route exact path="/ads/:walletid" component={MyAds} />
                     </Switch>
                 </div>
           </div>

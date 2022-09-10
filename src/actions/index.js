@@ -1,5 +1,5 @@
 import * as API from '../Utility/API'
-import { setRegisterUser,getUserDetails, getUserPurchases,getAllAds,updateOrderTracker} from './users'
+import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,updateOrderTracker} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -42,11 +42,11 @@ export function handleGetUserPurchases(walletid){
     }
 }
 
-export function handleGetAllAds(walletid){
+export function handleGetAllOrders(walletid){
     return(dispatch)=>{
-        return API.getAllAdsAPI(walletid).then((response)=>{
+        return API.getAllOrdersAPI(walletid).then((response)=>{
             //Reusing getUserDetails reducer
-            dispatch(getAllAds(response))
+            dispatch(getAllOrders(response))
         })
     }
 }
@@ -58,7 +58,7 @@ export function handleUpdateOrderTracker(orderid, trackerid){
                 window.alert(response.message)
             } else {
                 window.alert("Item has been shipped")
-                
+                //window.location.reload(false);
                 dispatch(updateOrderTracker(response))
                 
             }

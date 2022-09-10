@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux'
-import { handleGetAllAds } from '../../actions';
+import { handleGetAllOrders } from '../../actions';
 import '../Styles/Item.css'
 import { Redirect } from "react-router-dom";
 import ToShipForm from "../PageComponents/ToShipForm";
+import ShippedItem from "../PageComponents/ShippedItems";
 
 //Todo : Create another component for individual ship items
 
@@ -20,7 +21,7 @@ class MyDashboard extends Component{
                 redirectToHome : false
             })
             //This API must be called every time the page renders to get the latest data
-            await this.props.dispatch(handleGetAllAds(this.props.user['address']))
+            await this.props.dispatch(handleGetAllOrders(this.props.user['address']))
         }else{
             this.setState({
                 redirectToHome : true
@@ -45,30 +46,40 @@ class MyDashboard extends Component{
             }
         }
 
-        const renderAdsByStatus = (item,user,status) => {
+        const renderToShipItems = (item,user,status) => {
             if(status === "completed payment"){
                 return (<ToShipForm item={item} user={user} key={item}></ToShipForm>)
             }
         }
 
-        /*
-        if(user['toship'][item]['status'] === "completed payment"){
-                                            return <ToShipForm item={item} user={user} key={item}></ToShipForm>
-                                        }
-         */
-
+        const renderShippedItems = (item,user,status) => {
+           if(status === "shipped"){
+                return (<ShippedItem item={item} user={user} key={item}></ShippedItem>)
+            }
+        }
+        
     
         return(
         <div>
             {toHome()}
-            {user && user['toship'] ? 
+            {user && user['myorders'] ? 
                                     <div>
-                                        To Ship 
-                                        {displayNoItem(user['toship'])}
-                                        {Object.keys(user['toship']).map((item)=>{
-                                           return renderAdsByStatus(item, user,user['toship'][item]['status'])
-                                        }
-                                        )}
+                                        <div>
+                                            To Ship 
+                                            {displayNoItem(user['myorders'])}
+                                            {Object.keys(user['myorders']).map((item)=>{
+                                            return renderToShipItems(item, user,user['myorders'][item]['status'])
+                                            }
+                                            )}
+                                        </div>
+                                        <div>
+                                            Shipped Items
+                                            {Object.keys(user['myorders']).map((item)=>{
+                                                return renderShippedItems(item, user,user['myorders'][item]['status'])
+                                            }
+                                            )}
+
+                                        </div>
                                     </div> 
                                     :
                                      <div>Loading</div>}<div>

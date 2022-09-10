@@ -25,7 +25,9 @@ class WalletConnect extends Component {
                     <br></br>
                     <NavLink className='border-solid border-2 border-black' exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
                     <br></br>
-                    <NavLink className='border-solid border-2 border-black' exact to ={"/dashboard/"+address}>My Dashboard</NavLink>
+                    <NavLink className='border-solid border-2 border-black' exact to ={"/dashboard/"+address}>My Orders</NavLink>
+                    <br></br>
+                    <NavLink className='border-solid border-2 border-black' exact to ={"/ads/"+address}>My Ads</NavLink>
                 </div>
             )
         }

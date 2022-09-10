@@ -1,7 +1,7 @@
 import { SET_SIGNED_IN_USER, 
         GET_USER_BALANCE,REGISTER_USER, 
         GET_USER_DETAILS,GET_USER_PURCHASE,
-        GET_USER_TO_SHIP,
+        GET_ALL_ORDERS,
         UPDATE_ORDER_TRACKER } from "../actions/users";
 
 export default function user(state = null, action) {
@@ -33,10 +33,10 @@ export default function user(state = null, action) {
           return {...state,
                   mypurchase : {...action.user}}
 
-        case GET_USER_TO_SHIP:
+        case GET_ALL_ORDERS:
           //This state should be updated regularly to get the latest data
           return {...state,
-                  myads : {...action.user}}
+                  myorders : {...action.user}}
 
         //TODO : Make this work
         case UPDATE_ORDER_TRACKER:
@@ -47,7 +47,7 @@ export default function user(state = null, action) {
           //How to update object in reducer react
           //https://atomizedobjects.com/blog/javascript/how-to-merge-two-objects-in-javascript/
           return {...state,
-                   toship : { ...state.toship, [itemKey] : {...state.toship[itemKey],...action.user[itemKey]} }}
+                myorders : { ...state.myorders, [itemKey] : {...state.myorders[itemKey],...action.user[itemKey]} }}
 
       default:
         return state;

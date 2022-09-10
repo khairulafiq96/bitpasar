@@ -3,7 +3,7 @@ export const GET_USER_BALANCE = "SET_USER_BALANCE";
 export const REGISTER_USER = "REGISTER_USER ";
 export const GET_USER_DETAILS = "GET_USER_DETAILS";
 export const GET_USER_PURCHASE = "GET_USER_PURCHASE";
-export const GET_USER_TO_SHIP = "GET_USER_TO_SHIP";
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const UPDATE_ORDER_TRACKER = "UPDATE_ORDER_TRACKER"
 
 
@@ -42,9 +42,9 @@ export function getUserPurchases(user){
   }
 }
 
-export function getAllAds(user){
+export function getAllOrders(user){
   return {
-    type : GET_USER_TO_SHIP,
+    type : GET_ALL_ORDERS,
     user
   }
 }

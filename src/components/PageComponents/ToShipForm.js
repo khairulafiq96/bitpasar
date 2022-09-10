@@ -33,20 +33,20 @@ class ToShipForm extends Component{
         return(<div>
                     {JSON.stringify(this.state)}
                     <div className="itemImage">
-                            <img src={user['toship'][item]['images']}></img>
+                            <img src={user['myorders'][item]['images']}></img>
                     </div>
-                    <div>{user['toship'][item]['title']}</div>
-                    <div>{user['toship'][item]['itemprice']} ETH</div>
-                    <div>Status : {user['toship'][item]['status']}</div>
-                    <div>Buyer Name : {user['toship'][item]['buyername']}</div>
-                    <div>Buyer Contact Details : {user['toship'][item]['buyerphonenum']}</div>
-                    <div>Buyer Wallet : {user['toship'][item]['buyerwallet']}</div>
-                    <div>Shipping Address : {user['toship'][item]['address1']}</div>
-                    <div>{user['toship'][item]['address2']}</div>
-                    <div>{user['toship'][item]['city']}</div>
-                    <div>{user['toship'][item]['state']}</div>
-                    <div>{user['toship'][item]['zipcode']}</div>
-                    <div>Buyer Wallet : {user['toship'][item]['buyerwallet']}</div>
+                    <div>{user['myorders'][item]['title']}</div>
+                    <div>{user['myorders'][item]['itemprice']} ETH</div>
+                    <div>Status : {user['myorders'][item]['status']}</div>
+                    <div>Buyer Name : {user['myorders'][item]['buyername']}</div>
+                    <div>Buyer Contact Details : {user['myorders'][item]['buyerphonenum']}</div>
+                    <div>Buyer Wallet : {user['myorders'][item]['buyerwallet']}</div>
+                    <div>Shipping Address : {user['myorders'][item]['address1']}</div>
+                    <div>{user['myorders'][item]['address2']}</div>
+                    <div>{user['myorders'][item]['city']}</div>
+                    <div>{user['myorders'][item]['state']}</div>
+                    <div>{user['myorders'][item]['zipcode']}</div>
+                    <div>Buyer Wallet : {user['myorders'][item]['buyerwallet']}</div>
                     <input type="text" placeholder="Tracking Number" onChange={(e)=>this.handleTrackingNumber(e)}></input>
                     <br></br>
                     <button onClick={()=>updateTracker(item, trackingnumber)}>Ship Item</button>
