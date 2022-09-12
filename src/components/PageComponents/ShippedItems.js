@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 class ShippedItem extends Component{
     render(){
 
-        const {user, key,item} = this.props
+        const {user,item} = this.props
 
         return (<div>
                     <div>

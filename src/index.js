@@ -12,8 +12,18 @@ import { Provider } from "react-redux";
 
 //persist data stored in the LocalStorage
 import { PersistGate } from 'redux-persist/integration/react';
+//Based on the guide here
+//https://stackoverflow.com/questions/65658510/export-firestore-imported-as-firebase-was-not-found-in-firebase-after-up
+import firebase from 'firebase/compat/app'
 
-
+firebase.initializeApp({
+  apiKey: "",
+  authDomain: "bitpasar.firebaseapp.com",
+  projectId: "bitpasar",
+  storageBucket: "bitpasar.appspot.com",
+  messagingSenderId: "",
+  appId: ""
+})
 
 
 //WITH REDUX

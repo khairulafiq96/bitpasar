@@ -154,7 +154,8 @@ class Item_Individual extends Component{
                                         {items[itemId]['phonenum']}
                                     </div>
                                     <div>
-                                        <button onClick={()=>{handleBuyItem()}}>Buy Now</button>
+                                        {items[itemId]['postagename'] !== 'None' ? <button onClick={()=>{handleBuyItem()}}>Buy Now</button>
+                                                                      : <div>Please contact seller to enquire about this item</div>}
                                     </div>
                                     
                                 

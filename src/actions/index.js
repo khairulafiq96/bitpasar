@@ -1,5 +1,5 @@
 import * as API from '../Utility/API'
-import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,updateOrderTracker} from './users'
+import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,updateOrderTracker,getAllAds,deleteMyAds} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -139,5 +139,39 @@ export function handleCreateOrder(purchase){
         })
     }
 }
+
+export function handleGetAllAds(userid){
+    return(dispatch)=>{
+        return API.getAllAdsAPI(userid).then((response)=>{
+            dispatch(getAllAds(response))
+        })
+    }
+}
+
+//This function deletes the user Ads, no action & reducer is created
+//Once successful deletion of data in the db, getAllAds API will be called
+export function handleDeleteAds(userid,itemid){
+    return(dispatch)=>{
+        return API.deleteAdsAPI(itemid).then((response)=>{
+            if(response.status === 'successful'){
+                //Run Get my ads function
+                dispatch(handleGetAllAds(userid))
+                window.alert(response.message)
+            } else {
+                window.alert(response.message)
+            }
+        })
+
+    }
+}
+
+/*
+            var test = {
+                "id" : '3f1748fa-632c-463e-aea7-71dfcb3c6a74'
+            }
+            dispatch(deleteMyAds(test))
+
+
+*/
 
 

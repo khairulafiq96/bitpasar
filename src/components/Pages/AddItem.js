@@ -5,6 +5,7 @@ import * as API from "../../Utility/API";
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import firebase from 'firebase/compat/app';
 
 class AddItem extends Component {
 
@@ -39,17 +40,6 @@ class AddItem extends Component {
     
     }
 
-    firebaseConfig = {
-        apiKey: "",
-        authDomain: "bitpasar.firebaseapp.com",
-        projectId: "bitpasar",
-        storageBucket: "bitpasar.appspot.com",
-        messagingSenderId: "",
-        appId: ""
-      };
-      
-
-
     handleChange (evt) {
         // check it out: we get the evt.target.name (which will be either "email" or "password")
         // and use it to target the key on our `state` object with the same name, using bracket syntax
@@ -72,7 +62,10 @@ class AddItem extends Component {
 
     render(){
 
-        const app = initializeApp(this.firebaseConfig);
+        //const app = initializeApp(this.firebaseConfig);
+        //To access the initialized firebase configs from index.js
+        //https://dev.to/farazamiruddin/react-firebase-add-firebase-to-a-react-app-4nc9
+        const app = firebase.apps[0]
         const {user} = this.props
         const {images,cryptopayment} = this.state
         const storage = getStorage(app)
@@ -125,12 +118,12 @@ class AddItem extends Component {
         //No need to update Redux as the API will not call the data from the database
         const handleSubmission = async() =>{ 
 
-            var ownerid = Object.keys(user)
+            var ownerid = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance' && details !== 'myorders' && details !== 'mypurchases' && details !== 'myads')
 
             //PLEASE CHANGE HERE WHEN THE USER OBJECT HAS BEEN UPDATED
             var newObj = {
                 ...this.state,
-                "ownerid" : ownerid[2]
+                "ownerid" : ownerid[0]
             }
 
             await API.addItemAPI(newObj).then((response)=>{

@@ -5,6 +5,7 @@ export const GET_USER_DETAILS = "GET_USER_DETAILS";
 export const GET_USER_PURCHASE = "GET_USER_PURCHASE";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const UPDATE_ORDER_TRACKER = "UPDATE_ORDER_TRACKER"
+export const GET_ALL_ADS = "GET_ALL_ADS"
 
 
 export function setSignedInUser(user) {
@@ -55,3 +56,12 @@ export function updateOrderTracker(user){
     user
   }
 }
+
+export function getAllAds(user){
+  return {
+    type : GET_ALL_ADS,
+    user
+  }
+}
+
+

@@ -303,3 +303,49 @@ export function updateOrderTrackerAPI(orderid, trackerid){
     return resJson;
   })
 }
+
+export function getAllAdsAPI(ownerid){
+  var obj = {
+
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+      "ownerid" : ownerid
+    })
+
+  }
+
+  return fetch(url+'/getAllAds', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}
+
+export function deleteAdsAPI(itemid){
+  var obj = {
+
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+      "id" : itemid
+    })
+
+  }
+
+  return fetch(url+'/deleteAds', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}

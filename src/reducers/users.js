@@ -2,7 +2,9 @@ import { SET_SIGNED_IN_USER,
         GET_USER_BALANCE,REGISTER_USER, 
         GET_USER_DETAILS,GET_USER_PURCHASE,
         GET_ALL_ORDERS,
-        UPDATE_ORDER_TRACKER } from "../actions/users";
+        UPDATE_ORDER_TRACKER,
+        GET_ALL_ADS,
+         } from "../actions/users";
 
 export default function user(state = null, action) {
     switch (action.type) {
@@ -31,7 +33,7 @@ export default function user(state = null, action) {
 
         case GET_USER_PURCHASE:
           return {...state,
-                  mypurchase : {...action.user}}
+                  mypurchases : {...action.user}}
 
         case GET_ALL_ORDERS:
           //This state should be updated regularly to get the latest data
@@ -46,8 +48,14 @@ export default function user(state = null, action) {
           const itemKey = key[0]
           //How to update object in reducer react
           //https://atomizedobjects.com/blog/javascript/how-to-merge-two-objects-in-javascript/
+          //https://ncoughlin.com/posts/react-redux-object-based-reducers/
           return {...state,
                 myorders : { ...state.myorders, [itemKey] : {...state.myorders[itemKey],...action.user[itemKey]} }}
+        
+        case GET_ALL_ADS:
+                //This state should be updated regularly to get the latest data
+                return {...state,
+                        myads : {...action.user}}
 
       default:
         return state;

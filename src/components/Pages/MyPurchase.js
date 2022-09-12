@@ -35,8 +35,8 @@ class MyPurchase extends Component {
             } 
         }
 
-        const displayButton = (mypurchase) => {
-            if(Object.keys(mypurchase).length === 0){
+        const displayButton = (mypurchases) => {
+            if(Object.keys(mypurchases).length === 0){
                 return <div> There are no recent purchases</div>
             }
         }
@@ -47,25 +47,25 @@ class MyPurchase extends Component {
                     My purchase
                     <br></br>
                     <br></br>
-                    {user && user['mypurchase'] ?
+                    {user && user['mypurchases'] ?
                                         <div>
-                                            {displayButton(user['mypurchase'])}
-                                            {Object.keys(user['mypurchase']).map((item)=>
+                                            {displayButton(user['mypurchases'])}
+                                            {Object.keys(user['mypurchases']).map((item)=>
                                                 <div key={item}>
                                                     <div className="itemImage">
-                                                        <img src={user['mypurchase'][item]['images']}></img>
+                                                        <img src={user['mypurchases'][item]['images']}></img>
                                                     </div>
-                                                    <div>{user['mypurchase'][item]['title']}</div>
-                                                    <div>{user['mypurchase'][item]['itemprice']} ETH</div>
-                                                    <div>Status : {user['mypurchase'][item]['status']}</div>
-                                                    <div>Date of purchase : {user['mypurchase'][item]['timestamp']}</div>
-                                                    <div>{user['mypurchase'][item]['shortdescription']}</div>
+                                                    <div>{user['mypurchases'][item]['title']}</div>
+                                                    <div>{user['mypurchases'][item]['itemprice']} ETH</div>
+                                                    <div>Status : {user['mypurchases'][item]['status']}</div>
+                                                    <div>Date of purchase : {user['mypurchases'][item]['timestamp']}</div>
+                                                    <div>{user['mypurchases'][item]['shortdescription']}</div>
                                                     <div>Order Id : {item}</div>
                                                     <div>
                                                         Seller Contact Details
-                                                        <div>{user['mypurchase'][item]['ownername']}</div>
-                                                        <div>{user['mypurchase'][item]['ownerphonenum']}</div>
-                                                        <div>{user['mypurchase'][item]['ownerwallet']}</div>
+                                                        <div>{user['mypurchases'][item]['ownername']}</div>
+                                                        <div>{user['mypurchases'][item]['ownerphonenum']}</div>
+                                                        <div>{user['mypurchases'][item]['ownerwallet']}</div>
                                                     </div>
                                                     <br></br>
                                                     <br></br>
