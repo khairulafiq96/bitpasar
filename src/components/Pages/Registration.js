@@ -58,13 +58,13 @@ class Registration extends Component {
               if (response==="success"){
                      this.setState({redirectToHome : true})
               } else {
-                     this.setState({redirectToHome : true}) 
+                     this.setState({redirectToHome : false}) 
               }
                    
                      
        })
     }
-    
+
 
     render(){
        const {user} = this.props

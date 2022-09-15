@@ -50,6 +50,9 @@ class Payment extends Component {
         if (txn_test) {
             if (txn_test.blockNumber && txn_test['status'] === 1) {
                 const {purchase, dispatch} = this.props
+                //TODO : Please include transaction hash to be inserted into the db, for alpha no need but in further development
+                //this ensures the anonymity of the buyer and seller at the same time complying to 'tax' and security compliance
+                //when the user deletes the account
                 dispatch(handleCreateOrder(purchase))
                 this.setState({runCheckTransaction : false})
             }

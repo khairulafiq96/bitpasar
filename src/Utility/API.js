@@ -112,7 +112,7 @@ export function getUserPurchasesAPI(walletid){
   })
 }
 
-export function getAllOrdersAPI(walletid){
+export function getAllOrdersAPI(ownerid){
   var obj = {
 
     method: 'POST',
@@ -123,7 +123,7 @@ export function getAllOrdersAPI(walletid){
     },
 
     body: JSON.stringify({
-        "walletid" : walletid,
+        "ownerid" : ownerid,
     })
 
   }
@@ -344,6 +344,29 @@ export function deleteAdsAPI(itemid){
   }
 
   return fetch(url+'/deleteAds', obj).then(function(res){
+    return res.json();
+  }).then(function(resJson){
+    return resJson;
+  })
+}
+
+export function deleteUserAPI(userid){
+  var obj = {
+
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'appKey' : appKey
+    },
+
+    body: JSON.stringify({
+      "userid" : userid
+    })
+
+  }
+
+  return fetch(url+'/deleteUser', obj).then(function(res){
     return res.json();
   }).then(function(resJson){
     return resJson;

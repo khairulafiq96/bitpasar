@@ -22,7 +22,6 @@ class CategoryPage extends Component {
                 <br></br>
                 <br></br>
                 <div className='pb-2'>the bridge between real life and virtual currency</div>
-                <WalletConnect></WalletConnect>
             </div>
         )
     }

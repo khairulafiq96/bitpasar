@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { handleGetUserDetails } from "../../actions";
-import { handleUserRegistration,handleUpdateUserDetails } from '../../actions';
+import { handleUserRegistration,handleUpdateUserDetails,handleDeleteUser } from '../../actions';
+import { convertUserId } from '../../Utility/general';
 
 
 class MyProfile extends Component{
@@ -79,6 +80,10 @@ class MyProfile extends Component{
         await dispatch(handleUpdateUserDetails(obj))
      }
 
+    handleDeleteAccount = async(userid) => {
+        await this.props.dispatch(handleDeleteUser(userid))
+    }
+
     render(){
 
         const {user} = this.props
@@ -90,7 +95,7 @@ class MyProfile extends Component{
                 city,
                 state, 
                 zipcode } = this.state
-        const {userId} = this.props.match.params
+        const userId = convertUserId(user)
         
 
         //TOdo : If user hasent registered,redirect user to the Registration page
@@ -114,6 +119,7 @@ class MyProfile extends Component{
                             <div>
                                 <br></br>
                                 Your details
+                                {userId}
                                 <br></br>
                                 <br></br>
                                 <div>
@@ -151,7 +157,7 @@ class MyProfile extends Component{
                             <div>
                                 <button onClick={(e)=>this.handleSubmission(e,user['address'])}>Save</button>
                                 <br></br>
-                                <button>Delete Account</button>
+                                <button onClick={(e)=>this.handleDeleteAccount(userId)}>Delete Account</button>
                             </div>
                         </div>
                         :

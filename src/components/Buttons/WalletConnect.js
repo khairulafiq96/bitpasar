@@ -48,7 +48,7 @@ class WalletConnect extends Component {
                 await window.ethereum.request({method: 'eth_requestAccounts'}).then(result=>{
                     
                     //Just to dispatch account
-                    console.log(result)
+                    //console.log(result)
                     accountChangedHandler(result)
                     
 
@@ -84,10 +84,10 @@ class WalletConnect extends Component {
 
         //dispatching account
         const accountChangedHandler = async (result) => {
-            this.props.dispatch(setSignedInUser(result))
+            await this.props.dispatch(setSignedInUser(result))
             await dispatch(handleGetUserDetails(result.toString()))
-            getAccountBalance(result.toString())
-            //window.location.reload();
+            await getAccountBalance(result.toString())
+            window.location.reload();
         }
 
         //To refresh page when chain is chabged

@@ -4,7 +4,7 @@ import { SET_SIGNED_IN_USER,
         GET_ALL_ORDERS,
         UPDATE_ORDER_TRACKER,
         GET_ALL_ADS,
-         } from "../actions/users";
+        RESET_USER} from "../actions/users";
 
 export default function user(state = null, action) {
     switch (action.type) {
@@ -56,6 +56,10 @@ export default function user(state = null, action) {
                 //This state should be updated regularly to get the latest data
                 return {...state,
                         myads : {...action.user}}
+        
+        //This will clear all of the state in the storage
+        case RESET_USER:
+                return null
 
       default:
         return state;

@@ -5,6 +5,7 @@ import '../Styles/Item.css'
 import { Redirect } from "react-router-dom";
 import ToShipForm from "../PageComponents/ToShipForm";
 import ShippedItem from "../PageComponents/ShippedItems";
+import { convertUserId } from "../../Utility/general";
 
 //Todo : Create another component for individual ship items
 
@@ -12,31 +13,31 @@ class MyDashboard extends Component{
     //If the user does not have any items to ship or ads or non shipped , display a button to sell products
 
     state = {
-        redirectToHome : false,
+        redirectToRegistrationPage : false,
     }
 
     async componentDidMount(){
-        if(this.props.user){
+        if( convertUserId(this.props.user)){
             this.setState({
-                redirectToHome : false
+                redirectToRegistrationPage : false
             })
             //This API must be called every time the page renders to get the latest data
             await this.props.dispatch(handleGetAllOrders(this.props.user['address']))
         }else{
             this.setState({
-                redirectToHome : true
+                redirectToRegistrationPage : true
             })
         }
     }
 
     render(){
         const {user} = this.props
-        const {redirectToHome,displayTrackingComponent} = this.state
+        const {redirectToRegistrationPage,displayTrackingComponent} = this.state
 
         const toHome = () =>{
-            if(redirectToHome === true){
-                window.alert("Please connect to your wallet to access this page")
-                return <Redirect exact to='/home'></Redirect>
+            if(redirectToRegistrationPage === true){
+                window.alert("Please complete your registration to access this page")
+                return <Redirect exact to='/registration'></Redirect>
             } 
         }
 

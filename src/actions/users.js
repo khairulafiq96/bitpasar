@@ -6,6 +6,7 @@ export const GET_USER_PURCHASE = "GET_USER_PURCHASE";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const UPDATE_ORDER_TRACKER = "UPDATE_ORDER_TRACKER"
 export const GET_ALL_ADS = "GET_ALL_ADS"
+export const RESET_USER = "RESET_USER"
 
 
 export function setSignedInUser(user) {
@@ -60,6 +61,13 @@ export function updateOrderTracker(user){
 export function getAllAds(user){
   return {
     type : GET_ALL_ADS,
+    user
+  }
+}
+
+export function resetUser(user){
+  return {
+    type : RESET_USER,
     user
   }
 }

@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from 'firebase/compat/app';
+import { convertUserId } from '../../Utility/general';
 
 class AddItem extends Component {
 
@@ -30,7 +31,8 @@ class AddItem extends Component {
             name : null,
             email : null,
             phonenum : null,
-            redirectToMarketplace : false
+            redirectToMarketplace : false,
+            redirectToRegistrationPage : false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -55,6 +57,18 @@ class AddItem extends Component {
     handleCheckbox = () => {
         this.setState({cryptopayment:!this.state.cryptopayment})
     };
+
+    async componentDidMount(){
+        const {user,dispatch} = this.props
+        const userId = convertUserId(user)
+        
+        if(!user[userId]){
+            window.alert("Please complete your registration to upload advertisements to the marketplace")
+           this.setState({
+                'redirectToRegistrationPage' : true
+           })   
+        }
+    }
 
    
 
@@ -144,14 +158,20 @@ class AddItem extends Component {
             imageUpload()
         }
 
-        //TO BE UPDATED TO MARKETPLACE
         if (this.state.redirectToMarketplace === true){
-            return <Redirect exact to='/home'></Redirect>
+            return <Redirect exact to={`/ads/${user['address']}`}></Redirect>
+        }
+
+        const redirectToRegistrationPage =() =>{
+            if(this.state.redirectToRegistrationPage === true){
+                return <Redirect exact to='/registration'></Redirect>
+            }
         }
 
 
         return(
             <div>
+                {redirectToRegistrationPage()}
                 <br/>
                 <div>Sell new item</div>
                 <br/>

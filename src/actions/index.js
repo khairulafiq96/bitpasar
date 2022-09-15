@@ -1,5 +1,6 @@
 import * as API from '../Utility/API'
-import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,updateOrderTracker,getAllAds,deleteMyAds} from './users'
+import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,
+        updateOrderTracker,getAllAds,resetUser} from './users'
 import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
@@ -42,9 +43,9 @@ export function handleGetUserPurchases(walletid){
     }
 }
 
-export function handleGetAllOrders(walletid){
+export function handleGetAllOrders(ownerid){
     return(dispatch)=>{
-        return API.getAllOrdersAPI(walletid).then((response)=>{
+        return API.getAllOrdersAPI(ownerid).then((response)=>{
             //Reusing getUserDetails reducer
             dispatch(getAllOrders(response))
         })
@@ -162,6 +163,19 @@ export function handleDeleteAds(userid,itemid){
             }
         })
 
+    }
+}
+
+export function handleDeleteUser(userid){
+    return (dispatch)=>{
+        return API.deleteUserAPI(userid).then((response)=>{
+            if(response.status === 'successful'){
+                window.alert(response.message)
+                dispatch(resetUser(userid))
+            } else if (response.status === 'unsuccessful'){
+                window.alert(response.message)
+            }
+        })
     }
 }
 
