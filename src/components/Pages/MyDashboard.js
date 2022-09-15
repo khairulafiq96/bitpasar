@@ -22,7 +22,7 @@ class MyDashboard extends Component{
                 redirectToRegistrationPage : false
             })
             //This API must be called every time the page renders to get the latest data
-            await this.props.dispatch(handleGetAllOrders(this.props.user['address']))
+            await this.props.dispatch(handleGetAllOrders(convertUserId(this.props.user)))
         }else{
             this.setState({
                 redirectToRegistrationPage : true
