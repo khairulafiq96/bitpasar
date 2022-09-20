@@ -36,12 +36,11 @@ class App extends Component {
 
   pages(){
     return (
-      <div className='main_container'>
+      <div className='min-h-screen flex flex-col bg-violet-200'>
         <Header></Header>
-          <div className='main flex justify-center'>
-                <div className='container'>
+          <div className='flex flex-1 container mx-auto justify-center'>
                     <Switch>
-                      <Route exact path="/home" component={HomePage} />
+                      <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/registration" component={Registration} />
                       <Route exact path="/additem" component={AddItem} />
                       <Route exact path="/marketplace" component={Marketplace} />
@@ -54,7 +53,7 @@ class App extends Component {
                       <Route exact path="/dashboard/:walletid" component={MyDashboard} />
                       <Route exact path="/ads/:walletid" component={MyAds} />
                     </Switch>
-                </div>
+
           </div>
         <Footer></Footer>
       </div>

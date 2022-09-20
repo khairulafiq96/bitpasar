@@ -6,13 +6,11 @@ import {NavLink} from 'react-router-dom'
 class Header extends Component {
     render(){
         return(
-            <div className='header h-16 backdrop-blur bg-white/50'>
-                <div className='pt-2 pb-2'>
-                        <div className='float-left pl-10 pt-2.5'><NavLink exact to='/home'>bitPasar</NavLink></div>
-                        <div className='float-right pr-10 pt-2'>
+            <div className='p-4 backdrop-blur bg-white/50 flex justify-between items-center font-mono font-bold'>
+                        <div className='float-left'><NavLink className='drop-shadow-lg  text-bitpasar' exact to='/home'>bitPasar</NavLink></div>
+                        <div className='float-right'>
                            <WalletConnect></WalletConnect>
                         </div>
-                </div>
             </div>
         )
     }
