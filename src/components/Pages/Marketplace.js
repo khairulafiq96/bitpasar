@@ -56,24 +56,28 @@ class Marketplace extends Component {
             ]) 
         }
 
-        const redirectToItemIndividualPage = (itemId) =>{
-            console.log(itemId)
-            return <Redirect exact to={"item/" + itemId}></Redirect>
-            
-        }
-
         return (
-            <div>
-                <div>Marketplace</div>
-                <div>
-                    
-                    <input type="text" placeholder="Search Items" onChange={(e)=>handleSearchInput(e)}></input>
-                    <button onClick={()=>filterResults(search,1)}>Search</button>
+            <div className="w-full pb-2">
+                <div className="font-mono py-4 text-xl">
+                    Marketplace
+                </div>
+                <div className="font-robotomono flex">
+                    <input type="text" 
+                           placeholder="Search Items" 
+                           className="w-1/2 py-2 px-3 "
+                           onChange={(e)=>handleSearchInput(e)}>
+                    </input>
+                    <div className="pl-4">
+                    <button className="bg-beige hover:bg-yellow-200 text-black py-2 px-4"
+                            onClick={()=>filterResults(search,1)}>
+                        Search
+                    </button>
+                    </div>
                 </div>
 
       
                 {items ? 
-                        <div className="max-w-xl pt-10">
+                        <div className="pt-7">
                             {Object.keys(items).map(function(keyValue, index){
                                 return(
                                     <Link key={keyValue} className="inline-block pr-5 " to={"/item/"+keyValue}>
@@ -91,14 +95,15 @@ class Marketplace extends Component {
 
                 {marketplace ? 
                              marketplace['totalPage'].map((pageNum)=>
-                             {
-                                return(
-                                    <div className="inline-block border-solid border-2 border-black p-2" key={pageNum}>
-                                        <button onClick={()=>filterResults(search,pageNum)}>{pageNum}</button>
+                             {return(
+                                    <div className="inline-block pr-2">
+                                        <button key={pageNum} 
+                                                className="font-robotomono  hover:bg-yellow-200 bg-beige p-2" 
+                                                onClick={()=>filterResults(search,pageNum)}>
+                                                {pageNum}
+                                        </button>
                                     </div>
-                                )
-                             }
-                             )
+                                )})
                              :
                              <div>
                                 Loading...

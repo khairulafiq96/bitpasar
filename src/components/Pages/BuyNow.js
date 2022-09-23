@@ -5,6 +5,7 @@ import '../Styles/Item.css'
 import {handleGetIndividualItem} from '../../actions'
 import { Redirect } from "react-router-dom";
 import {setConfirmPurchase} from '../../actions/items'
+import { convertUserId } from "../../Utility/general";
 
 class BuyNow extends Component{
 
@@ -43,7 +44,7 @@ class BuyNow extends Component{
         if(user){
             //checks if the user already registed their details in the registration form
             try{
-                const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance')
+                const userId = convertUserId(user)
                 this.setState({
                     form : {
                         name : user[userId]['name'],
@@ -70,13 +71,10 @@ class BuyNow extends Component{
                     }
                 })
             }
-
-            
         } else {
             window.alert("Please connect to your wallet")
             this.setState({redirectToBuyNow : true})
         }
-        
     }
 
 
@@ -163,56 +161,138 @@ class BuyNow extends Component{
 
         return (
             <div>
-                Buy Now Component
                 {renderRedirect()}
                 {renderToVerifyPurchase()}
                 {checkItems() ? 
-                            <div>
-                                {JSON.stringify(this.state.form)}
-                                <div>
-                                    <div className="itemLargeImage">
-                                        <img src={items[itemId]['images'][0]}></img>
+                            <div className="flex 
+                                            xs:flex-col xs:space-x-0 xs:space-y-5 
+                                            lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 py-5">
+                                <div className="flex flex-col  
+                                                items-center sm:space-y-5">
+                                    <div className="flex flex-col items-center h-min-1/2
+                                                    sm:border-solid sm:border-2 sm:border-darkbeige bg-lightbeige">
+                                        <img src={items[itemId]['images'][0]}
+                                                className="bg-white object-scale-down 
+                                                            h-48 w-96 sm:h-68 sm:w-96
+                                                            p-5" ></img>
+                                        <div className="p-4 sm:text-md font-mono sm:w-[250px] sm:w-min-[300px]
+                                                        ">
+                                            <div className="">
+                                                {items[itemId]['title']}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div>{items[itemId]['title']}</div>
-                                        <div>{items[itemId]['itemprice']} ETH</div>
-                                        <div>{items[itemId]['ownername']}</div>
+                                    <div className="flex justify-center items-center h-full w-full sm:border-solid sm:border-2 
+                                                  sm:border-darkbeige bg-lightbeige
+                                                    font-mono xs:p-3 p-2">
+                                        <div className="flex flex-col space-y-2 w-11/12 ">
+                                            <div>
+                                                Item<div className="float-right">{items[itemId]['itemprice']} ETH</div>
+                                            </div>
+                                            <div>
+                                                Postage ({postagename})<div className="float-right">{postageprice} ETH</div>
+                                            </div>
+                                            <div className="border-t-2 border-gray-400">
+                                                <div className="py-2">
+                                                    Total Price <div className="float-right">{totalprice} ETH</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    Contact Details
-                                    <div>
-                                        <input onChange={this.handleFormChange} type="text" placeholder="Name" name="name" value={name || ''}></input>
-                                        <input onChange={this.handleFormChange} type="text" placeholder="Email"  name="email" value={email || ''}></input>
-                                        <br></br>
-                                        <input onChange={this.handleFormChange} type="text" placeholder="Phone Num"  name="phonenum" value={phonenum || ''}></input>
+                                <div className="sm:border-solid sm:border-2 sm:border-darkbeige 
+                                              bg-lightbeige lg:min-h-[450px] p-5">
+                                    <div className="">
+                                        <div className="font-mono text-lg">
+                                            Shipping details
+                                        </div>
+                                        <div className="font-robotomono w-2/3">
+                                            <div className="py-2 flex flex-col ">
+                                                <label for="fullname" 
+                                                        className="text-sm">
+                                                        Name
+                                                </label>
+                                                <input onChange={this.handleFormChange} 
+                                                    className="p-1 text-xs"
+                                                    type="text" 
+                                                    placeholder="Name" 
+                                                    name="name" value={name || ''}
+                                                    id="fullname">
+                                                </input>
+                                            </div>
+                                            <div className="py-2 flex flex-col">
+                                                <label for="email" 
+                                                       className="text-sm">
+                                                        Email
+                                                </label>
+                                                <input onChange={this.handleFormChange} 
+                                                        className="p-1 text-xs"
+                                                       type="text" placeholder="Email"  
+                                                       name="email" value={email || ''}
+                                                       id="email">
+                                                 </input>
+                                            </div>
+                                            <div className="py-2 flex flex-col">
+                                                <label for="phonenum" 
+                                                       className="text-sm">
+                                                        Phone number
+                                                </label>
+                                                <input onChange={this.handleFormChange} 
+                                                       className="p-1 text-xs"
+                                                       type="text" placeholder="Phone Num"  
+                                                       name="phonenum" value={phonenum || ''}
+                                                       id="phonenum">
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col  space-y-2 font-robotomono lg:w-[500px]">
+                                        <div className="text-sm">
+                                            Ship To :
+                                        </div>
+                                        <input type="text" 
+                                            name="address1" 
+                                            placeholder="Address 1"
+                                            className="p-1 text-xs" 
+                                            onChange={this.handleFormChange} 
+                                            value={address1 || ''}>
+                                        </input>
+                                        <input type="text" 
+                                                name="address2" 
+                                                className="p-1 text-xs" 
+                                                placeholder="Address 2" 
+                                                onChange={this.handleFormChange} 
+                                                value={address2 || ''}>
+                                        </input>
+                                        <div className="flex sm:flex-row xs:flex-col 
+                                                        sm:space-x-2 sm:space-y-0 
+                                                        space-x-0 space-y-2 w-2/3 sm:w-full text-xs">
+                                            <input type="text" 
+                                                   name="city" 
+                                                   className="p-1"
+                                                   placeholder="City" 
+                                                   onChange={this.handleFormChange} 
+                                                   value={city || ''}></input>
+                                            <input type="text" 
+                                                   name="states"
+                                                   className="p-1" 
+                                                   placeholder="State" 
+                                                   onChange={this.handleFormChange} 
+                                                   value={states || ''}></input>
+                                            <input type="text" 
+                                                   name="zipcode"
+                                                   className="p-1" 
+                                                   placeholder="Zipcode" 
+                                                   onChange={this.handleFormChange} 
+                                                   value={zipcode || ''}></input>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-center pt-10">
+                                        <button className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user )}
+                                                >Proceed</button>
                                     </div>
                                 </div>
-                                <br></br>
-                                <div>
-                                    Ship To :
-                                    <br></br>
-                                    <input type="text" name="address1" placeholder="Address 1" onChange={this.handleFormChange} value={address1 || ''}></input>
-                                    <br></br>
-                                    <input type="text" name="address2" placeholder="Address 2" onChange={this.handleFormChange} value={address2 || ''}></input>
-                                    <br></br>
-                                    <input type="text" name="city" placeholder="City" onChange={this.handleFormChange} value={city || ''}></input>
-                                    <input type="text" name="states" placeholder="State" onChange={this.handleFormChange} value={states || ''}></input>
-                                    <input type="text" name="zipcode" placeholder="Zipcode" onChange={this.handleFormChange} value={zipcode || ''}></input>
-                                </div>
-                                <br></br>
-                                <div>
-                                    Postage
-                                    <br></br>
-                                    <div>{postagename}</div>
-                                    <div>{postageprice}</div>
-                                </div>
-                                <br></br>
-                                <div>
-                                    Total Price : {items[itemId]['itemprice']} + {postageprice} = {totalprice} ETH
-                                </div>
-                                <br></br>
-                                <button onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user )}>Proceed</button>
                             </div>
                             :
                             <div></div>

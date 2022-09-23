@@ -5,11 +5,19 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens : {
+      'xs' : '300px',
+      'divbreak' : '845px',
+      ...defaultTheme.screens
+    },
     extend: {
       colors : {
         bitpasar : '#3465a4',
         beige : '#CECCC6',
-        darkbeige : '#ACA368'
+        darkbeige : '#ACA368',
+        lightbeige : '#ECE9DC',
+        lightblue : '#E4F2FF',
+        button : '#D5D4CD',
       },
       fontFamily : {
         mono : ["'Space Mono'", ...defaultTheme.fontFamily.mono],

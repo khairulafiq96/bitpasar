@@ -21,14 +21,18 @@ class WalletConnect extends Component {
     renderDropdownItems(address){
         if(this.state.renderDropdown){
             return(
-                <div className='bg-amber-200 absolute '>
-                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} className='p-2' exact to ={"/profile/" + address}>My Profile</NavLink>
+                <div className='bg-lightblue absolute'>
+                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
+                             className='px-2 hover:bg-amber-200' exact to ={"/profile/" + address}>My Profile</NavLink>
                     <br></br>
-                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} className='p-2' exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
+                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
+                             className='px-2 hover:bg-amber-200'  exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
                     <br></br>
-                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} className='p-2' exact to ={"/dashboard/"+address}>My Orders</NavLink>
+                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
+                             className='px-2 hover:bg-amber-200' exact to ={"/dashboard/"+address}>My Orders</NavLink>
                     <br></br>
-                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} className='p-2' exact to ={"/ads/"+address}>My Ads</NavLink>
+                    <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
+                             className='px-2 hover:bg-amber-200' exact to ={"/ads/"+address}>My Ads</NavLink>
                 </div>
             )
         }
@@ -108,7 +112,7 @@ class WalletConnect extends Component {
         return(
             <div>
                 {user ?<div>
-                            <button onClick={()=>this.displayDropdown(renderDropdown)} className=" text-xs hover:bg-blue-500 bg-bitpasar text-white font-bold py-2 px-4">
+                            <button onClick={()=>this.displayDropdown(renderDropdown)} className=" text-xs hover:bg-blue-500 bg-bitpasar text-white py-2 px-4">
                                     {displayAddress(user.address)}
                             </button>
                             {renderDropdown ? this.renderDropdownItems(user.address) : <div></div>}

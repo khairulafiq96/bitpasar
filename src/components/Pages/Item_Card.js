@@ -7,7 +7,9 @@ export class Item_Card extends Component{
         const {individualItem} = this.props
 
         return(
-            <div className="border-solid border-2 border-gray-400 p-3 h-48 ">
+            <div title={individualItem['shortdescription']} 
+                className="border-solid border-2 border-gray-400 p-3 sm:h-48 sm:w-56 w-36
+                          bg-lightblue  hover:bg-yellow-200 title:bg-red-200">
                 
                 <div className="flex justify-center">
                     {individualItem['images'] ? 
@@ -19,7 +21,7 @@ export class Item_Card extends Component{
                                                 <div>No Images Provided</div>}
                 </div>  
                 <div className="font-robotomono p-2">
-                    <div className="font-bold">
+                    <div className="text-xs h-8 overflow-hidden">
                         {individualItem['title']}
                     </div>
                     <div className="text-xs">

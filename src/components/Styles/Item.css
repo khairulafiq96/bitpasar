@@ -1,33 +1,16 @@
-* { 
-   
-    padding: 0; 
+.itemcontainer {  display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-rows: 0.9fr 1.1fr;
+    gap: 5px 6px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "image details"
+      "description description";
   }
-
-.itemImage {
-    height: auto; 
-    width: auto; 
-    max-width: 150px; 
-    max-height: 150px;
-}
-
-.itemMargin{
-    margin: 10px;
-}
-
-.itemCard {
-    border: solid 1px black;
-    max-width: 11rem;
-    height: 12rem;
-}
-
-.itemLayout{
-    width: 200px;
-}
-
-.itemLargeImage{
-    height: auto; 
-    width: auto; 
-    max-width: 400px; 
-    max-height: 400px;
-}
-
+  
+  .itemimage { grid-area: image; }
+  
+  .itemdetails { grid-area: details; }
+  
+  .itemdescription { grid-area: description; }
+  

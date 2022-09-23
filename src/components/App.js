@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div className='min-h-screen flex flex-col bg-violet-200'>
         <Header></Header>
-          <div className='flex flex-1 container mx-auto justify-center'>
+          <div className='flex flex-1 sm:container mx-auto justify-center'>
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/registration" component={Registration} />
