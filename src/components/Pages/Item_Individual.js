@@ -114,7 +114,7 @@ class Item_Individual extends Component{
             <div>
                 {renderRedirect()}
                 {checkItems() ? 
-                                <div className="w-full pt-4 flex flex-col items-center">
+                                <div className="w-full flex flex-col items-center">
                                     <div className="sm:flex sm:space-x-2 sm:pb-3 sm:w-full">
                                         <div className="flex items-center flex-col
                                                         sm:border-solid sm:border-2 sm:border-darkbeige bg-lightbeige

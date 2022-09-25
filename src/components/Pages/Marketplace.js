@@ -58,7 +58,7 @@ class Marketplace extends Component {
 
         return (
             <div className="w-full pb-2">
-                <div className="font-mono py-4 text-xl">
+                <div className="font-mono pb-2 text-xl">
                     Marketplace
                 </div>
                 <div className="font-robotomono flex">

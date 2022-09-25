@@ -62,7 +62,7 @@ class VerifyPurchase extends Component {
                 {checkItems() ?
                                 <div className="flex 
                                                 xs:flex-col xs:space-x-0 xs:space-y-5 
-                                                lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 py-5">
+                                                lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 pb-5">
                                     {renderRedirectToPurchase()}
                                     {renderRedirectToBuyNow()}
                             
@@ -97,7 +97,7 @@ class VerifyPurchase extends Component {
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap flex-col space-y-2 sm:border-solid sm:border-2 sm:border-darkbeige 
-                                                  bg-lightbeige lg:min-h-[450px] lg:w-[500px] p-5 break-words">
+                                                  bg-lightbeige lg:min-h-[450px] sm:w-[550px] p-5 break-words">
                                         <div>
                                             <div className="font-mono text-lg">
                                                 Shipping to :

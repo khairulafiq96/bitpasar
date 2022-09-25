@@ -71,29 +71,34 @@ class Payment extends Component {
     renderCheckTransaction(txnHash,buyerwallet){
         if(this.state.runCheckTransaction){
             this.checkTransaction(txnHash)
-            return(<div className="inline-block">
-                <div>Checking transaction</div>
+            return(
+                <div className="flex flex-col items-center space-y-5 p-5
+                                font-mono
+                                border-2 border-solid border-darkbeige bg-lightbeige">
+                    <div>Checking transaction</div>
                     <img src="https://i.stack.imgur.com/27Rnd.gif"></img>
-                </div>)
+                </div>
+                )
         } else {
-            return(<div>
-                        <div>Transaction Completed</div>
-                        <br></br>
-                        <div>Check out your purchases here</div>
-                        <br></br>
+            return(
+                <div className="flex flex-col space-y-2 items-center p-5
+                                font-mono w-full
+                                border-2 border-solid border-darkbeige bg-lightbeige">
+                    <div>Transaction Completed !</div>
+                    <div>Check out your purchases here</div>
+                    <div className="pt-5">
                         <NavLink
-                            exact to={"/profile/purchase/" + buyerwallet}
-                            className="text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            exact to={"/profile/purchase/"}
+                            className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono">
                             My Purchases
                         </NavLink>
-                    </div>)
-        }
-       
+                    </div>
+                 </div>)}
     }
 
     render(){
 
-        const {gasprice,transaction,transactionStatus,runCheckTransaction} = this.state
+        const {transaction} = this.state
         const {purchase} = this.props
         const {itemId} = this.props.match.params
 
@@ -104,41 +109,63 @@ class Payment extends Component {
         }
 
         return(
-            <div>
+            <div >
                 {purchase ?
-                            <div>
-                            <br></br>
-                            <br></br>
-                            <div>To pay : {purchase['totalprice']} ETH</div>
-                            <div>to : {purchase['ownerwallet']}</div>
-                            <br></br>
-                            {transaction ? 
-                                        <div>Payment initiated</div> 
-                                        : 
-                                        <div>
-                                            <button onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>Pay Now</button>
-                                        </div>}
-                            {/*<button onClick={()=>this.startPayment('purchase['totalprice'].toString() 0.00001', purchase['ownerwallet'])}>Pay Now</button>*/}
-                            <br></br>
-                            <div>Check your transaction here</div>
-                            {transaction ? 
-                                        <div> 
-                                            <a target="_blank" href={"https://ropsten.etherscan.io/tx/"+transaction['hash']}>https://ropsten.etherscan.io/tx/{transaction['hash']}</a>
-                                        </div> 
-                                        : 
-                                        <div>
-                                        </div>}
-                            <br></br>
-                            {transaction ? 
-                                        this.renderCheckTransaction(transaction['hash'], purchase['buyerwallet']) 
-                                        : 
-                                        <div>
-                                        </div>}
+                            <div className="flex flex-col space-y-5 items-center xs:p-2 sm:p-0">
+                                <div className="flex flex-col space-y-2 items-center 
+                                                border-2 border-solid border-darkbeige p-5
+                                              bg-lightbeige">
+                                    <div className="font-mono text-md">
+                                        To pay
+                                    </div>
+                                    <div className="font-robotomono text-2xl"> 
+                                        {purchase['totalprice']} ETH
+                                    </div>
+                                    <div className="font-mono text-md">
+                                        to
+                                    </div>
+                                    <div className="font-robotomono text-xs">
+                                        {purchase['ownername']}
+                                    </div>
+                                    <div className="font-robotomono text-xs pb-5">
+                                        {purchase['ownerwallet']}
+                                    </div>
+                                    {transaction ? 
+                                                <div className="font-robotomono">
+                                                    Payment initiated
+                                                </div> 
+                                                : 
+                                                <button 
+                                                    className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                    onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>
+                                                        Pay Now
+                                                </button>
+                                                }
+                                                {/*<button onClick={()=>this.startPayment('purchase['totalprice'].toString() 0.00001', purchase['ownerwallet'])}>Pay Now</button>*/}
+                                </div>
+                                {transaction ? 
+                                            <div className="flex flex-col items-center break-all p-5
+                                                        xs:text-xs sm:text-sm md:text-base
+                                                        border-2 border-solid border-darkbeige bg-lightbeige"> 
+                                                <div className="font-mono pb-5">
+                                                    Check your transaction here
+                                                </div>
+                                                <a  className="font-robotomono underline"
+                                                    target="_blank" href={`https://ropsten.etherscan.io/tx/${transaction['hash']}`}>
+                                                    https://etherscan.io/tx/{transaction['hash']}</a>
+                                            </div>
+                                            : 
+                                            <div>
+                                            </div>}
+                                {/*this.renderCheckTransaction(transaction['hash'], purchase['buyerwallet']) */}
+                                {transaction ? 
+                                            this.renderCheckTransaction(transaction['hash'], purchase['buyerwallet'])
+                                            : 
+                                            <div>
+                                            </div>}
                             </div> 
                             :
                             redirectToIndividualItem() }
-                
-                    
             </div>
         )
     }

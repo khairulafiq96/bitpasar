@@ -166,7 +166,7 @@ class BuyNow extends Component{
                 {checkItems() ? 
                             <div className="flex 
                                             xs:flex-col xs:space-x-0 xs:space-y-5 
-                                            lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 py-5">
+                                            lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 pb-5">
                                 <div className="flex flex-col  
                                                 items-center sm:space-y-5">
                                     <div className="flex flex-col items-center h-min-1/2
@@ -177,9 +177,7 @@ class BuyNow extends Component{
                                                             p-5" ></img>
                                         <div className="p-4 sm:text-md font-mono sm:w-[250px] sm:w-min-[300px]
                                                         ">
-                                            <div className="">
                                                 {items[itemId]['title']}
-                                            </div>
                                         </div>
                                     </div>
                                     <div className="flex justify-center items-center h-full w-full sm:border-solid sm:border-2 
@@ -201,7 +199,7 @@ class BuyNow extends Component{
                                     </div>
                                 </div>
                                 <div className="sm:border-solid sm:border-2 sm:border-darkbeige 
-                                              bg-lightbeige lg:min-h-[450px] p-5">
+                                              bg-lightbeige lg:min-h-[450px] sm:w-[550px] p-5">
                                     <div className="">
                                         <div className="font-mono text-lg">
                                             Shipping details
