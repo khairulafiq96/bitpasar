@@ -36,7 +36,7 @@ class App extends Component {
 
   pages(){
     return (
-      <div className='min-h-screen flex flex-col bg-violet-200'>
+      <div className='min-h-screen flex flex-col background_color'>
         <Header></Header>
           <div className='flex flex-1 sm:container mx-auto justify-center'>
                     <Switch>

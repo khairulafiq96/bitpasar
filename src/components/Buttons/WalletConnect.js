@@ -44,8 +44,6 @@ class WalletConnect extends Component {
         const {user,dispatch} = this.props
         const {renderDropdown} = this.state
 
-        
-
         const connectWalletHandler = async () => {
             if (window.ethereum || window.ethereum.isMetaMask) {
                 console.log('MetaMask Here!');
@@ -112,13 +110,15 @@ class WalletConnect extends Component {
         return(
             <div>
                 {user ?<div>
-                            <button onClick={()=>this.displayDropdown(renderDropdown)} className=" text-xs hover:bg-blue-500 bg-bitpasar text-white py-2 px-4">
+                            <button title={user.address}
+                                    onClick={()=>this.displayDropdown(renderDropdown)} 
+                                    className=" text-xs hover:bg-blue-500 bg-bitpasar text-white py-2 px-4">
                                     {displayAddress(user.address)}
                             </button>
                             {renderDropdown ? this.renderDropdownItems(user.address) : <div></div>}
                         </div>
                       : <button 
-                            className=" text-xs hover:bg-blue-500 bg-bitpasar text-white font-bold py-2 px-4"
+                            className="text-xs hover:bg-blue-500 bg-bitpasar text-white font-bold py-2 px-4"
                             onClick={connectWalletHandler}>
                                 Connect Wallet
                         </button>}

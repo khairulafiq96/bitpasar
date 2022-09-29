@@ -41,12 +41,6 @@ class MyDashboard extends Component{
             } 
         }
 
-        const displayNoItem = (toship) => {
-            if(Object.keys(toship).length === 0){
-                return <div> There are no items to be shipped out</div>
-            }
-        }
-
         const renderToShipItems = (item,user,status) => {
             if(status === "completed payment"){
                 return (<ToShipForm item={item} user={user} key={item}></ToShipForm>)
@@ -61,20 +55,25 @@ class MyDashboard extends Component{
         
     
         return(
-        <div>
+        <div className="md:w-[620px] px-2 sm:px-0">
             {toHome()}
             {user && user['myorders'] ? 
-                                    <div>
-                                        <div>
-                                            To Ship 
-                                            {displayNoItem(user['myorders'])}
+                                    <div className="flex flex-col space-y-7">
+                                        <div className="flex flex-col space-y-3">
+                                            <div className="font-mono text-lg">
+                                                To Ship 
+                                            </div>
+                                            
                                             {Object.keys(user['myorders']).map((item)=>{
                                             return renderToShipItems(item, user,user['myorders'][item]['status'])
                                             }
                                             )}
                                         </div>
-                                        <div>
-                                            Shipped Items
+                                        <div className="flex flex-col space-y-3">
+                                            <div className="font-mono text-lg">
+                                                Shipped Items
+                                            </div>
+                                           
                                             {Object.keys(user['myorders']).map((item)=>{
                                                 return renderShippedItems(item, user,user['myorders'][item]['status'])
                                             }

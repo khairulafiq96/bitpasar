@@ -63,11 +63,9 @@ class MyAds extends Component{
             }
         }
 
-        return (<div>
-                    {user && user['myads'] ? <div>
-                                                On Marketplace
-                                                <br></br>
-                                                <br></br>
+        return (<div className="md:w-[620px] px-2 sm:px-0">
+                    {user && user['myads'] ? <div className="flex flex-col space-y-3">
+                                                <div className="bitpasar_text text-lg">On Marketplace</div>
                                                 {displayNoItem(user['myads'])}
                                                 {Object.keys(user['myads']).map((item)=>{
                                                  return renderOnMarketplaceAds(item, user,user['myads'][item]['status'])

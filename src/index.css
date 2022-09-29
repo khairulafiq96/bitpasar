@@ -15,3 +15,85 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+label {
+  font-family: 'Roboto Mono', monospace ;
+  padding-bottom: 2px;
+  display: block;
+}
+
+textarea,input[type=text]{
+  padding: 0.5rem;
+  font-family: 'Roboto Mono', monospace ;
+  width: 100%;
+  font-size: 0.875rem/* 14px */;
+  line-height: 1.25rem
+}
+
+button{
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 204 198 / var(--tw-bg-opacity));
+
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  padding-top: 0.5rem/* 8px */;
+  padding-bottom: 0.5rem/* 8px */;
+  padding-left: 1rem/* 16px */;
+  padding-right: 1rem/* 16px */;
+  font-family: 'Space Mono', monospace;
+}
+button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+}
+
+input[type=file] {
+  font-family: 'Space Mono', monospace;
+}
+input[type=file]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+}
+
+.bitpasar_border {
+  border-style: solid;
+  border-color:  #ACA368;
+  border-width: 2px
+}
+
+.bitpasar_bg {
+  background-color: #ECE9DC;
+}
+
+.bitpasar_loading {
+  font-family: 'Space Mono', monospace;
+}
+
+.bitpasar_text {
+  font-family: 'Roboto Mono', monospace ;
+}
+
+.bitpasar_subtext {
+  font-family: 'Roboto Mono', monospace ;
+}
+
+.bitpasar_contentcontainer {
+  width: 620px;
+}
+
+.background_color{
+  background-color: #D9D9D9;
+}
+
+.box{
+  border-width:2px;
+  border-color:#FFFFFF #808080 #808080 #FFFFFF;
+  border-style:solid;
+}
+
+.box_background{
+  background:#C0C0C0;
+}
+

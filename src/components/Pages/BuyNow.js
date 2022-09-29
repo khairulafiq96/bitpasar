@@ -199,7 +199,7 @@ class BuyNow extends Component{
                                     </div>
                                 </div>
                                 <div className="sm:border-solid sm:border-2 sm:border-darkbeige 
-                                              bg-lightbeige lg:min-h-[450px] sm:w-[550px] p-5">
+                                              bg-lightbeige lg:min-h-[450px] lg:w-[550px] p-5">
                                     <div className="">
                                         <div className="font-mono text-lg">
                                             Shipping details
@@ -211,7 +211,7 @@ class BuyNow extends Component{
                                                         Name
                                                 </label>
                                                 <input onChange={this.handleFormChange} 
-                                                    className="p-1 text-xs"
+                                                    className="p-1  "
                                                     type="text" 
                                                     placeholder="Name" 
                                                     name="name" value={name || ''}
@@ -224,7 +224,7 @@ class BuyNow extends Component{
                                                         Email
                                                 </label>
                                                 <input onChange={this.handleFormChange} 
-                                                        className="p-1 text-xs"
+                                                        className="p-1  "
                                                        type="text" placeholder="Email"  
                                                        name="email" value={email || ''}
                                                        id="email">
@@ -236,7 +236,7 @@ class BuyNow extends Component{
                                                         Phone number
                                                 </label>
                                                 <input onChange={this.handleFormChange} 
-                                                       className="p-1 text-xs"
+                                                       className="p-1  "
                                                        type="text" placeholder="Phone Num"  
                                                        name="phonenum" value={phonenum || ''}
                                                        id="phonenum">
@@ -251,20 +251,20 @@ class BuyNow extends Component{
                                         <input type="text" 
                                             name="address1" 
                                             placeholder="Address 1"
-                                            className="p-1 text-xs" 
+                                            className="p-1  " 
                                             onChange={this.handleFormChange} 
                                             value={address1 || ''}>
                                         </input>
                                         <input type="text" 
                                                 name="address2" 
-                                                className="p-1 text-xs" 
+                                                className="p-1  " 
                                                 placeholder="Address 2" 
                                                 onChange={this.handleFormChange} 
                                                 value={address2 || ''}>
                                         </input>
                                         <div className="flex sm:flex-row xs:flex-col 
                                                         sm:space-x-2 sm:space-y-0 
-                                                        space-x-0 space-y-2 w-2/3 sm:w-full text-xs">
+                                                        space-x-0 space-y-2 w-2/3 sm:w-full">
                                             <input type="text" 
                                                    name="city" 
                                                    className="p-1"

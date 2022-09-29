@@ -122,7 +122,7 @@ class Item_Individual extends Component{
                                             <img className="bg-white object-scale-down h-48 w-96 sm:h-80 sm:w-9/12"
                                                     src={items[itemId]['images'][photoCount]}></img>
 
-                                            <div className="font-mono xs:py-2 sm:py-5 flex">
+                                            <div className="font-mono xs:py-2 sm:py-5 flex items-center">
                                                 <button className="hover:bg-yellow-200" 
                                                         onClick={()=>decrementPic(photoCount)}>
                                                         Previous

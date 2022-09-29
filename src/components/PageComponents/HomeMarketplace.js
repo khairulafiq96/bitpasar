@@ -19,9 +19,8 @@ class HomeMarketplace extends Component{
         const {items} = this.props
 
         return (
-            <div className="p-2 bg-beige drop-shadow-2xl">
-                <div className="border-solid border-2 border-green p-2">
-                    <div className="font-mono text-center">
+            <div className="p-2 box box_background">
+                    <div className="font-mono text-center text-lg p-5">
                         Latest Listings
                     </div>
                         {items ? 
@@ -41,7 +40,6 @@ class HomeMarketplace extends Component{
                                 <div>
                                     Loading...    
                                 </div>}
-                </div>
             </div>
         )
     }

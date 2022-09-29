@@ -75,48 +75,67 @@ class Registration extends Component {
        }
 
         return(
-            <div>
-              {user ? <div>
-                            <br/>
-                            Registration
-                            <div>Contact Details</div>
-                            <input className='min-w-4' 
-                                   type="text" placeholder='Name' name='name'
-                                   onChange={this.handleChange}></input> 
-                            <input type="text" placeholder='Email' name='email'
-                                   onChange={this.handleChange}></input>
-                            <br></br>
-                            <input type="text" placeholder='Phonenum' name='phonenum'
-                                   onChange={this.handleChange}></input>
-                            <input type="text" placeholder='Account Type'></input>
-                            <br></br>
-                     
-                            <div>Address</div>
-                            <input type="text" 
-                                   placeholder='Address line 1' name='address1'
-                                   onChange={this.handleChange}></input>
-                            <br/>
-                            <input type="text" placeholder='Address line 2' name='address2'
-                                   onChange={this.handleChange}></input>
-                            <br/>
-                            <input className='w-16' type="text" 
-                                   placeholder='City' name='city'
-                                   onChange={this.handleChange}></input>
-                            <input className='w-26' type="text" 
-                                   placeholder='State' name='state'
-                                   onChange={this.handleChange}></input>
-                            <input className='w-16' type="text" 
-                                   placeholder='Zipcode' name='zipcode'
-                                   onChange={this.handleChange}></input>
-                            <br/>
-                            <label>
-                            <input type="checkbox"
-                                   checked={this.state.privacypolicy}
-                                   onChange={this.handleCheckbox}></input> I have read, understand and agree on the privacy policy stated here
-                            </label>
-                            <br/>
-
-                            <button disabled={!this.state.privacypolicy} onClick={(e)=>this.handleSubmission(e)}>Submit</button>
+            <div className='flex justify-center'>
+              {user ? <div className='px-2 sm:w-[500px]'>
+                            <div className='flex flex-col space-y-2
+                                            bitpasar_border bitpasar_bg p-5'>
+                                   <div className='font-mono text-lg pb-3 '>
+                                          Registration
+                                   </div>
+                                   <div className='font-robotomono'>
+                                          My Details</div>
+                                   <div className='w-2/3'>
+                                          <label for="name">Name</label>
+                                          <input id="name" 
+                                                 type="text" placeholder='Name' name='name'
+                                                 onChange={this.handleChange}></input>
+                                   </div>
+                                   <div className='w-2/3'>
+                                          <label classname='text-xs'for="email">Email</label>
+                                          <input id="email" type="text" placeholder='Email' name='email'
+                                                 onChange={this.handleChange}></input>
+                                   </div>
+                                   <div className='w-2/3'>
+                                          <label classname='text-xs'for="phonenum">Phone number</label>
+                                          <input id='phonenum' type="text" placeholder='Phonenum' name='phonenum'
+                                                 onChange={this.handleChange}></input>
+                                   </div>
+                                   <div className='pt-3'>
+                                          <label clasname='text-xs' for='address'>Shipping Address</label>
+                                          <input id='address'
+                                                 type="text" 
+                                                 placeholder='Address line 1' name='address1'
+                                                 onChange={this.handleChange}></input>
+                                   </div>
+                                   <input type="text" placeholder='Address line 2' name='address2'
+                                          onChange={this.handleChange}></input>
+                                   <div className='flex flex-col w-2/3 space-y-2 
+                                                   sm:flex-row sm:space-x-2 sm:space-y-0 sm:w-full'>
+                                          <input className='' type="text" 
+                                                 placeholder='City' name='city'
+                                                 onChange={this.handleChange}></input>
+                                          <input className='' type="text" 
+                                                 placeholder='State' name='state'
+                                                 onChange={this.handleChange}></input>
+                                          <input className='' type="text" 
+                                                 placeholder='Zipcode' name='zipcode'
+                                                 onChange={this.handleChange}></input>
+                                   </div>
+                                   <div className='py-5'>
+                                          <label className='text-sm'>
+                                          <input type="checkbox"
+                                                 checked={this.state.privacypolicy}
+                                                 onChange={this.handleCheckbox}></input> I have read, understand and agree on the privacy policy stated here
+                                          </label>
+                                   </div>
+                                   <div className='flex justify-center'>
+                                          <button className='disabled:bg-red-200 disabled:line-through disabled:text-white' 
+                                                 disabled={!this.state.privacypolicy} 
+                                                  onClick={(e)=>this.handleSubmission(e)}>
+                                                 Submit
+                                          </button>
+                                   </div>
+                            </div>
                      </div>
                      :
                      <div>  

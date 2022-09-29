@@ -112,54 +112,63 @@ class MyProfile extends Component{
         }
 
         return (
-            <div>
+            <div className=''>
+                <div className='font-mono text-lg pb-5'>
+                                    Your details
+                                </div>
                 {redirectToRegistrationPage()}
-                {user ?
-                        <div>
-                            <div>
-                                <br></br>
-                                Your details
-                                {userId}
-                                <br></br>
-                                <br></br>
-                                <div>
+                {user ? 
+                            <div className='flex flex-col space-y-4 p-5
+                                            text-sm sm:text-base
+                                            border-solid border-2 border-darkbeige bg-lightbeige'>
+                                <div className='font-robotomono'>
                                     Contact Details
                                 </div>
-                                <input className='min-w-4' 
-                                            type="text" placeholder='Name' name='name'
-                                            onChange={this.handleChange} value={name || ''}></input> 
-                                        <input type="text" placeholder='Email' name='email'
-                                            onChange={this.handleChange} value={email || ''}></input>
-                                        <br></br>
-                                        <input type="text" placeholder='Phonenum' name='phonenum'
-                                            onChange={this.handleChange} value={phonenum || ''}></input>
+                                
+                                <div className='w-2/3'>
+                                    <label for="fullname">Name</label>
+                                    <input className='text-xs sm:text-base'
+                                        type="text" placeholder='Name' name='name' id="fullname"
+                                        onChange={this.handleChange} value={name || ''}></input> 
+                                </div>
+                                <div className='w-2/3'>
+                                    <label for="email">Email</label>
+                                    <input type="text" placeholder='Email' name='email' id="email"
+                                    onChange={this.handleChange} value={email || ''}></input>
+                                </div>
+                                <div className='w-2/3'>
+                                    <label for="phonenum">Phone number</label>
+                                    <input type="text" placeholder='Phonenum' name='phonenum' id="phonenum"
+                                        onChange={this.handleChange} value={phonenum || ''}></input>
+                                </div>
+                                <div className='flex flex-col space-y-2 min-w-[300px]'>
+                                            <label for='address'>Shipping Address</label>
+                                            <input id='address 'type="text" className='' 
+                                                placeholder='Address line 1' name='address1'
+                                                onChange={this.handleChange} value={address1 || ''}></input>
+                                            <input  type="text" placeholder='Address line 2' name='address2'
+                                                onChange={this.handleChange} value={address2 || ''}></input>
+                                            <div className='flex flex-col space-y-2 w-2/3 
+                                                            sm:flex-row sm:space-x-2 sm:space-y-0 sm:w-full'>
+                                                <input  type="text" 
+                                                    placeholder='City' name='city'
+                                                    onChange={this.handleChange} value={city || ''}></input>
+                                                <input  type="text" 
+                                                    placeholder='State' name='state'
+                                                    onChange={this.handleChange} value={state || ''}></input>
+                                                <input type="text" 
+                                                    placeholder='Zipcode' name='zipcode'
+                                                    onChange={this.handleChange} value={zipcode || ''}></input>
+                                            </div>
+                                </div>
+                                <div className='flex items-center justify-center pt-3'>
+                                    <div className='flex flex-row space-x-2'>
+                                        <button onClick={(e)=>this.handleSubmission(e,user['address'])}>Save</button>
+                                        <button onClick={(e)=>this.handleDeleteAccount(userId)}>Delete Account</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <div>Address</div>
-                                        <input type="text" 
-                                            placeholder='Address line 1' name='address1'
-                                            onChange={this.handleChange} value={address1 || ''}></input>
-                                        <br/>
-                                        <input type="text" placeholder='Address line 2' name='address2'
-                                            onChange={this.handleChange} value={address2 || ''}></input>
-                                        <br/>
-                                        <input className='w-16' type="text" 
-                                            placeholder='City' name='city'
-                                            onChange={this.handleChange} value={city || ''}></input>
-                                        <input className='w-26' type="text" 
-                                            placeholder='State' name='state'
-                                            onChange={this.handleChange} value={state || ''}></input>
-                                        <input className='w-16' type="text" 
-                                            placeholder='Zipcode' name='zipcode'
-                                            onChange={this.handleChange} value={zipcode || ''}></input>
-                            </div>
-                            <br></br>
-                            <div>
-                                <button onClick={(e)=>this.handleSubmission(e,user['address'])}>Save</button>
-                                <br></br>
-                                <button onClick={(e)=>this.handleDeleteAccount(userId)}>Delete Account</button>
-                            </div>
-                        </div>
+                        
                         :
                         redirectToHome()}
                 
