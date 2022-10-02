@@ -1,4 +1,4 @@
-import { CONFIRM_PURCHASE, VERIFY_PAYMENT } from "../actions/items";
+import { CONFIRM_PURCHASE, VERIFY_PAYMENT,RESET_PURCHASE } from "../actions/items";
 
 export default function purchase(state = null, action){
     switch(action.type){
@@ -8,6 +8,9 @@ export default function purchase(state = null, action){
 
         case VERIFY_PAYMENT:
             return action.purchase
+
+        case RESET_PURCHASE:
+            return null
 
         default:
             return state;

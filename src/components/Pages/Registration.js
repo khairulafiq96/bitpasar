@@ -78,30 +78,30 @@ class Registration extends Component {
             <div className='flex justify-center'>
               {user ? <div className='px-2 sm:w-[500px]'>
                             <div className='flex flex-col space-y-2
-                                            bitpasar_border bitpasar_bg p-5'>
+                                            box bg-slate-200 p-5'>
                                    <div className='font-mono text-lg pb-3 '>
                                           Registration
                                    </div>
                                    <div className='font-robotomono'>
                                           My Details</div>
                                    <div className='w-2/3'>
-                                          <label for="name">Name</label>
+                                          <label htmlFor="name">Name</label>
                                           <input id="name" 
                                                  type="text" placeholder='Name' name='name'
                                                  onChange={this.handleChange}></input>
                                    </div>
                                    <div className='w-2/3'>
-                                          <label classname='text-xs'for="email">Email</label>
+                                          <label className='text-xs'htmlFor="email">Email</label>
                                           <input id="email" type="text" placeholder='Email' name='email'
                                                  onChange={this.handleChange}></input>
                                    </div>
                                    <div className='w-2/3'>
-                                          <label classname='text-xs'for="phonenum">Phone number</label>
+                                          <label className='text-xs'htmlFor="phonenum">Phone number</label>
                                           <input id='phonenum' type="text" placeholder='Phonenum' name='phonenum'
                                                  onChange={this.handleChange}></input>
                                    </div>
                                    <div className='pt-3'>
-                                          <label clasname='text-xs' for='address'>Shipping Address</label>
+                                          <label clasname='text-xs' htmlFor='address'>Shipping Address</label>
                                           <input id='address'
                                                  type="text" 
                                                  placeholder='Address line 1' name='address1'

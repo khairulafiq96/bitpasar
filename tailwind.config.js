@@ -17,7 +17,7 @@ module.exports = {
         darkbeige : '#ACA368',
         lightbeige : '#ECE9DC',
         lightblue : '#E4F2FF',
-        button : '#D5D4CD',
+        button : '#1100FF',
       },
       fontFamily : {
         mono : ["'Space Mono'", ...defaultTheme.fontFamily.mono],

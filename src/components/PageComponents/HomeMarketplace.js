@@ -20,15 +20,15 @@ class HomeMarketplace extends Component{
 
         return (
             <div className="p-2 box box_background">
-                    <div className="font-mono text-center text-lg p-5">
+                    <div className="font-mono text-center text-lg p-5 underline">
                         Latest Listings
                     </div>
                         {items ? 
                                 <div className="flex flex-wrap justify-center">
                                     {Object.keys(items).map(function(keyValue, index){
                                         return(
-                                            <div className="p-2 w-1/8">
-                                                <Link key={keyValue} to={"/item/"+keyValue}>
+                                            <div key={keyValue} className="p-2 w-1/8">
+                                                <Link  to={"/item/"+keyValue}>
                                                     <Item_Card individualItem={items[keyValue]}></Item_Card>
                                                     <br/>
                                                 </Link>

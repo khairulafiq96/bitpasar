@@ -69,17 +69,17 @@ class VerifyPurchase extends Component {
                                     <div className="flex flex-col  
                                                     items-center sm:space-y-5">
                                         <div className="flex flex-col items-center h-min-1/2
-                                                        sm:border-solid sm:border-2 sm:border-darkbeige bg-lightbeige">
+                                                        box bg-white">
                                             <img src={items[itemId]['images'][0]}
-                                                    className="bg-white object-scale-down 
+                                                    className="bg-slate-200 object-scale-down 
                                                                 h-48 w-96 sm:h-68 sm:w-96
                                                                 p-5" ></img>
                                             <div className="p-4 sm:text-md font-mono sm:w-[250px] sm:w-min-[300px]">
                                                 {items[itemId]['title']}
                                             </div>
                                         </div>
-                                        <div className="flex justify-center items-center h-full w-full sm:border-solid sm:border-2 
-                                                    sm:border-darkbeige bg-lightbeige
+                                        <div className="flex justify-center items-center h-full w-full 
+                                                        box bg-white
                                                         font-mono xs:p-3 p-2">
                                             <div className="flex flex-col space-y-2 w-11/12 ">
                                                 <div>
@@ -96,10 +96,11 @@ class VerifyPurchase extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap flex-col space-y-2 sm:border-solid sm:border-2 sm:border-darkbeige 
-                                                  bg-lightbeige lg:min-h-[450px] sm:w-[550px] p-5 break-words">
+                                    <div className="flex flex-wrap flex-col space-y-2 
+                                                    box bg-white
+                                                    lg:min-h-[450px] sm:w-[550px] p-5 break-words">
                                         <div>
-                                            <div className="font-mono text-lg">
+                                            <div className="font-mono text-lg underline">
                                                 Shipping to :
                                             </div>
                                             <div className="flex flex-col space-y-2 font-robotomono p-2 ">
@@ -117,7 +118,7 @@ class VerifyPurchase extends Component {
                                             </div>
                                         </div>
                                         <div className="flex flex-col flex-wrap break-all">
-                                            <div className="font-mono text-lg ">
+                                            <div className="font-mono text-lg underline">
                                                 Pay to :
                                             </div>
                                             <div className="flex flex-col p-2 space-y-2 font-robotomono ">
@@ -128,11 +129,11 @@ class VerifyPurchase extends Component {
                                         </div>
                                         <div className="flex flex-row space-x-2 justify-center pt-7">
                                             <button
-                                                className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                className=""
                                                 onClick={()=>this.handleBackButton()}>Back
                                             </button>
                                             <button 
-                                                className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                className=""
                                                 onClick={()=>this.handleProceedPayment(purchase)}>Proceed to Payment
                                             </button>
                                         </div>

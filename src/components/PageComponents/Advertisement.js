@@ -77,15 +77,15 @@ class Advertisement extends Component{
         return (
            <div className="flex flex-col space-x-0 space-y-2 p-5
                                sm:flex-row sm:space-x-5 sm:space-y-0 sm:p-5 sm:min-w-[300px] 
-                               bitpasar_bg bitpasar_border">
+                               box bg-slate-200">
                     <div className="flex flex-col items-center space-y-2 sm:w-1/3">
-                        <div className="flex items-center justify-center bg-white p-2 w-full">
+                        <div className="flex items-center justify-center box bg-white p-2 w-full">
                                 <img className="object-scale-down h-[170px]" src={item['images'][0]}></img>
                         </div>
-                        <div className="bitpasar_text">
+                        <div className="bitpasar_text underline">
                             {item['title']}
                         </div>
-                        <div className="bitpasar_text">
+                        <div className="bitpasar_text underline">
                             {item['itemprice']} ETH
                         </div>
                     </div>

@@ -73,8 +73,8 @@ class Payment extends Component {
             this.checkTransaction(txnHash)
             return(
                 <div className="flex flex-col items-center space-y-5 p-5
-                                font-mono
-                                border-2 border-solid border-darkbeige bg-lightbeige">
+                                font-mono underline
+                                box bg-white">
                     <div>Checking transaction</div>
                     <img src="https://i.stack.imgur.com/27Rnd.gif"></img>
                 </div>
@@ -83,13 +83,13 @@ class Payment extends Component {
             return(
                 <div className="flex flex-col space-y-2 items-center p-5
                                 font-mono w-full
-                                border-2 border-solid border-darkbeige bg-lightbeige">
+                                box bg-white">
                     <div>Transaction Completed !</div>
                     <div>Check out your purchases here</div>
                     <div className="pt-5">
                         <NavLink
-                            exact to={"/profile/purchase/"}
-                            className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono">
+                            exact to={`/profile/purchase/${buyerwallet}`}
+                            className="box text-lg bg-beige hover:bg-button hover:text-white text-black py-2 px-4 font-mono">
                             My Purchases
                         </NavLink>
                     </div>
@@ -113,12 +113,12 @@ class Payment extends Component {
                 {purchase ?
                             <div className="flex flex-col space-y-5 items-center xs:p-2 sm:p-0">
                                 <div className="flex flex-col space-y-2 items-center 
-                                                border-2 border-solid border-darkbeige p-5
-                                              bg-lightbeige">
+                                                p-5
+                                                box bg-white">
                                     <div className="font-mono text-md">
                                         To pay
                                     </div>
-                                    <div className="font-robotomono text-2xl"> 
+                                    <div className="font-robotomono text-2xl underline"> 
                                         {purchase['totalprice']} ETH
                                     </div>
                                     <div className="font-mono text-md">
@@ -136,7 +136,7 @@ class Payment extends Component {
                                                 </div> 
                                                 : 
                                                 <button 
-                                                    className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                    className="text-lg"
                                                     onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>
                                                         Pay Now
                                                 </button>
@@ -146,7 +146,7 @@ class Payment extends Component {
                                 {transaction ? 
                                             <div className="flex flex-col items-center break-all p-5
                                                         xs:text-xs sm:text-sm md:text-base
-                                                        border-2 border-solid border-darkbeige bg-lightbeige"> 
+                                                        box bg-white"> 
                                                 <div className="font-mono pb-5">
                                                     Check your transaction here
                                                 </div>

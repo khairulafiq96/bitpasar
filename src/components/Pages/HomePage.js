@@ -16,14 +16,14 @@ class HomePage extends Component {
                             <div>
                                 <NavLink
                                     exact to="/marketplace"
-                                    className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono">
+                                    className="box text-lg bg-beige hover:bg-button hover:text-white text-black py-2 px-4 font-mono">
                                     Buy Items
                                     </NavLink>
                             </div>
                             <div>
                                 <NavLink
                                     exact to='/additem'
-                                    className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono">
+                                    className="box text-lg bg-beige hover:bg-button hover:text-white text-black py-2 px-4 font-mono">
                                     Sell Items</NavLink>
                             </div>
                             

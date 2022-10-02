@@ -57,33 +57,34 @@ class Marketplace extends Component {
         }
 
         return (
-            <div className="w-full pb-2">
-                <div className="font-mono pb-2 text-xl">
+            <div className="w-full px-2 sm:px-0 pb-2">
+                <div className="font-mono pb-3 text-xl underline">
                     Marketplace
                 </div>
-                <div className="font-robotomono flex">
+                <div className="font-robotomono flex w-full lg:w-11/12">
                     <input type="text" 
                            placeholder="Search Items" 
                            className="w-1/2 py-2 px-3 "
                            onChange={(e)=>handleSearchInput(e)}>
                     </input>
                     <div className="pl-4">
-                    <button className="bg-beige hover:bg-yellow-200 text-black py-2 px-4"
-                            onClick={()=>filterResults(search,1)}>
-                        Search
-                    </button>
+                        <button className=""
+                                onClick={()=>filterResults(search,1)}>
+                            Search
+                        </button>
                     </div>
                 </div>
 
-      
+                <div className="flex flex-1">
                 {items ? 
-                        <div className="pt-7">
+                        <div className="pt-5 flex flex-row flex-wrap justify-center lg:justify-start">
                             {Object.keys(items).map(function(keyValue, index){
                                 return(
-                                    <Link key={keyValue} className="inline-block pr-5 " to={"/item/"+keyValue}>
-                                        <Item_Card individualItem={items[keyValue]}></Item_Card>
-                                        <br/>
-                                    </Link>   
+                                    <div className="w-1/2 xs:w-fit xs:p-1 sm:pr-3">
+                                        <Link key={keyValue} className="" to={"/item/"+keyValue}>
+                                            <Item_Card individualItem={items[keyValue]}></Item_Card>
+                                        </Link>
+                                    </div>
                                 )  
                             })}
                         </div>
@@ -92,13 +93,14 @@ class Marketplace extends Component {
                             Loading...    
                         </div>}
        
-
+                </div>
+                <div className="flex flex-row space-x-2 justify-center pt-5">
                 {marketplace ? 
                              marketplace['totalPage'].map((pageNum)=>
                              {return(
-                                    <div className="inline-block pr-2">
+                                    <div className="">
                                         <button key={pageNum} 
-                                                className="font-robotomono  hover:bg-yellow-200 bg-beige p-2" 
+                                                className="text-lg" 
                                                 onClick={()=>filterResults(search,pageNum)}>
                                                 {pageNum}
                                         </button>
@@ -109,7 +111,7 @@ class Marketplace extends Component {
                                 Loading...
                              </div>
                 }
-
+                </div>
                 
             </div>
         )

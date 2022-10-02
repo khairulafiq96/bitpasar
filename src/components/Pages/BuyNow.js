@@ -170,18 +170,18 @@ class BuyNow extends Component{
                                 <div className="flex flex-col  
                                                 items-center sm:space-y-5">
                                     <div className="flex flex-col items-center h-min-1/2
-                                                    sm:border-solid sm:border-2 sm:border-darkbeige bg-lightbeige">
+                                                    box bg-white">
                                         <img src={items[itemId]['images'][0]}
-                                                className="bg-white object-scale-down 
+                                                className="bg-slate-200 object-scale-down 
                                                             h-48 w-96 sm:h-68 sm:w-96
                                                             p-5" ></img>
                                         <div className="p-4 sm:text-md font-mono sm:w-[250px] sm:w-min-[300px]
-                                                        ">
+                                                        underline">
                                                 {items[itemId]['title']}
                                         </div>
                                     </div>
-                                    <div className="flex justify-center items-center h-full w-full sm:border-solid sm:border-2 
-                                                  sm:border-darkbeige bg-lightbeige
+                                    <div className="flex justify-center items-center h-full w-full
+                                                    box bg-white
                                                     font-mono xs:p-3 p-2">
                                         <div className="flex flex-col space-y-2 w-11/12 ">
                                             <div>
@@ -198,10 +198,9 @@ class BuyNow extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <div className="sm:border-solid sm:border-2 sm:border-darkbeige 
-                                              bg-lightbeige lg:min-h-[450px] lg:w-[550px] p-5">
+                                <div className="box bg-slate-200 lg:min-h-[450px] lg:w-[550px] p-5">
                                     <div className="">
-                                        <div className="font-mono text-lg">
+                                        <div className="font-mono text-lg underline">
                                             Shipping details
                                         </div>
                                         <div className="font-robotomono w-2/3">
@@ -244,7 +243,7 @@ class BuyNow extends Component{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col  space-y-2 font-robotomono lg:w-[500px]">
+                                    <div className="flex flex-col  space-y-2 font-robotomono lg:w-[500px] pt-3">
                                         <div className="text-sm">
                                             Ship To :
                                         </div>
@@ -286,7 +285,7 @@ class BuyNow extends Component{
                                         </div>
                                     </div>
                                     <div className="flex justify-center pt-10">
-                                        <button className="text-lg bg-beige hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                        <button className="text-lg"
                                                 onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user )}
                                                 >Proceed</button>
                                     </div>

@@ -46,7 +46,8 @@ button{
 }
 button:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+  background-color: rgb(17 0 255 / var(--tw-bg-opacity));
+  color: white;
 }
 
 input[type=file] {
@@ -54,7 +55,8 @@ input[type=file] {
 }
 input[type=file]:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+  background-color: rgb(17 0 255 / var(--tw-bg-opacity));
+  color: white;
 }
 
 .bitpasar_border {
@@ -95,5 +97,10 @@ input[type=file]:hover {
 
 .box_background{
   background:#C0C0C0;
+}
+
+.image_small{
+  height: 165px;
+  width: 245px;
 }
 

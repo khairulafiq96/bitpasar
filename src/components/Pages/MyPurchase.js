@@ -44,7 +44,7 @@ class MyPurchase extends Component {
 
         return (<div className="md:w-[620px] px-2 sm:px-0">
                    {toHome()}
-                   <div className="font-mono text-lg pb-5">
+                   <div className="font-mono text-lg pb-5 underline">
                         My purchase(s)
                     </div>
                     {user && user['mypurchases'] ?
@@ -53,22 +53,22 @@ class MyPurchase extends Component {
                                                         {Object.keys(user['mypurchases']).map((item)=>
                                                             <div className="flex flex-col space-x-0 space-y-2
                                                                             sm:flex-row sm:space-x-5 sm:space-y-0
-                                                                            bitpasar_border bitpasar_bg min-w-[300px] 
+                                                                            box bg-white min-w-[300px] 
                                                                             break-all p-5"
                                                                             key={item}>
-                                                                <div className="flex flex-col space-y-2 sm:w-1/3">
-                                                                    <div className="flex items-center justify-center bg-white p-2">
+                                                                <div className="flex items-center flex-col space-y-2 sm:w-1/3">
+                                                                    <div className="flex items-center justify-center box bg-slate-200 p-2">
                                                                         <img className="object-scale-down h-[170px]" 
                                                                              src={user['mypurchases'][item]['images']}></img>
                                                                     </div>
-                                                                    <div className="font-mono">
+                                                                    <div className="font-mono underline">
                                                                         {user['mypurchases'][item]['title']}
                                                                     </div>
-                                                                    <div className="font-robotomono">
+                                                                    <div className="font-robotomono underline">
                                                                         {user['mypurchases'][item]['itemprice']} ETH
                                                                     </div>
                                                                 </div>
-                                                                <div className="flex flex-col space-y-2">
+                                                                <div className="flex w-full sm:w-1/2 flex-col space-y-2">
                                                                     <div>
                                                                         <div className="bitpasar_text ">
                                                                             Order Id
@@ -110,7 +110,7 @@ class MyPurchase extends Component {
                                                                         {user['mypurchases'][item]['shortdescription']}
                                                                     </div>
                                                                     <div className="w-[300px]">
-                                                                        <div className="bitpasar_text">
+                                                                        <div className="bitpasar_text underline">
                                                                             Seller Contact Details
                                                                         </div>
                                                                         <div className="

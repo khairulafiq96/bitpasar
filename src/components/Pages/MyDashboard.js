@@ -60,7 +60,7 @@ class MyDashboard extends Component{
             {user && user['myorders'] ? 
                                     <div className="flex flex-col space-y-7">
                                         <div className="flex flex-col space-y-3">
-                                            <div className="font-mono text-lg">
+                                            <div className="font-mono text-lg underline">
                                                 To Ship 
                                             </div>
                                             
@@ -70,7 +70,7 @@ class MyDashboard extends Component{
                                             )}
                                         </div>
                                         <div className="flex flex-col space-y-3">
-                                            <div className="font-mono text-lg">
+                                            <div className="font-mono text-lg underline">
                                                 Shipped Items
                                             </div>
                                            

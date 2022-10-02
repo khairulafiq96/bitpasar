@@ -4,6 +4,7 @@ export const GET_INDIVIDUAL_ITEM = "GET_INDIVIDUAL_ITEM";
 //with purchase object
 export const CONFIRM_PURCHASE = "CONFIRM_PURCHASE";
 export const VERIFY_PAYMENT = "VERIFY_PAYMENT";
+export const RESET_PURCHASE = "RESET_PURCHASE"
 
 
 export function getAllMarketplaceItems(items) {
@@ -40,3 +41,11 @@ export function postVerifyPayment(purchase){
     purchase
   }
 }
+
+export function resetPurchase(purchase){
+  return {
+    type : RESET_PURCHASE,
+    purchase
+  }
+}
+

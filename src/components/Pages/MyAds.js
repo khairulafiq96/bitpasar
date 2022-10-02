@@ -44,7 +44,7 @@ class MyAds extends Component{
 
         const displayNoItem = (toship) => {
             if(Object.keys(toship).length === 0){
-                return <div>
+                return <div className="font-mono">
                             <div> You dont have any ads displayed in the marketplace</div>
                             <br></br>
                             <div>Start Selling here</div>
@@ -65,7 +65,7 @@ class MyAds extends Component{
 
         return (<div className="md:w-[620px] px-2 sm:px-0">
                     {user && user['myads'] ? <div className="flex flex-col space-y-3">
-                                                <div className="bitpasar_text text-lg">On Marketplace</div>
+                                                <div className="bitpasar_text text-lg underline">On Marketplace</div>
                                                 {displayNoItem(user['myads'])}
                                                 {Object.keys(user['myads']).map((item)=>{
                                                  return renderOnMarketplaceAds(item, user,user['myads'][item]['status'])

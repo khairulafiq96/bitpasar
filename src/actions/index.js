@@ -1,7 +1,7 @@
 import * as API from '../Utility/API'
 import { setRegisterUser,getUserDetails, getUserPurchases,getAllOrders,
         updateOrderTracker,getAllAds,resetUser} from './users'
-import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem} from './items'
+import {getAllMarketplaceItems,getSearchMarketplaceItems,getIndividualItem, resetPurchase} from './items'
 import {getSearchMarketplaceTotalPages} from './marketplace'
 import { Redirect } from 'react-router'
 
@@ -187,5 +187,12 @@ export function handleDeleteUser(userid){
 
 
 */
+
+export function handleClearLocalStorage (user, purchase) {
+    return (dispatch)=>{
+        dispatch(resetUser(user));
+        dispatch(resetPurchase(purchase))
+    }   
+}
 
 

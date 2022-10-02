@@ -8,15 +8,15 @@ class ShippedItem extends Component{
 
         return (<div className="flex flex-col space-x-0 space-y-2 p-5
                                sm:flex-row sm:space-x-5 sm:space-y-0 sm:p-5 sm:min-w-[300px] 
-                               bitpasar_bg bitpasar_border">
+                               box bg-white">
                     <div className="flex flex-col items-center space-y-2 sm:w-1/3">
-                        <div className="flex items-center justify-center bg-white p-2 w-full">
+                        <div className="flex items-center justify-center box bg-slate-200 p-2 w-full">
                                 <img className="object-scale-down h-[170px]" src={user['myorders'][item]['images']}></img>
                         </div>
-                        <div className="bitpasar_text">
+                        <div className="bitpasar_text underline">
                             {user['myorders'][item]['title']}
                         </div>
-                        <div className="bitpasar_text">
+                        <div className="bitpasar_text underline">
                             {user['myorders'][item]['itemprice']} ETH
                         </div>
                     </div>
@@ -51,7 +51,7 @@ class ShippedItem extends Component{
                                                                                     </div>}
                         </div>
                         <div className="sm:w-[360px] flex flex-col space-y-2">
-                            <div className='bitpasar_text text-sm sm:text-base'>
+                            <div className='bitpasar_text text-sm sm:text-base underline'>
                                 Buyer Details
                             </div>
                             <div className="bitpasar_subtext text-xs sm:text-sm">

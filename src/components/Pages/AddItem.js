@@ -166,7 +166,7 @@ class AddItem extends Component {
             <div className="md:w-[620px] px-2 sm:px-0">
                 {redirectToRegistrationPage()}
                 <div className='flex flex-col space-y-4 p-5
-                                 bitpasar_bg bitpasar_border'>
+                                 box bg-slate-200'>
                     <div className='bitpasar_text text-lg'>
                         Sell new item
                     </div>
@@ -227,7 +227,7 @@ class AddItem extends Component {
                                         <div className='inline-block pr-5 pb-5'
                                             key={url}>
                                             <div className='flex flex-col items-center space-y-2 
-                                                            bitpasar_border p-2 bg-lightblue'>
+                                                            box bg-white p-2 '>
                                                 <div>
                                                     <img className="object-scale-down h-[165px] w-[245px]" src={url} />
                                                 </div>

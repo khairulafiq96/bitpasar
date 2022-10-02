@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Switch,Route, withRouter} from 'react-router-dom'
+import {Switch,Route, withRouter, Redirect} from 'react-router-dom'
 
 import HomePage from './Pages/HomePage';
 import Header from './Pages/Header';
@@ -18,6 +18,10 @@ import MyProfile from './Pages/MyProfile'
 import MyDashboard from './Pages/MyDashboard';
 import MyAds from './Pages/MyAds';
 
+import { checkMetaMaskConnection } from '../Utility/metamask';
+import { resetUser } from '../actions/users';
+import { handleClearLocalStorage } from '../actions';
+
 import './Styles/App.css'
 
 
@@ -31,6 +35,18 @@ class App extends Component {
     }
   }
 
+  async checkWalletConnection(){
+    
+  }
+
+  async componentDidMount(){
+    const status =  await checkMetaMaskConnection().then((result)=>{
+      if(!result){
+        //Clears state
+        this.props.dispatch(handleClearLocalStorage(this.props.user, this.props.purchase))
+      } 
+    })
+  }
  
 
 
@@ -63,22 +79,23 @@ class App extends Component {
 
 
   render(){
-    return (
-      
+
+    return ( 
         <div>
           {this.state.loaded?this.pages():null}
-         
         </div>
     )
   }
 }
 
-function mapStateToProps() {
+function mapStateToProps({user, purchase}) {
   return { 
+    user,
+    purchase
   }
 }
 
-export default withRouter(App)
+export default withRouter(connect(mapStateToProps)(App))
 
 //WITH REDUX
 //export default withRouter(connect(mapStateToProps)(App));

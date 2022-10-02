@@ -111,41 +111,44 @@ class Item_Individual extends Component{
         }
 
         return (
-            <div>
+            <div className="w-full lg:w-3/4">
                 {renderRedirect()}
                 {checkItems() ? 
                                 <div className="w-full flex flex-col items-center">
-                                    <div className="sm:flex sm:space-x-2 sm:pb-3 sm:w-full">
-                                        <div className="flex items-center flex-col
-                                                        sm:border-solid sm:border-2 sm:border-darkbeige bg-lightbeige
-                                                        sm:min-w-[400px] sm:w-1/2 sm:p-5">
-                                            <img className="bg-white object-scale-down h-48 w-96 sm:h-80 sm:w-9/12"
-                                                    src={items[itemId]['images'][photoCount]}></img>
-
+                                    <div className="sm:flex sm:space-x-2 sm:pb-3 w-full">
+                                        <div className="flex flex-1 items-center flex-col 
+                                                        box bg-white 
+                                                        ">
+                                            <div className="flex flex-1 w-full h-full p-2
+                                                           justify-center items-center bg-slate-200">
+                                                
+                                                <img className="object-scale-down w-[493px] h-[268px]"
+                                                        src={items[itemId]['images'][photoCount]}></img>
+                                                
+                                            </div>
                                             <div className="font-mono xs:py-2 sm:py-5 flex items-center">
-                                                <button className="hover:bg-yellow-200" 
+                                                <button className="" 
                                                         onClick={()=>decrementPic(photoCount)}>
                                                         Previous
                                                 </button>
                                                 <div className="px-2">
                                                     {photoCount+1} of {items[itemId]['images'].length}
                                                 </div>
-                                                <button className="hover:bg-yellow-200" 
+                                                <button className="" 
                                                         onClick={()=>incrementPic(photoCount)}>
                                                         Next
                                                 </button>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col sm:border-solid sm:border-2 sm:border-darkbeige 
-                                                    bg-lightbeige sm:w-1/2 md:min-w-[470px]  w-screen">
-                                            <div className="font-robotomono xs:px-5 sm:p-5 break-words ">
-                                                <div className="sm:text-lg">
+                                        <div className="flex flex-col box bg-white sm:w-1/2">
+                                            <div className="font-robotomono p-5 break-words ">
+                                                <div className="sm:text-lg underline">
                                                     {items[itemId]['title']}
                                                 </div>
-                                                <div className="sm:text-lg py-2">
+                                                <div className="sm:text-lg py-2 underline">
                                                     {items[itemId]['itemprice']} ETH
                                                 </div>
-                                                <div className="text-xs sm:text-base py-2">
+                                                <div className="text-xs sm:text-sm py-2">
                                                     <div className="">
                                                         From : {items[itemId]['location']}
                                                     </div>
@@ -154,25 +157,25 @@ class Item_Individual extends Component{
                                                     </div>
                                                 </div>
                                                 
-                                                <div className="text-xs sm:text-base py-2">
-                                                    <div className="py-1">
+                                                <div className="text-xs sm:text-sm">
+                                                    <div className="py-1 text-base underline">
                                                         Contact Details
                                                     </div>
-                                                    <li>
+                                                    <div>
                                                         {items[itemId]['ownername']}
-                                                    </li>
-                                                    <li>
+                                                    </div>
+                                                    <div>
                                                         {items[itemId]['phonenum']}
-                                                    </li>
-                                                    <li>
+                                                    </div>
+                                                    <div>
                                                         {items[itemId]['walletid']}
-                                                    </li>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="flex justify-center items-center bg-red-50 w-full h-full p-5">
+                                            <div className="flex justify-center items-center w-full h-full p-5">
                                                     {items[itemId]['postagename'] !== 'None' ?
                                                                                             <div className="">
-                                                                                                <button className="xs:text-sm sm:text-lg bg-button hover:bg-yellow-200 text-black py-2 px-4 font-mono"
+                                                                                                <button className="xs:text-sm sm:text-lg"
                                                                                                         onClick={()=>{handleBuyItem()}}>
                                                                                                         Buy Now
                                                                                                 </button>
@@ -183,9 +186,9 @@ class Item_Individual extends Component{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="w-full 2xl:w-[1536px] bg-lightbeige">
+                                    <div className="box bg-white w-full">
                                         <div className="xs:p-3 sm:p-5">
-                                            <div className="font-mono sm:font-lg">
+                                            <div className="font-mono sm:font-lg underline">
                                                 Description
                                             </div>
                                             <div className="font-robotomono text-sm py-3 leading-snug whitespace-pre-line">

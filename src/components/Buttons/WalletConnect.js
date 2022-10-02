@@ -21,18 +21,15 @@ class WalletConnect extends Component {
     renderDropdownItems(address){
         if(this.state.renderDropdown){
             return(
-                <div className='bg-lightblue absolute'>
+                <div className='flex flex-col box_background absolute space-y-2'>
                     <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
-                             className='px-2 hover:bg-amber-200' exact to ={"/profile/" + address}>My Profile</NavLink>
-                    <br></br>
+                             className='px-2 py-1 hover:bg-amber-200' exact to ={"/profile/" + address}>My Profile</NavLink>
                     <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
-                             className='px-2 hover:bg-amber-200'  exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
-                    <br></br>
+                             className='px-2 py-1 hover:bg-amber-200'  exact to ={"/profile/purchase/"+address}>My Purchase</NavLink>
                     <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
-                             className='px-2 hover:bg-amber-200' exact to ={"/dashboard/"+address}>My Orders</NavLink>
-                    <br></br>
+                             className='px-2 py-1 hover:bg-amber-200' exact to ={"/dashboard/"+address}>My Orders</NavLink>
                     <NavLink onClick={()=>this.displayDropdown(this.state.renderDropdown)} 
-                             className='px-2 hover:bg-amber-200' exact to ={"/ads/"+address}>My Ads</NavLink>
+                             className='px-2 py-1 hover:bg-amber-200' exact to ={"/ads/"+address}>My Ads</NavLink>
                 </div>
             )
         }

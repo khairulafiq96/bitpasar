@@ -113,14 +113,14 @@ class MyProfile extends Component{
 
         return (
             <div className=''>
-                <div className='font-mono text-lg pb-5'>
+                <div className='font-mono text-lg pb-5 underline'>
                                     Your details
                                 </div>
                 {redirectToRegistrationPage()}
                 {user ? 
                             <div className='flex flex-col space-y-4 p-5
                                             text-sm sm:text-base
-                                            border-solid border-2 border-darkbeige bg-lightbeige'>
+                                            box bg-slate-200'>
                                 <div className='font-robotomono'>
                                     Contact Details
                                 </div>
