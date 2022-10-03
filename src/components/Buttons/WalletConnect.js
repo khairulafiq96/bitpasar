@@ -98,10 +98,14 @@ class WalletConnect extends Component {
         }
 
         //Listener when account is changed and dispatching the value
-        window.ethereum.on('accountsChanged', accountChangedHandler);
+        if(window.ethereum){
+            console.log("Running Account Changed")
+            window.ethereum.on('accountsChanged', accountChangedHandler);}
 
         //Listener when chain is changed
-        window.ethereum.on('chainChanged', chainChangedHandler) 
+        if(window.ethereum){
+            window.ethereum.on('chainChanged', chainChangedHandler) 
+        }
 
 
         return(
