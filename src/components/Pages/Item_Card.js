@@ -7,7 +7,7 @@ export class Item_Card extends Component{
         const {individualItem} = this.props
 
         return(
-            <div className="xs:w-[150px] sm:w-[265px]">
+            <div  className="xs:w-[150px] sm:w-[265px]">
                 <div title={individualItem['shortdescription']} 
                     className="border-solid border-2 border-gray-400
                             bg-white hover:bg-button hover:text-white">

@@ -19,19 +19,10 @@ class Item_Individual extends Component{
         const {itemId} = this.props.match.params
 
         //console.log("Running component did mount")
-
-        //This function checks if the page contains the itemId in the State of the app, 
-        //If its not available, the app will call an API to be appended to the current state
-        try {
-            //This is the way to check if the item is in the state, It will always return an
-            //error if items[itemId] is used any where in the code, therefore a try catch is used
-            if(items[itemId] && items[itemId] !== undefined){
-                console.log("Item "+items[itemId] + "is in state, No need for API Call" )
-            } else {
-                individualItem()
-            }
-
-        } catch (e) {
+        //checks for null items first, then checks for itemId in items object
+        if(items !== null && itemId in items){
+            console.log("Item "+items[itemId] + "is in state, No need for API Call" )
+        } else {
             individualItem()
         }
 
@@ -43,11 +34,6 @@ class Item_Individual extends Component{
                 window.alert(e)
             }
         }
-        
-        
-       
-
-        
 
     }
 
@@ -57,6 +43,8 @@ class Item_Individual extends Component{
         const {itemId} = this.props.match.params
         const {photoCount,buyNow,buyButtonMessage,redirectToBuyNow} = this.state
         //const photoLength = items[itemId]['images'].length
+
+
 
         const decrementPic = (currPhoto) => {
             if(currPhoto!==0){
@@ -100,20 +88,12 @@ class Item_Individual extends Component{
         }
 
         //as items[itemId] always return an error when null/undefined, try catch is used
-        const checkItems = () => {
-            try {
-                if(items[itemId]){
-                   return true
-                }
-            } catch (e){
-                return false
-            } 
-        }
+
 
         return (
             <div className="w-full lg:w-3/4">
                 {renderRedirect()}
-                {checkItems() ? 
+                {items !== null && itemId in items ? 
                                 <div className="w-full flex flex-col items-center">
                                     <div className="sm:flex sm:space-x-2 sm:pb-3 w-full">
                                         <div className="flex flex-1 items-center flex-col 

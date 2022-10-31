@@ -11,3 +11,7 @@ export function convertUTCtoDate(unixdate){
     var time = unix.toLocaleTimeString("default")
     return `${date} ${time}`
 }
+
+export function APIerrorHandling(response){
+    window.alert("Code : " + response.code + " Name : " + response.name )
+}

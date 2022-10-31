@@ -151,8 +151,8 @@ class Payment extends Component {
                                                     Check your transaction here
                                                 </div>
                                                 <a  className="font-robotomono underline"
-                                                    target="_blank" href={`https://ropsten.etherscan.io/tx/${transaction['hash']}`}>
-                                                    https://etherscan.io/tx/{transaction['hash']}</a>
+                                                    target="_blank" href={`https://goerli.etherscan.io/tx/${transaction['hash']}`}>
+                                                    https://goerli.etherscan.io/tx/{transaction['hash']}</a>
                                             </div>
                                             : 
                                             <div>

@@ -19,7 +19,8 @@ class HomeMarketplace extends Component{
         const {items} = this.props
 
         return (
-            <div className="p-2 box box_background">
+            <div data-testid="display-tiles"
+                 className="p-2 box box_background">
                     <div className="font-mono text-center text-lg p-5 underline">
                         Latest Listings
                     </div>
@@ -37,7 +38,7 @@ class HomeMarketplace extends Component{
                                     })}
                                 </div>
                                 :
-                                <div>
+                                <div className="font-mono text-center p-5">
                                     Loading...    
                                 </div>}
             </div>

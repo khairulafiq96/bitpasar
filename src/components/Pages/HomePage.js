@@ -6,7 +6,7 @@ import HomeMarketplace from '../PageComponents/HomeMarketplace'
 class HomePage extends Component {
     render(){
         return(
-            <div className=''>
+            <div>
                 <div className='box bg-bitpasar p-4 text-white text-center'>
                     
                         <div className='font-robotomono text-lg pb-4 '>
