@@ -17,7 +17,6 @@ import MyPurchase from './Pages/MyPurchase';
 import MyProfile from './Pages/MyProfile'
 import MyDashboard from './Pages/MyDashboard';
 import MyAds from './Pages/MyAds';
-import web3modal from './web3modal/web3modal';
 
 import { checkMetaMaskConnection } from '../Utility/metamask';
 import { resetUser } from '../actions/users';
@@ -69,7 +68,6 @@ class App extends Component {
                       <Route exact path="/profile/:userId" component={MyProfile} />
                       <Route exact path="/dashboard/:walletid" component={MyDashboard} />
                       <Route exact path="/ads/:walletid" component={MyAds} />
-                      <Route exact path="/web3modal" component={web3modal} />
                     </Switch>
 
           </div>
