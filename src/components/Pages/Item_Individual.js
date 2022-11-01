@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import {handleGetIndividualItem} from '../../actions'
 import '../Styles/Item.css'
 import { convertUTCtoDate } from "../../Utility/general";
+import UseAccount from "./web3modal/useAccount";
 
 class Item_Individual extends Component{
 
@@ -42,7 +43,9 @@ class Item_Individual extends Component{
         const {items,user} = this.props
         const {itemId} = this.props.match.params
         const {photoCount,buyNow,buyButtonMessage,redirectToBuyNow} = this.state
+        const {address,isConnected} = this.props.myuser
         //const photoLength = items[itemId]['images'].length
+
 
 
 
@@ -60,6 +63,7 @@ class Item_Individual extends Component{
 
         const handleBuyItem = () =>{
             console.log("Running buy now button")
+
             if(!user){
               window.alert("Please sign in to your wallet to buy")
               //this.setState({buyButtonMessage : [...this.state.buyButtonMessage, 'new value'] })
@@ -92,6 +96,7 @@ class Item_Individual extends Component{
 
         return (
             <div className="w-full lg:w-3/4">
+                {JSON.stringify(this.props.myuser)}
                 {renderRedirect()}
                 {items !== null && itemId in items ? 
                                 <div className="w-full flex flex-col items-center">
@@ -196,6 +201,11 @@ function mapStateToProps({user,items}) {
       user,
       items
     }
-  }
+}
 
-export default connect(mapStateToProps)(Item_Individual)
+const myUser = Component => props => {
+    const user = UseAccount();
+    return <Component {...props} myuser={user} />;
+};
+
+export default myUser(connect(mapStateToProps)(Item_Individual))

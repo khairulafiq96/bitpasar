@@ -17,10 +17,14 @@ import MyPurchase from './Pages/MyPurchase';
 import MyProfile from './Pages/MyProfile'
 import MyDashboard from './Pages/MyDashboard';
 import MyAds from './Pages/MyAds';
+import UseAccount from './Pages/web3modal/useAccount';
 
 import { checkMetaMaskConnection } from '../Utility/metamask';
 import { resetUser } from '../actions/users';
 import { handleClearLocalStorage } from '../actions';
+
+import { chains, providers } from '@web3modal/ethereum'
+import { Web3Modal } from '@web3modal/react'
 
 import './Styles/App.css'
 
@@ -33,10 +37,6 @@ class App extends Component {
     this.state = {
       loaded: true
     }
-  }
-
-  async checkWalletConnection(){
-    
   }
 
   async componentDidMount(){
@@ -68,6 +68,7 @@ class App extends Component {
                       <Route exact path="/profile/:userId" component={MyProfile} />
                       <Route exact path="/dashboard/:walletid" component={MyDashboard} />
                       <Route exact path="/ads/:walletid" component={MyAds} />
+                      <Route exact path="/useAccount" component={UseAccount} />
                     </Switch>
 
           </div>
@@ -80,8 +81,24 @@ class App extends Component {
 
   render(){
 
+    const modalConfig = {
+      projectId: "c2b975a1e9bc302f69b3adf13a2c3f4b",
+      theme: 'dark',
+      accentColor: 'default',
+      ethereum: {
+        appName: 'web3Modal',
+        autoConnect: true,
+        chains: [
+          chains.mainnet,
+          chains.goerli
+        ]
+      }
+    }
+ 
+
     return ( 
         <div>
+          <Web3Modal config={modalConfig} />
           {this.state.loaded?this.pages():null}
         </div>
     )
