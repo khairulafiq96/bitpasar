@@ -112,7 +112,9 @@ class App extends Component {
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/marketplace" component={Marketplace} />
-                      <Route exact path="/item/:itemId" component={Item_Individual} />
+                      <Route exact path="/item/:itemId" 
+                        render={(props)=>(<Item_Individual wallet={wallet} itemId={props.match.params.itemId}>
+                                          </Item_Individual>)} />
                       <Route exact path="/registration">
                         {wallet.isConnected ? <Registration></Registration> : <Redirect exact to="/home"></Redirect>}
                       </Route>
@@ -123,7 +125,7 @@ class App extends Component {
                         {wallet.isConnected ? <AddItem></AddItem> : <Redirect exact to="/home"></Redirect>}
                       </Route>
                       <Route exact path="/buynow/:itemId">
-                        {wallet.isConnected ? <Route path="/buynow/:itemId" component={BuyNow} ></Route> : <Redirect exact to="/home"></Redirect> }
+                        {wallet.isConnected ? <Route path="/buynow/:itemId" component={BuyNow}></Route> : <Redirect exact to="/home"></Redirect> }
                       </Route>
                       <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} >
                         {wallet.isConnected ? <Route path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} ></Route> : <Redirect exact to="/home"></Redirect> }

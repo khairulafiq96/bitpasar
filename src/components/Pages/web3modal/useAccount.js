@@ -11,8 +11,7 @@ export default function UseAccount() {
     "isLoading" : account.isLoading,
     "isConnected" : account.isConnected,
     "address" : account.address,
-    "account" : account
-
+    "balance" : data
   }
 
   return (

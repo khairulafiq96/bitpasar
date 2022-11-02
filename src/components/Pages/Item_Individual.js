@@ -17,7 +17,7 @@ class Item_Individual extends Component{
 
     componentDidMount= async () => {
         const {items,dispatch} = this.props
-        const {itemId} = this.props.match.params
+        const {itemId} = this.props
 
         //console.log("Running component did mount")
         //checks for null items first, then checks for itemId in items object
@@ -40,10 +40,8 @@ class Item_Individual extends Component{
 
     render(){
 
-        const {items,user} = this.props
-        const {itemId} = this.props.match.params
-        const {photoCount,buyNow,buyButtonMessage,redirectToBuyNow} = this.state
-        const {address,isConnected} = this.props.myuser
+        const {items,user,itemId, wallet} = this.props
+        const {photoCount,redirectToBuyNow} = this.state
         //const photoLength = items[itemId]['images'].length
 
 
@@ -64,22 +62,17 @@ class Item_Individual extends Component{
         const handleBuyItem = () =>{
             console.log("Running buy now button")
 
-            if(!isConnected){
+            if(!wallet.isConnected){
               window.alert("Please sign in to your wallet to buy")
-              //this.setState({buyButtonMessage : [...this.state.buyButtonMessage, 'new value'] })
             } else if (items[itemId]['status'] !== 'new'){
                 window.alert("Item is "+ items[itemId]['status'])
-                //this.setState({buyButtonMessage : [...this.state.buyButtonMessage, 'new value'] })
-            } else if (parseFloat(user['balance']) < parseFloat(items[itemId]['itemprice'])){
+            } else if (parseFloat(wallet.balance.formatted) < parseFloat(items[itemId]['itemprice'])){
                 window.alert("Balance is unsufficient")
-                //this.setState({buyButtonMessage : [...this.state.buyButtonMessage, 'new value'] })
             }
             
             else {
                 //redirect to next page
-                //window.alert(user['balance'])
                 this.setState({redirectToBuyNow : true})
-                //return <Redirect exact to = {"/buynow/"+itemId} ></Redirect>
             }
            
         }
@@ -96,6 +89,7 @@ class Item_Individual extends Component{
 
         return (
             <div className="w-full lg:w-3/4">
+                
                 {renderRedirect()}
                 {items !== null && itemId in items ? 
                                 <div className="w-full flex flex-col items-center">
@@ -182,7 +176,7 @@ class Item_Individual extends Component{
                                     </div>
                                 </div>
                                 :
-                                <div>
+                                <div className="font-mono">
                                     Loading....
                                    
                                 </div>   
@@ -201,9 +195,6 @@ function mapStateToProps({user,items}) {
 
 //Implemented HOC for functional components in class component
 //https://stackoverflow.com/questions/70373597/is-it-possible-to-use-react-hooks-in-class-component-by-using-hochigher-order-c/70375132#70375132
-const myUser = Component => props => {
-    const user = UseAccount();
-    return <Component {...props} myuser={user} />;
-};
 
-export default myUser(connect(mapStateToProps)(Item_Individual))
+
+export default connect(mapStateToProps)(Item_Individual)
