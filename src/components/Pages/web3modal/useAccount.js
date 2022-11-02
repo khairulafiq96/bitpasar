@@ -8,7 +8,8 @@ export default function UseAccount() {
 
 
   const user = {
-    "isLoading" : account.isLoading,
+    "status" : account.status,
+    "isLoading" : isLoading,
     "isConnected" : account.isConnected,
     "address" : account.address,
     "balance" : data

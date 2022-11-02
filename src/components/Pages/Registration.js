@@ -70,9 +70,9 @@ class Registration extends Component {
        const {user} = this.props
        const {redirectToHome} = this.state
 
-       if(redirectToHome== true){
+       /*if(redirectToHome== true){
               return <Redirect exact to='/home'></Redirect>
-       }
+       }*/
 
         return(
             <div className='flex justify-center'>

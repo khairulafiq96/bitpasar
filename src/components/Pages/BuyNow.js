@@ -38,8 +38,7 @@ class BuyNow extends Component{
     }
 
     async componentDidMount(){
-        const {itemId} = this.props.match.params
-        const {user,items} = this.props
+        const {user,items,itemId} = this.props
         
         if(user){
             //checks if the user already registed their details in the registration form
@@ -129,8 +128,7 @@ class BuyNow extends Component{
 
     render (){
 
-        const {itemId} = this.props.match.params
-        const {items,user,wallet} = this.props
+        const {items,user,wallet,itemId} = this.props
         const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice,totalprice} =this.state.form
         const {redirectToBuyNow,redirectToVerifyPurchase} = this.state.redirect
 

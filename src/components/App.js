@@ -49,36 +49,6 @@ class App extends Component {
   }
  
 
-
-  pages(){
-    return (
-      <div className='min-h-screen flex flex-col background_color'>
-        <Header></Header>
-          <div className='flex flex-1 sm:container mx-auto justify-center'>
-                    <Switch>
-                      <Route exact path={["/","/home"]} component={HomePage} />
-                      <Route exact path="/registration" component={Registration} />
-                      <Route exact path="/additem" component={AddItem} />
-                      <Route exact path="/marketplace" component={Marketplace} />
-                      <Route exact path="/item/:itemId" component={Item_Individual} />
-                      <Route exact path="/buynow/:itemId" component={BuyNow} />
-                      <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} />
-                      <Route exact path="/buynow/verifypurchase/payment/:itemId" component={Payment} />
-                      <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase} />
-                      <Route exact path="/profile/:userId" component={MyProfile} />
-                      <Route exact path="/dashboard/:walletid" component={MyDashboard} />
-                      <Route exact path="/ads/:walletid" component={MyAds} />
-                      <Route exact path="/useAccount" component={UseAccount} />
-                    </Switch>
-
-          </div>
-        <Footer></Footer>
-      </div>
-    )
-  }
-
-
-
   render(){
 
     const modalConfig = {
@@ -95,11 +65,25 @@ class App extends Component {
       }
     }
 
-    const walletPopup = () => {
-      window.alert("Please sign in to your wallet")
-      return (
-        <HomePage></HomePage>
-      )
+    const walletAuth = () => {
+      if(wallet.isLoading === false && wallet.isConnected === true){
+        return true
+      } else {
+        return false
+      }
+    }
+
+
+    //Checking if the User has signed in their wallet
+    //Since web3modal require some time to Load the data, isLoading is used
+    //Only when isLoading is false, then other variables are accessible
+    const renderLoading = () =>{
+      if(wallet.isLoading === true){
+        //render component
+        return (<div className='font-mono'>Loading Web3Modal...</div>)
+      } else if(wallet.isConnected === false) {
+        return(<Redirect exact to="/home"></Redirect>)
+      }
     }
  
     const {wallet} = this.props
@@ -108,24 +92,33 @@ class App extends Component {
       <div className='min-h-screen flex flex-col background_color'>
         <Web3Modal config={modalConfig} />
         <Header></Header>
+        {JSON.stringify(wallet.isLoading)}
+        {JSON.stringify(wallet.isConnected)}
           <div className='flex flex-1 sm:container mx-auto justify-center'>
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/marketplace" component={Marketplace} />
                       <Route exact path="/item/:itemId" 
-                        render={(props)=>(<Item_Individual wallet={wallet} itemId={props.match.params.itemId}>
+                        render={(props)=>(<Item_Individual 
+                                            wallet={wallet} 
+                                            itemId={props.match.params.itemId}>
                                           </Item_Individual>)} />
                       <Route exact path="/registration">
-                        {wallet.isConnected ? <Registration></Registration> : <Redirect exact to="/home"></Redirect>}
+                        {wallet.isLoading === false ? <Registration></Registration> : <div>Loading Web3Modal...</div>}
                       </Route>
                       <Route exact path="/profile/:userId">
-                        {wallet.isConnected ? <MyProfile></MyProfile> : <Redirect exact to="/home"></Redirect>}
+                        {walletAuth() ? <MyProfile></MyProfile> : renderLoading()}
                       </Route>
                       <Route exact path="/additem">
                         {wallet.isConnected ? <AddItem></AddItem> : <Redirect exact to="/home"></Redirect>}
                       </Route>
                       <Route exact path="/buynow/:itemId">
-                        {wallet.isConnected ? <Route path="/buynow/:itemId" component={BuyNow}></Route> : <Redirect exact to="/home"></Redirect> }
+                        {walletAuth()  ? <Route path="/buynow/:itemId" 
+                                                render={(props)=>(<BuyNow 
+                                                wallet={wallet} 
+                                                itemId={props.match.params.itemId}>
+                                                </BuyNow>)}>
+                                              </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} >
                         {wallet.isConnected ? <Route path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} ></Route> : <Redirect exact to="/home"></Redirect> }
