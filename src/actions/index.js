@@ -28,6 +28,7 @@ export function handleGetUserDetails(walletid){
             if(response.status === 'unregistered'){
                 window.alert(response.message)
             } else {
+                dispatch(resetUser({}))
                 dispatch(getUserDetails(response))
             }
         })

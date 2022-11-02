@@ -2,7 +2,6 @@ import { async } from '@firebase/util';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { handleGetUserDetails } from "../../actions";
 import { handleUserRegistration,handleUpdateUserDetails,handleDeleteUser } from '../../actions';
 import { convertUserId } from '../../Utility/general';
 

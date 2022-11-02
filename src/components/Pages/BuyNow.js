@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux'
-import { handleGetUserDetails } from "../../actions";
 import '../Styles/Item.css'
 import {handleGetIndividualItem} from '../../actions'
 import { Redirect } from "react-router-dom";
 import {setConfirmPurchase} from '../../actions/items'
 import { convertUserId } from "../../Utility/general";
+import UseAccount from "./web3modal/useAccount";
 
 class BuyNow extends Component{
 
@@ -39,7 +39,7 @@ class BuyNow extends Component{
 
     async componentDidMount(){
         const {itemId} = this.props.match.params
-        const {user,dispatch,items} = this.props
+        const {user,items} = this.props
         
         if(user){
             //checks if the user already registed their details in the registration form
@@ -73,7 +73,7 @@ class BuyNow extends Component{
             }
         } else {
             window.alert("Please connect to your wallet")
-            this.setState({redirectToBuyNow : true})
+            this.setState({redirect : {redirectToBuyNow : true}})
         }
     }
 
@@ -130,40 +130,34 @@ class BuyNow extends Component{
     render (){
 
         const {itemId} = this.props.match.params
-        const {items,user} = this.props
+        const {items,user,wallet} = this.props
         const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice,totalprice} =this.state.form
         const {redirectToBuyNow,redirectToVerifyPurchase} = this.state.redirect
 
-        const checkItems = () => {
-            try {
-                if(items[itemId] && user['address'] ){
-                   return true
-                }
-            } catch (e){
-                return false
-            } 
-        }
-
 
         //Redirect users if they are not connected to their wallet
-        function renderRedirect(){
-            if(redirectToBuyNow){
-                return <Redirect exact to = {"/item/"+itemId} ></Redirect>
-            }
-        }
-
         function renderToVerifyPurchase(){
             if(redirectToVerifyPurchase){
                 return <Redirect exact to={"/buynow/verifypurchase/"+itemId}></Redirect>
             }
         }
 
+        function checkAccess(wallet, item){
+            if (wallet.isConnected === false){
+                return false
+            } else if (!item[itemId]){
+                return false
+            } else {
+                return true
+            }
+        }
 
+        /* {renderRedirect()}
+           {renderToVerifyPurchase()} */
         return (
             <div>
-                {renderRedirect()}
                 {renderToVerifyPurchase()}
-                {checkItems() ? 
+                {checkAccess(wallet, items) ? 
                             <div className="flex 
                                             xs:flex-col xs:space-x-0 xs:space-y-5 
                                             lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 pb-5">
@@ -292,7 +286,7 @@ class BuyNow extends Component{
                                 </div>
                             </div>
                             :
-                            <div></div>
+                            <Redirect exact to = {"/item/"+itemId} ></Redirect>
                             }
                 
             </div>
@@ -307,4 +301,10 @@ function mapStateToProps({user,items}) {
     }
   }
 
-export default connect(mapStateToProps)(BuyNow);
+  const web3modal = Component => props => {
+    const user = UseAccount();
+    return <Component {...props} wallet={user} />;
+};
+
+
+export default web3modal(connect(mapStateToProps)(BuyNow))

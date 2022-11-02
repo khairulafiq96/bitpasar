@@ -35,45 +35,17 @@ class WalletConnect extends Component {
         }
     }
 
+    async componentDidMount(){
+        const {dispatch, wallet, user} = this.props
+        if (wallet.isConnected === false || user === null){
+            await dispatch(handleGetUserDetails(wallet.address))}
+    }
+
 
     render(){
 
-        const {user,dispatch} = this.props
+        const {user,wallet} = this.props
         const {renderDropdown} = this.state
-
-        const connectWalletHandler = async () => {
-            if (window.ethereum || window.ethereum.isMetaMask) {
-                console.log('MetaMask Here!');
-
-                await window.ethereum.request({method: 'eth_requestAccounts'}).then(result=>{
-                    
-                    //Just to dispatch account
-                    //console.log(result)
-                    accountChangedHandler(result)
-                    
-
-                }
-                ).catch(error =>{
-                    window.alert(error.message)
-                })
-    
-            } else {
-                console.log('Need to install MetaMask');
-                window.alert('Please install MetaMask browser extension to interact');
-            }
-        }
-
-        const getAccountBalance = (account) => {
-            //console.log("Running Account balance")
-            window.ethereum.request({method: 'eth_getBalance', params: [account, 'latest']})
-            .then(balance => {
-                console.log((ethers.utils.formatEther(balance)))
-                this.props.dispatch(getUserBalance(ethers.utils.formatEther(balance)));
-            })
-            .catch(error => {
-                window.alert(error.message);
-            });
-        };
 
         //converting address to a shorter version
         const displayAddress = (address) => {
@@ -82,47 +54,18 @@ class WalletConnect extends Component {
             return finalString
         }
 
-        //dispatching account
-        const accountChangedHandler = async (result) => {
-            await this.props.dispatch(setSignedInUser(result))
-            await dispatch(handleGetUserDetails(result.toString()))
-            await getAccountBalance(result.toString())
-            window.location.reload();
-        }
-
-        //To refresh page when chain is chabged
-        const chainChangedHandler = () => {
-            //console.log("Changing account")
-            getAccountBalance(this.props.user.address)
-            //window.location.reload();
-        }
-
-        //Listener when account is changed and dispatching the value
-        if(window.ethereum){
-            console.log("Running Account Changed")
-            window.ethereum.on('accountsChanged', accountChangedHandler);}
-
-        //Listener when chain is changed
-        if(window.ethereum){
-            window.ethereum.on('chainChanged', chainChangedHandler) 
-        }
-
 
         return(
             <div>
-                {user ?<div>
-                            <button title={user.address}
+                {wallet.isConnected ?<div>
+                            <button title={wallet.address}
                                     onClick={()=>this.displayDropdown(renderDropdown)} 
                                     className=" text-xs hover:bg-blue-500 bg-bitpasar text-white py-2 px-4">
-                                    {displayAddress(user.address)}
+                                    {displayAddress(wallet.address)}
                             </button>
-                            {renderDropdown ? this.renderDropdownItems(user.address) : <div></div>}
+                            {renderDropdown ? this.renderDropdownItems(wallet.address) : <div></div>}
                         </div>
-                      : <button 
-                            className="text-xs hover:bg-blue-500 bg-bitpasar text-white font-bold py-2 px-4"
-                            onClick={connectWalletHandler}>
-                                Connect Wallet
-                        </button>}
+                      :<></>}
                 
 
                 

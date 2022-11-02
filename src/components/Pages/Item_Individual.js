@@ -64,7 +64,7 @@ class Item_Individual extends Component{
         const handleBuyItem = () =>{
             console.log("Running buy now button")
 
-            if(!user){
+            if(!isConnected){
               window.alert("Please sign in to your wallet to buy")
               //this.setState({buyButtonMessage : [...this.state.buyButtonMessage, 'new value'] })
             } else if (items[itemId]['status'] !== 'new'){
@@ -96,7 +96,6 @@ class Item_Individual extends Component{
 
         return (
             <div className="w-full lg:w-3/4">
-                {JSON.stringify(this.props.myuser)}
                 {renderRedirect()}
                 {items !== null && itemId in items ? 
                                 <div className="w-full flex flex-col items-center">
@@ -188,9 +187,6 @@ class Item_Individual extends Component{
                                    
                                 </div>   
                 }
-                
-
-                
             </div>
         )
     }
@@ -203,6 +199,8 @@ function mapStateToProps({user,items}) {
     }
 }
 
+//Implemented HOC for functional components in class component
+//https://stackoverflow.com/questions/70373597/is-it-possible-to-use-react-hooks-in-class-component-by-using-hochigher-order-c/70375132#70375132
 const myUser = Component => props => {
     const user = UseAccount();
     return <Component {...props} myuser={user} />;
