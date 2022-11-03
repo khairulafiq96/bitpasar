@@ -87,7 +87,6 @@ class BuyNow extends Component{
         if(values.length > 0 ){
             window.alert("Please fill all of the input required *")
         } else {
-
             await this.props.dispatch(setConfirmPurchase(this.handlePurchaseObject(formState, item ,url , user)))
             this.setState({
                 redirect:{
@@ -99,7 +98,7 @@ class BuyNow extends Component{
 
     handlePurchaseObject(form, items, itemId, user){
 
-        const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance')
+        const userId = convertUserId(user)
 
         var purchase = {
             "buyername" : form['name'],
@@ -128,9 +127,9 @@ class BuyNow extends Component{
 
     render (){
 
-        const {items,user,wallet,itemId} = this.props
+        const {items,user,itemId} = this.props
         const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice,totalprice} =this.state.form
-        const {redirectToBuyNow,redirectToVerifyPurchase} = this.state.redirect
+        const {redirectToVerifyPurchase} = this.state.redirect
 
 
         //Redirect users if they are not connected to their wallet
@@ -140,22 +139,12 @@ class BuyNow extends Component{
             }
         }
 
-        function checkAccess(wallet, item){
-            if (wallet.isConnected === false){
-                return false
-            } else if (!item[itemId]){
-                return false
-            } else {
-                return true
-            }
-        }
-
         /* {renderRedirect()}
            {renderToVerifyPurchase()} */
         return (
             <div>
                 {renderToVerifyPurchase()}
-                {checkAccess(wallet, items) ? 
+                {items && itemId in items ? 
                             <div className="flex 
                                             xs:flex-col xs:space-x-0 xs:space-y-5 
                                             lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 pb-5">
@@ -299,10 +288,5 @@ function mapStateToProps({user,items}) {
     }
   }
 
-  const web3modal = Component => props => {
-    const user = UseAccount();
-    return <Component {...props} wallet={user} />;
-};
 
-
-export default web3modal(connect(mapStateToProps)(BuyNow))
+export default connect(mapStateToProps)(BuyNow)

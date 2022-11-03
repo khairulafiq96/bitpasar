@@ -103,9 +103,6 @@ class App extends Component {
                                             wallet={wallet} 
                                             itemId={props.match.params.itemId}>
                                           </Item_Individual>)} />
-                      <Route exact path="/registration">
-                        {wallet.isLoading === false ? <Registration></Registration> : <div>Loading Web3Modal...</div>}
-                      </Route>
                       <Route exact path="/profile/:userId">
                         {walletAuth() ? <MyProfile></MyProfile> : renderLoading()}
                       </Route>
@@ -115,10 +112,9 @@ class App extends Component {
                       <Route exact path="/buynow/:itemId">
                         {walletAuth()  ? <Route path="/buynow/:itemId" 
                                                 render={(props)=>(<BuyNow 
-                                                wallet={wallet} 
                                                 itemId={props.match.params.itemId}>
                                                 </BuyNow>)}>
-                                              </Route> : renderLoading()}
+                                          </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} >
                         {wallet.isConnected ? <Route path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} ></Route> : <Redirect exact to="/home"></Redirect> }
