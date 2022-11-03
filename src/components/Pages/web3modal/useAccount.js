@@ -1,10 +1,13 @@
-import { useAccount,useBalance,Web3Button, useConnectModal } from '@web3modal/react'
+import { useAccount,useBalance,Web3Button, useConnectModal,useProvider } from '@web3modal/react'
 
 export default function UseAccount() {
   const { account, isReady } = useAccount()
   const { data, error, isLoading, refetch } = useBalance({
     addressOrName: account.address
   })
+  //Provider would require some time to load, any component that requires this value
+  //Checks are added in the APP.js to check the provider value
+  const { provider } = useProvider()
 
 
   const user = {
@@ -12,7 +15,8 @@ export default function UseAccount() {
     "isLoading" : isLoading,
     "isConnected" : account.isConnected,
     "address" : account.address,
-    "balance" : data
+    "balance" : data,
+    "provider" : provider
   }
 
   return (

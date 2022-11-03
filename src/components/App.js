@@ -112,15 +112,25 @@ class App extends Component {
                       <Route exact path="/buynow/:itemId">
                         {walletAuth()  ? <Route path="/buynow/:itemId" 
                                                 render={(props)=>(<BuyNow 
+                                                wallet={wallet}
                                                 itemId={props.match.params.itemId}>
                                                 </BuyNow>)}>
                                           </Route> : renderLoading()}
                       </Route>
-                      <Route exact path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} >
-                        {wallet.isConnected ? <Route path="/buynow/verifypurchase/:itemId" component={VerifyPurchase} ></Route> : <Redirect exact to="/home"></Redirect> }
+                      <Route exact path="/buynow/verifypurchase/:itemId">
+                        {walletAuth()  ? <Route path="/buynow/verifypurchase/:itemId" 
+                                                  render={(props)=>(<VerifyPurchase
+                                                  itemId={props.match.params.itemId}>
+                                                  </VerifyPurchase>)}>
+                                          </Route> : renderLoading()}
                       </Route>
-                      <Route exact path="/buynow/verifypurchase/payment/:itemId" component={Payment}>
-                        {wallet.isConnected ? <Route path="/buynow/verifypurchase/payment/:itemId" component={Payment} ></Route> : <Redirect exact to="/home"></Redirect> }
+                      <Route exact path="/buynow/verifypurchase/payment/:itemId">
+                        {walletAuth() && wallet.provider ? <Route path="/buynow/verifypurchase/payment/:itemId" 
+                                                    render={(props)=>(<Payment
+                                                    wallet={wallet}
+                                                    itemId={props.match.params.itemId}>
+                                                    </Payment>)}>
+                                          </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase}>
                         {wallet.isConnected ? <Route path="/buynow/verifypurchase/payment/:itemId" component={Payment} ></Route> : <Redirect exact to="/home"></Redirect> }

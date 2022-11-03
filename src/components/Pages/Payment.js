@@ -1,9 +1,91 @@
-import React, {Component} from "react";
-import {connect} from 'react-redux'
+import React, {Component, useEffect} from "react";
+import {connect, useDispatch} from 'react-redux'
 import {ethers} from 'ethers'
 import { handleCreateOrder } from "../../actions";
 import {NavLink} from 'react-router-dom'
 import { Redirect } from 'react-router-dom';
+import { useSendTransaction,useWaitForTransaction  } from '@web3modal/react'
+import { BigNumber } from 'ethers'
+
+const MySubComponent = (props) => {
+
+    const transaction = {
+        request: {
+          to: props.receiverWallet,
+          //value: BigNumber.from(ethers.utils.parseUnits(props.price.toString(), "ether"))
+          value : BigNumber.from('1000000')
+        }
+      }
+      
+      const { data, error, isLoading, sendTransaction } = useSendTransaction(transaction)
+      const { receipt, isWaiting } = useWaitForTransaction({ hash: data?.hash })
+
+      useEffect(()=>{
+        async function dispatchData(){
+            await props.dispatch(handleCreateOrder(props.purchase))
+        }
+        
+        if(receipt && isWaiting === false){
+            //window.alert(JSON.stringify(receipt))
+            dispatchData()
+        }
+
+
+      })
+
+    return (
+        <div className="flex flex-col items-center justify-center font-robotomono">
+             {isWaiting && !data.hash ? <></>
+                          :
+                          <button
+                            className="text-lg" 
+                            onClick={async () => sendTransaction()}>
+                            Pay Now
+                          </button>}
+             <div>
+                {isWaiting  ? <div>
+                                <div>
+                                    Payment initiated
+                                </div> 
+                                <img src="https://i.stack.imgur.com/27Rnd.gif"></img>
+                                <div>
+                                    <div className="font-mono p-5">
+                                        Check your transaction status here
+                                    </div>
+                                    <a  className="font-robotomono underline"
+                                        target="_blank" href={`https://goerli.etherscan.io/tx/${data?.hash}`}>
+                                        https://goerli.etherscan.io/tx/{data?.hash}</a>
+                                </div>
+                            </div> 
+                            :
+                            <></>}
+             </div>
+             <div>
+                {receipt ?  <div className="flex flex-col items-center space-y-3">
+                                <div className="p-3">Transaction Completed !</div>
+                                <div className="flex flex-col items-center">
+                                    <div className="font-mono p-5">
+                                        Check your transaction status here
+                                    </div>
+                                    <a  className="font-robotomono underline"
+                                        target="_blank" href={`https://goerli.etherscan.io/tx/${data?.hash}`}>
+                                        https://goerli.etherscan.io/tx/{data?.hash}</a>
+                                </div>
+                                <div>Check out your purchases here</div>
+                                <NavLink
+                                    exact to={`/profile/purchase/${props.wallet}`}
+                                    className="box w-fit text-lg bg-beige hover:bg-button hover:text-white text-black py-2 px-4 font-mono">
+                                    My Purchases
+                                </NavLink>    
+                            </div> 
+                        :
+                            <></>}
+             </div>
+        </div>
+       )
+
+}
+
 
 class Payment extends Component {
 
@@ -14,10 +96,11 @@ class Payment extends Component {
     state = {
         transaction : null,
         gasprice : null,
+        runTransaction : false
     }
 
 
-    async startPayment (totalprice, ownerwallet){
+    async startPayment (totalprice, ownerwallet, provider){
         try {
             await window.ethereum.send("eth_requestAccounts");
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -99,8 +182,7 @@ class Payment extends Component {
     render(){
 
         const {transaction} = this.state
-        const {purchase} = this.props
-        const {itemId} = this.props.match.params
+        const {purchase,itemId,wallet,dispatch} = this.props
 
         function redirectToIndividualItem(){
             if(!purchase){
@@ -116,7 +198,7 @@ class Payment extends Component {
                                                 p-5
                                                 box bg-white">
                                     <div className="font-mono text-md">
-                                        To pay
+                                        To pay 
                                     </div>
                                     <div className="font-robotomono text-2xl underline"> 
                                         {purchase['totalprice']} ETH
@@ -130,6 +212,8 @@ class Payment extends Component {
                                     <div className="font-robotomono text-xs pb-5">
                                         {purchase['ownerwallet']}
                                     </div>
+                                    <button onClick={()=>this.setState(({ runTransaction }) => ({ runTransaction: !runTransaction }))}> LOL TEST</button>
+                                    {this.state.runTransaction ? <MySubComponent dispatch={dispatch} wallet={wallet.address} purchase={purchase} price={purchase['totalprice']} receiverWallet={purchase['ownerwallet']}></MySubComponent> : <></>}
                                     {transaction ? 
                                                 <div className="font-robotomono">
                                                     Payment initiated
@@ -137,7 +221,7 @@ class Payment extends Component {
                                                 : 
                                                 <button 
                                                     className="text-lg"
-                                                    onClick={()=>this.startPayment('0.00001', purchase['ownerwallet'])}>
+                                                    onClick={()=>this.startPayment('0.0000000001', purchase['ownerwallet'])}>
                                                         Pay Now
                                                 </button>
                                                 }
@@ -177,5 +261,6 @@ function mapStateToProps({items,purchase}){
         purchase
     }
 }
+
 
 export default connect(mapStateToProps)(Payment)

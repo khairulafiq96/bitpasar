@@ -81,13 +81,13 @@ class BuyNow extends Component{
         this.setState((prevState, props) => ({ form : {...prevState.form,[evt.target.name]: evt.target.value }}));
     }
 
-    async handleSubmission(formState, item, url, user){
+    async handleSubmission(formState, item, url, user,wallet){
         //filtering null items in form state
         const values = Object.values(formState).filter((item)=> item === '')
         if(values.length > 0 ){
             window.alert("Please fill all of the input required *")
         } else {
-            await this.props.dispatch(setConfirmPurchase(this.handlePurchaseObject(formState, item ,url , user)))
+            await this.props.dispatch(setConfirmPurchase(this.handlePurchaseObject(formState, item ,url , user, wallet)))
             this.setState({
                 redirect:{
                     redirectToVerifyPurchase : true
@@ -96,7 +96,7 @@ class BuyNow extends Component{
         }
     }
 
-    handlePurchaseObject(form, items, itemId, user){
+    handlePurchaseObject(form, items, itemId, user, wallet){
 
         const userId = convertUserId(user)
 
@@ -116,8 +116,8 @@ class BuyNow extends Component{
             "buyerphonenum" : form['phonenum'],
             "itemid" : itemId,
             "ownerid" : items['ownerid'],
-            "buyerid" : userId[0],
-            "buyerwallet" : user['address']
+            "buyerid" : userId,
+            "buyerwallet" : wallet.address
         }
 
         
@@ -127,7 +127,7 @@ class BuyNow extends Component{
 
     render (){
 
-        const {items,user,itemId} = this.props
+        const {items,user,itemId,wallet} = this.props
         const {name,email,phonenum,address1,address2,city,zipcode,states,postagename,postageprice,totalprice} =this.state.form
         const {redirectToVerifyPurchase} = this.state.redirect
 
@@ -267,7 +267,7 @@ class BuyNow extends Component{
                                     </div>
                                     <div className="flex justify-center pt-10">
                                         <button className="text-lg"
-                                                onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user )}
+                                                onClick={()=>this.handleSubmission(this.state.form, items[itemId], itemId, user,wallet )}
                                                 >Proceed</button>
                                     </div>
                                 </div>

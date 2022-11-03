@@ -27,8 +27,7 @@ class VerifyPurchase extends Component {
 
     render(){
 
-        const {purchase,items} = this.props
-        const {itemId} = this.props.match.params
+        const {purchase,items,itemId} = this.props
         const {redirectToPurchase, redirectToBuyNow} = this.state
 
         function renderRedirectToPurchase(){
@@ -47,25 +46,14 @@ class VerifyPurchase extends Component {
             return <Redirect exact to = {"/item/"+itemId} ></Redirect>
         }
 
-        const checkItems = () => {
-            try {
-                if(items[itemId] && purchase){
-                   return true
-                }
-            } catch (e){
-                return false
-            } 
-        }
-
         return (
             <div>
-                {checkItems() ?
+                {items && itemId in items && purchase?
                                 <div className="flex 
                                                 xs:flex-col xs:space-x-0 xs:space-y-5 
                                                 lg:flex-row lg:w-full lg:space-x-5 lg:space-y-0 pb-5">
                                     {renderRedirectToPurchase()}
                                     {renderRedirectToBuyNow()}
-                            
                                     <div className="flex flex-col  
                                                     items-center sm:space-y-5">
                                         <div className="flex flex-col items-center h-min-1/2
