@@ -86,19 +86,28 @@ class App extends Component {
       }
     }
  
-    const {wallet} = this.props
+    const {wallet, user} = this.props
 
     return ( 
       <div className='min-h-screen flex flex-col background_color'>
         <Web3Modal config={modalConfig} />
-        <Header></Header>
+        <Header wallet={wallet}></Header>
         {JSON.stringify(wallet.isLoading)}
         {JSON.stringify(wallet.isConnected)}
           <div className='flex flex-1 sm:container mx-auto justify-center'>
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/marketplace" component={Marketplace} />
-                      <Route exact path="/registration" component={Registration}/>
+                      <Route exact path="/registration" >
+                        {/* only isLoading is required, this to enable users
+                        with unconnected wallet to connectwallet on the page and Register on the page */}
+                        {wallet.isLoading === false ? <Route path="/registration" 
+                                                  render={(props)=>(<Registration 
+                                                  wallet={wallet}
+                                                  >
+                                                  </Registration>)}>
+                                          </Route> : renderLoading()}
+                      </Route>
                       <Route exact path="/item/:itemId" 
                         render={(props)=>(<Item_Individual 
                                             wallet={wallet} 

@@ -41,7 +41,7 @@ class Registration extends Component {
 
     handleSubmission = async (e) => {
        e.preventDefault();
-       const {dispatch,user} = this.props
+       const {dispatch,wallet} = this.props
        
        var obj = {
               "name" : this.state.name,
@@ -52,31 +52,29 @@ class Registration extends Component {
               "city" : this.state.city,
               "state" : this.state.state,
               "zipcode" : this.state.zipcode,
-              "walletid" :user['address']  
+              "walletid" :wallet.address
        }
-       await dispatch(handleUserRegistration(obj)).then((response)=>{
-              if (response==="success"){
-                     this.setState({redirectToHome : true})
-              } else {
-                     this.setState({redirectToHome : false}) 
-              }
-                   
-                     
-       })
+       await dispatch(handleUserRegistration(obj))
     }
 
 
     render(){
-       const {user} = this.props
+       const {user,wallet} = this.props
        const {redirectToHome} = this.state
 
-       /*if(redirectToHome== true){
-              return <Redirect exact to='/home'></Redirect>
-       }*/
+       const renderExternalPages = () => {
+              if(user && wallet.isConnected === true){
+                     return <Redirect exact to={'/profile/'+wallet.address}></Redirect>
+              } else {
+                     return <div className='p-5 font-mono'>
+                            Please connect to your wallet to proceed to registration
+                            </div>
+              }
+       }
 
         return(
             <div className='flex justify-center'>
-              {user ? <div className='px-2 sm:w-[500px]'>
+              {!user && wallet.isConnected === true ? <div className='px-2 sm:w-[500px]'>
                             <div className='flex flex-col space-y-2
                                             box bg-slate-200 p-5'>
                                    <div className='font-mono text-lg pb-3 '>
@@ -138,12 +136,7 @@ class Registration extends Component {
                             </div>
                      </div>
                      :
-                     <div>  
-                            <br/>
-                            <div>Please connect to your wallet to proceed to registration</div>
-                            <WalletConnect></WalletConnect>
-                     </div>}
-              
+                     renderExternalPages()}
             </div>
 
             
