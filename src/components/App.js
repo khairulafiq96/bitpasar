@@ -147,8 +147,13 @@ class App extends Component {
                                                     </Payment>)}>
                                           </Route> : renderLoading()}
                       </Route>
-                      <Route exact path="/profile/purchase/:walletaddress" component={MyPurchase}>
-                        {wallet.isConnected ? <Route path="/buynow/verifypurchase/payment/:itemId" component={Payment} ></Route> : <Redirect exact to="/home"></Redirect> }
+                      <Route exact path="/profile/purchase/:walletaddress">
+                        {walletAuth()  ? <Route path="/profile/purchase/:walletaddress" 
+                                                  render={(props)=>(<MyPurchase 
+                                                  wallet={wallet}
+                                                  >
+                                                  </MyPurchase>)}>
+                                            </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/dashboard/:walletid">
                         {wallet.isConnected ? <Route path="/dashboard/:walletid" component={MyDashboard} ></Route> : <Redirect exact to="/home"></Redirect> }

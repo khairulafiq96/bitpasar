@@ -12,38 +12,21 @@ class MyPurchase extends Component {
     }
 
     async componentDidMount(){
-        if(this.props.user){
-            this.setState({
-                redirectToHome : false
-            })
-            await this.props.dispatch(handleGetUserPurchases(this.props.user['address']))
-        }else{
-            this.setState({
-                redirectToHome : true
-            })
-        }
+        //This must be called everytime as the user should get the latest data
+        await this.props.dispatch(handleGetUserPurchases(this.props.wallet.address))
     }
 
     render(){
 
         const {user} = this.props
-        const {redirectToHome} = this.state
-
-        const toHome = () =>{
-            if(redirectToHome === true){
-                window.alert("Please connect to your wallet to access this page")
-                return <Redirect exact to='/home'></Redirect>
-            } 
-        }
 
         const displayButton = (mypurchases) => {
             if(Object.keys(mypurchases).length === 0){
-                return <div> There are no recent purchases</div>
+                return <div className="font-mono"> There are no recent purchases</div>
             }
         }
 
         return (<div className="md:w-[620px] px-2 sm:px-0">
-                   {toHome()}
                    <div className="font-mono text-lg pb-5 underline">
                         My purchase(s)
                     </div>
