@@ -14,27 +14,15 @@ class MyAds extends Component{
     }
 
     async componentDidMount(){
-
         const {user} = this.props
         const userId = convertUserId(user)
-
-        if(user && userId){
-            await this.props.dispatch(handleGetAllAds(userId))
-        } else {
-            window.alert("Please complete your registration to access this page")
-            this.setState({
-                redirectToRegistrationPage : true
-            })
-        }
+        await this.props.dispatch(handleGetAllAds(userId))
     }
-
-    
-
-    
 
     render(){
 
         const {user} = this.props
+        const userId = convertUserId(user)
 
         const renderOnMarketplaceAds = (item,user,status) => {
             if(status === "new"){
@@ -57,14 +45,18 @@ class MyAds extends Component{
             }
         }
 
-        const redirectToHome =() =>{
-            if(this.state.redirectToRegistrationPage === true){
-                return <Redirect exact to='/registration'></Redirect>
+
+        const renderExternalComponent = () => {
+            if(!userId){
+                window.alert("Please complete your registration to access this page")
+                return(<Redirect exact to="/registration"></Redirect>)
+            } else {
+                return(<div className="font-mono">Loading...</div>)
             }
         }
 
         return (<div className="md:w-[620px] px-2 sm:px-0">
-                    {user && user['myads'] ? <div className="flex flex-col space-y-3">
+                    {userId && user['myads'] ? <div className="flex flex-col space-y-3">
                                                 <div className="bitpasar_text text-lg underline">On Marketplace</div>
                                                 {displayNoItem(user['myads'])}
                                                 {Object.keys(user['myads']).map((item)=>{
@@ -72,11 +64,9 @@ class MyAds extends Component{
                                                     }
                                                 )}
                                             </div> 
-                                            : <div>
-                                                {redirectToHome()}
-                                                Loading</div>}
-
-            
+                                            :
+                                            renderExternalComponent()
+                                            }
                 </div>)
     }
 }

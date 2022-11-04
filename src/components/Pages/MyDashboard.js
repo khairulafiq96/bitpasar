@@ -17,24 +17,13 @@ class MyDashboard extends Component{
     }
 
     async componentDidMount(){
-        if( convertUserId(this.props.user)){
-            this.setState({
-                redirectToRegistrationPage : false
-            })
-            //This API must be called every time the page renders to get the latest data
-            await this.props.dispatch(handleGetAllOrders(convertUserId(this.props.user)))
-        }else{
-            this.setState({
-                redirectToRegistrationPage : true
-            })
-        }
+        //This API must be called every time the page renders to get the latest data
+        await this.props.dispatch(handleGetAllOrders(convertUserId(this.props.user)))
     }
 
     render(){
         const {user} = this.props
         const userId = convertUserId(user)
-        const {redirectToRegistrationPage,displayTrackingComponent} = this.state
-
 
         const renderToShipItems = (item,user,status) => {
             if(status === "completed payment"){
