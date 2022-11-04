@@ -58,8 +58,8 @@ const MySubComponent = (props) => {
                             <></>}
              </div>
              <div>
-                {receipt ?  <div className="flex flex-col items-center space-y-3">
-                                <div className="p-3">Transaction Completed !</div>
+                {receipt ?  <div className="flex flex-col items-center space-y-5">
+                                <div>Transaction Completed !</div>
                                 <div className="flex flex-col items-center">
                                     <div className="font-mono p-5">
                                         Check your transaction status here

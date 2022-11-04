@@ -98,13 +98,19 @@ class App extends Component {
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/marketplace" component={Marketplace} />
+                      <Route exact path="/registration" component={Registration}/>
                       <Route exact path="/item/:itemId" 
                         render={(props)=>(<Item_Individual 
                                             wallet={wallet} 
                                             itemId={props.match.params.itemId}>
                                           </Item_Individual>)} />
                       <Route exact path="/profile/:userId">
-                        {walletAuth() ? <MyProfile></MyProfile> : renderLoading()}
+                        {walletAuth() ? <Route path="/profile/:userId" 
+                                                render={(props)=>(<MyProfile 
+                                                wallet={wallet}
+                                                userId={props.match.params.userId}>
+                                                </MyProfile>)}>
+                                         </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/additem">
                         {wallet.isConnected ? <AddItem></AddItem> : <Redirect exact to="/home"></Redirect>}

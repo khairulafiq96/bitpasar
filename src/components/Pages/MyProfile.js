@@ -35,8 +35,8 @@ class MyProfile extends Component{
 
     async componentDidMount(){
 
-        const {user,dispatch} = this.props
-        const userId = Object.keys(user).filter((details)=> details !== 'address' && details !== 'balance' && details !== 'myorders' && details !== 'myads' && details !== 'mypurchases')
+        const {user,wallet} = this.props
+        const userId = convertUserId(user)
         
         if(user[userId]){
             console.log("User details is identified")
@@ -49,7 +49,7 @@ class MyProfile extends Component{
                 'city' : user[userId]['city'],
                 'state' : user[userId]['state'],
                 'zipcode' : user[userId]['zipcode'],
-                "walletid" :user['address']
+                "walletid" : wallet.address
             })
         }else{
             //User did not registered to the app
@@ -61,7 +61,7 @@ class MyProfile extends Component{
         
     }
 
-    handleSubmission = async (e,walletaddress) => {
+    handleSubmission = async (e,wallet) => {
         e.preventDefault();
         const {dispatch,user} = this.props
         
@@ -74,7 +74,7 @@ class MyProfile extends Component{
                "city" : this.state.city,
                "state" : this.state.state,
                "zipcode" : this.state.zipcode,
-               "walletid" : walletaddress  
+               "walletid" : wallet.address  
         }
         await dispatch(handleUpdateUserDetails(obj))
      }
@@ -85,7 +85,7 @@ class MyProfile extends Component{
 
     render(){
 
-        const {user} = this.props
+        const {user,wallet} = this.props
         const { name,
                 email,
                 phonenum,
@@ -116,7 +116,7 @@ class MyProfile extends Component{
                                     Your details
                                 </div>
                 {redirectToRegistrationPage()}
-                {user ? 
+                {userId ? 
                             <div className='flex flex-col space-y-4 p-5
                                             text-sm sm:text-base
                                             box bg-slate-200'>
@@ -162,14 +162,14 @@ class MyProfile extends Component{
                                 </div>
                                 <div className='flex items-center justify-center pt-3'>
                                     <div className='flex flex-row space-x-2'>
-                                        <button onClick={(e)=>this.handleSubmission(e,user['address'])}>Save</button>
+                                        <button onClick={(e)=>this.handleSubmission(e,wallet)}>Save</button>
                                         <button onClick={(e)=>this.handleDeleteAccount(userId)}>Delete Account</button>
                                     </div>
                                 </div>
                             </div>
                         
                         :
-                        redirectToHome()}
+                        <Redirect exact to='/registration'></Redirect>}
                 
             </div>
         )
