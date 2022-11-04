@@ -37,27 +37,19 @@ class MyProfile extends Component{
 
         const {user,wallet} = this.props
         const userId = convertUserId(user)
-        
-        if(user[userId]){
-            console.log("User details is identified")
-            this.setState({
-                'name' : user[userId]['name'],
-                'email' : user[userId]['email'],
-                'phonenum' : user[userId]['phonenum'],
-                'address1' : user[userId]['address1'],
-                'address2' : user[userId]['address2'],
-                'city' : user[userId]['city'],
-                'state' : user[userId]['state'],
-                'zipcode' : user[userId]['zipcode'],
-                "walletid" : wallet.address
-            })
-        }else{
-            //User did not registered to the app
-           window.alert("Please complete your registration")
-           this.setState({
-                'redirectToRegistrationPage' : true
-           })
-        }
+
+        console.log("User details is identified")
+        this.setState({
+            'name' : user[userId]['name'],
+            'email' : user[userId]['email'],
+            'phonenum' : user[userId]['phonenum'],
+            'address1' : user[userId]['address1'],
+            'address2' : user[userId]['address2'],
+            'city' : user[userId]['city'],
+            'state' : user[userId]['state'],
+            'zipcode' : user[userId]['zipcode'],
+            "walletid" : wallet.address
+        })
         
     }
 
@@ -96,26 +88,20 @@ class MyProfile extends Component{
                 zipcode } = this.state
         const userId = convertUserId(user)
         
-
-        //TOdo : If user hasent registered,redirect user to the Registration page
-
-        const redirectToRegistrationPage =() =>{
-            if(this.state.redirectToRegistrationPage === true){
-                return <Redirect exact to='/registration'></Redirect>
+        const renderExternalComponent = () => {
+            if(!userId){
+                window.alert("Please complete your registration to access this page")
+                return(<Redirect exact to="/registration"></Redirect>)
+            } else {
+                return(<div className="font-mono">Loading...</div>)
             }
         }
 
-        const redirectToHome = () =>{
-            window.alert("Please connect to your wallet to access this page")
-            return <Redirect exact to='/home'></Redirect>
-        }
-
         return (
-            <div className=''>
+            <div>
                 <div className='font-mono text-lg pb-5 underline'>
                                     Your details
                                 </div>
-                {redirectToRegistrationPage()}
                 {userId ? 
                             <div className='flex flex-col space-y-4 p-5
                                             text-sm sm:text-base
@@ -169,7 +155,7 @@ class MyProfile extends Component{
                             </div>
                         
                         :
-                        <Redirect exact to='/registration'></Redirect>}
+                        renderExternalComponent()}
                 
             </div>
         )

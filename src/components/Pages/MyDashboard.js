@@ -32,14 +32,9 @@ class MyDashboard extends Component{
 
     render(){
         const {user} = this.props
+        const userId = convertUserId(user)
         const {redirectToRegistrationPage,displayTrackingComponent} = this.state
 
-        const toHome = () =>{
-            if(redirectToRegistrationPage === true){
-                window.alert("Please complete your registration to access this page")
-                return <Redirect exact to='/registration'></Redirect>
-            } 
-        }
 
         const renderToShipItems = (item,user,status) => {
             if(status === "completed payment"){
@@ -53,11 +48,18 @@ class MyDashboard extends Component{
             }
         }
         
+        const renderExternalComponent = () => {
+            if(!userId){
+                window.alert("Please complete your registration to access this page")
+                return(<Redirect exact to="/registration"></Redirect>)
+            } else {
+                return(<div className="font-mono">Loading...</div>)
+            }
+        }
     
         return(
         <div className="md:w-[620px] px-2 sm:px-0">
-            {toHome()}
-            {user && user['myorders'] ? 
+            {userId && user['myorders'] ? 
                                     <div className="flex flex-col space-y-7">
                                         <div className="flex flex-col space-y-3">
                                             <div className="font-mono text-lg underline">
@@ -82,7 +84,7 @@ class MyDashboard extends Component{
                                         </div>
                                     </div> 
                                     :
-                                     <div>Loading</div>}<div>
+                                    renderExternalComponent()}<div>
                 
             </div>
             

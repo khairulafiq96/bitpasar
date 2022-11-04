@@ -5,6 +5,7 @@ import UserDetails from '../FormComponent/UserDetails'
 import { handleUserRegistration } from '../../actions';
 import WalletConnect from '../Buttons/WalletConnect';
 import { Redirect } from 'react-router-dom';
+import { convertUserId } from '../../Utility/general';
 
 class Registration extends Component {
 
@@ -60,6 +61,7 @@ class Registration extends Component {
 
     render(){
        const {user,wallet} = this.props
+       const userId = convertUserId(user)
        const {redirectToHome} = this.state
 
        const renderExternalPages = () => {
@@ -74,7 +76,7 @@ class Registration extends Component {
 
         return(
             <div className='flex justify-center'>
-              {!user && wallet.isConnected === true ? <div className='px-2 sm:w-[500px]'>
+              {!userId && wallet.isConnected === true ? <div className='px-2 sm:w-[500px]'>
                             <div className='flex flex-col space-y-2
                                             box bg-slate-200 p-5'>
                                    <div className='font-mono text-lg pb-3 '>

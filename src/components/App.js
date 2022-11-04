@@ -156,7 +156,12 @@ class App extends Component {
                                             </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/dashboard/:walletid">
-                        {wallet.isConnected ? <Route path="/dashboard/:walletid" component={MyDashboard} ></Route> : <Redirect exact to="/home"></Redirect> }
+                        {walletAuth()  ? <Route path="/dashboard/:walletid" 
+                                                    render={(props)=>(<MyDashboard 
+                                                    wallet={wallet}
+                                                    >
+                                                    </MyDashboard>)}>
+                                              </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/ads/:walletid">
                         {wallet.isConnected ? <Route path="/ads/:walletid" component={MyAds} ></Route> : <Redirect exact to="/home"></Redirect> }
