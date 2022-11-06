@@ -2,6 +2,10 @@
   "name": "bitpasar",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "v16.15.1",
+    "npm": "8.11.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
@@ -41,10 +45,6 @@
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
     "web3modal": "^1.9.9"
-  },
-  "engines": {
-    "node": "v16.15.1",
-    "npm": "8.11.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
