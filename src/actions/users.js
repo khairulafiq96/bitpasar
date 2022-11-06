@@ -66,10 +66,10 @@ export function getAllAds(user){
   }
 }
 
-export function resetUser(user){
+export function resetUser(){
   return {
     type : RESET_USER,
-    user
+    
   }
 }
 

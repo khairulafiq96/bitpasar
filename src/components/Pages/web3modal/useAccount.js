@@ -19,6 +19,9 @@ export default function UseAccount() {
     "provider" : provider
   }
 
+  //console.log(user)
+
+
   return (
     user
   )

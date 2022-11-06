@@ -28,7 +28,6 @@ export function handleGetUserDetails(walletid){
             if(response.status === 'unregistered'){
                 window.alert(response.message)
             } else {
-                dispatch(resetUser({}))
                 dispatch(getUserDetails(response))
             }
         })
@@ -189,10 +188,10 @@ export function handleDeleteUser(userid){
 
 */
 
-export function handleClearLocalStorage (user, purchase) {
+export function handleClearLocalStorage () {
     return (dispatch)=>{
-        dispatch(resetUser(user));
-        dispatch(resetPurchase(purchase))
+        dispatch(resetUser());
+        dispatch(resetPurchase())
     }   
 }
 

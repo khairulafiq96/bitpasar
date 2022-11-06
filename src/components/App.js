@@ -27,6 +27,7 @@ import { chains, providers } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 
 import './Styles/App.css'
+import localStorage from 'redux-persist/es/storage';
 
 
 
@@ -40,12 +41,18 @@ class App extends Component {
   }
 
   async componentDidMount(){
-    const status =  await checkMetaMaskConnection().then((result)=>{
-      if(!result){
-        //Clears state
-        this.props.dispatch(handleClearLocalStorage(this.props.user, this.props.purchase))
-      } 
+    //Checking if user wallet is connected, If not, state is cleared
+    const local = localStorage.getItem('wagmi.connected').then((res)=>{
+      console.log(res)
+      if(res==='true'){
+        //window.alert("Wallet is connected")
+      } else {
+        //window.alert("Wallet is disconnected")
+        this.props.dispatch(handleClearLocalStorage())
+        //window.reload()
+      }
     })
+
   }
  
 
@@ -73,7 +80,6 @@ class App extends Component {
       }
     }
 
-
     //Checking if the User has signed in their wallet
     //Since web3modal require some time to Load the data, isLoading is used
     //Only when isLoading is false, then other variables are accessible
@@ -86,19 +92,18 @@ class App extends Component {
       }
     }
  
-    const {wallet, user} = this.props
+    const {wallet} = this.props
 
     return ( 
       <div className='min-h-screen flex flex-col background_color'>
         <Web3Modal config={modalConfig} />
         <Header wallet={wallet}></Header>
-        {JSON.stringify(wallet.isLoading)}
-        {JSON.stringify(wallet.isConnected)}
+        
           <div className='flex flex-1 sm:container mx-auto justify-center'>
                     <Switch>
                       <Route exact path={["/","/home"]} component={HomePage} />
                       <Route exact path="/marketplace" component={Marketplace} />
-                      <Route exact path="/registration" >
+                      <Route exact path="/registration">
                         {/* only isLoading is required, this to enable users
                         with unconnected wallet to connectwallet on the page and Register on the page */}
                         {wallet.isLoading === false ? <Route path="/registration" 
@@ -122,7 +127,11 @@ class App extends Component {
                                          </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/additem">
-                        {wallet.isConnected ? <AddItem></AddItem> : <Redirect exact to="/home"></Redirect>}
+                        {walletAuth() ? <Route path="/additem" 
+                                                  render={(props)=>(<AddItem 
+                                                  wallet={wallet}>
+                                                  </AddItem>)}>
+                                          </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/buynow/:itemId">
                         {walletAuth()  ? <Route path="/buynow/:itemId" 
