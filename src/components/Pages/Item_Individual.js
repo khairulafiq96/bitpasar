@@ -158,7 +158,7 @@ class Item_Individual extends Component{
                                                                                                         Buy Now
                                                                                                 </button>
                                                                                             </div>
-                                                                                            :<div>
+                                                                                            :<div className="font-mono">
                                                                                                 Please contact seller to enquire about this item
                                                                                             </div>}
                                             </div>
