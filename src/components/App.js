@@ -127,7 +127,7 @@ class App extends Component {
                                          </Route> : renderLoading()}
                       </Route>
                       <Route exact path="/additem">
-                        {walletAuth() ? <Route path="/additem" 
+                        {wallet.isLoading === false ? <Route path="/additem" 
                                                   render={(props)=>(<AddItem 
                                                   wallet={wallet}>
                                                   </AddItem>)}>
