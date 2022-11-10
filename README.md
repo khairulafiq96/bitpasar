@@ -1,12 +1,9 @@
 # bitPasar
-## An e-commerce site with direct crypto payment
+## An e-commerce site with direct cryptocurrency payment
 
 # Demo Video
- <iframe width="560" height="315"
-src="https://youtu.be/Ivbu0vCx9CU" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+***Click the image and the video will open in a new tab***
+[![Watch the video](https://i9.ytimg.com/vi_webp/Ivbu0vCx9CU/sddefault.webp?v=636d4c51&sqp=CLSbtZsG&rs=AOn4CLCyJgu1kfdJLw40lZPZQdcjt7m9OA)](https://youtu.be/Ivbu0vCx9CU)
 
 
 # Description
