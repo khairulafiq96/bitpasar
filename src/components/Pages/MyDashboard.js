@@ -18,7 +18,11 @@ class MyDashboard extends Component{
 
     async componentDidMount(){
         //This API must be called every time the page renders to get the latest data
-        await this.props.dispatch(handleGetAllOrders(convertUserId(this.props.user)))
+        const {user} = this.props
+        const userId = convertUserId(user)
+        if(userId){
+            await this.props.dispatch(handleGetAllOrders(userId))
+        }
     }
 
     render(){

@@ -16,7 +16,9 @@ class MyAds extends Component{
     async componentDidMount(){
         const {user} = this.props
         const userId = convertUserId(user)
-        await this.props.dispatch(handleGetAllAds(userId))
+        if(userId){
+            await this.props.dispatch(handleGetAllAds(userId))
+        }
     }
 
     render(){

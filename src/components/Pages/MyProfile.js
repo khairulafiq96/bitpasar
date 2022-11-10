@@ -38,18 +38,20 @@ class MyProfile extends Component{
         const {user,wallet} = this.props
         const userId = convertUserId(user)
 
-        console.log("User details is identified")
-        this.setState({
-            'name' : user[userId]['name'],
-            'email' : user[userId]['email'],
-            'phonenum' : user[userId]['phonenum'],
-            'address1' : user[userId]['address1'],
-            'address2' : user[userId]['address2'],
-            'city' : user[userId]['city'],
-            'state' : user[userId]['state'],
-            'zipcode' : user[userId]['zipcode'],
-            "walletid" : wallet.address
-        })
+        if(userId){
+            //console.log("User details is identified")
+            this.setState({
+                'name' : user[userId]['name'],
+                'email' : user[userId]['email'],
+                'phonenum' : user[userId]['phonenum'],
+                'address1' : user[userId]['address1'],
+                'address2' : user[userId]['address2'],
+                'city' : user[userId]['city'],
+                'state' : user[userId]['state'],
+                'zipcode' : user[userId]['zipcode'],
+                "walletid" : wallet.address
+            })
+        }
         
     }
 

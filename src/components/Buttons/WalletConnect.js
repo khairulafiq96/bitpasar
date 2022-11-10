@@ -4,6 +4,7 @@ import {ethers} from 'ethers'
 import { setSignedInUser,getUserBalance } from '../../actions/users';
 import { handleGetUserDetails } from "../../actions";
 import { NavLink } from 'react-router-dom';
+import { convertUserId } from '../../Utility/general';
 
 class WalletConnect extends Component {
 
@@ -37,7 +38,8 @@ class WalletConnect extends Component {
 
     async componentDidMount(){
         const {dispatch, wallet, user} = this.props
-        if (wallet.isConnected === false || user === null){
+        const userId = convertUserId(user)
+        if (wallet.isConnected === false || !userId){
             await dispatch(handleGetUserDetails(wallet.address))}
     }
 

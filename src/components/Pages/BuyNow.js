@@ -39,11 +39,9 @@ class BuyNow extends Component{
 
     async componentDidMount(){
         const {user,items,itemId} = this.props
-        
-        if(user){
+        const userId = convertUserId(user)
+        if(userId){
             //checks if the user already registed their details in the registration form
-            try{
-                const userId = convertUserId(user)
                 this.setState({
                     form : {
                         name : user[userId]['name'],
@@ -59,9 +57,8 @@ class BuyNow extends Component{
                         totalprice : parseFloat(items[itemId]['postageprice']) + parseFloat(items[itemId]['itemprice'])
                     }
                 })
-
-            } catch (e) {
-                window.alert("Please update your details in the edit profile page for better user experience later.")
+        } else {
+            window.alert("Please update your details in the edit profile page for better user experience later.")
                 this.setState({
                     form : {
                         postagename : items[itemId]['postagename'],
@@ -69,10 +66,6 @@ class BuyNow extends Component{
                         totalprice : parseFloat(items[itemId]['postageprice']) + parseFloat(items[itemId]['itemprice'])
                     }
                 })
-            }
-        } else {
-            window.alert("Please connect to your wallet")
-            this.setState({redirect : {redirectToBuyNow : true}})
         }
     }
 
