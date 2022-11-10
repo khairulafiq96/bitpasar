@@ -2,7 +2,7 @@
 ## An e-commerce site with direct cryptocurrency payment
 
 # Demo Video
-***Click the image and the video will open in a new tab***
+***Click the image and the video open***
 [![Watch the video](https://i9.ytimg.com/vi_webp/Ivbu0vCx9CU/sddefault.webp?v=636d4c51&sqp=CLSbtZsG&rs=AOn4CLCyJgu1kfdJLw40lZPZQdcjt7m9OA)](https://youtu.be/Ivbu0vCx9CU)
 
 
