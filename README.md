@@ -2,9 +2,9 @@
 ## An e-commerce site with direct cryptocurrency payment
 
 # Demo Video
-***Click the image and the video open***
-[![Watch the video](https://i9.ytimg.com/vi_webp/Ivbu0vCx9CU/sddefault.webp?v=636d4c51&sqp=CLSbtZsG&rs=AOn4CLCyJgu1kfdJLw40lZPZQdcjt7m9OA)](https://youtu.be/Ivbu0vCx9CU)
+*** Open the link in a new tab ***
 
+[BitPasar Demo Video](https://youtu.be/Ivbu0vCx9CU)
 
 # Description
 ### Main Features of the application :
@@ -17,6 +17,11 @@
   - advertise products/assets
   - manage products/assets
   - manage shipments of the product
+
+# bitPasar API
+*** Open the link in a new tab ***
+
+[bitPasar GitHub](https://github.com/khairulafiq96/bitpasar_api/)
 
 # Developed with
 - Frontend : ReactJs, Redux, TailwindCSS, Web3Modal
